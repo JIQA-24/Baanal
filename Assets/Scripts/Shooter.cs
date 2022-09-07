@@ -24,6 +24,6 @@ public class Shooter : MonoBehaviour
 
     private void Shoot() {
         GameObject bullet = Instantiate(bulletProp, firePoint.transform.position, firePoint.transform.rotation);
-        Destroy(bullet, 3f);
+        Destroy(bullet, 2f);
     }
 }

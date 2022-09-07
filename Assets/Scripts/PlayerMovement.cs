@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 
@@ -31,5 +32,17 @@ public class PlayerMovement : MonoBehaviour
 	private void FixedUpdate() {
 		controller.Move(horizontalMove, crouch, jump);
 		jump = false;
+	}
+
+	private void OnCollisionEnter2D(Collision2D other) {
+		if(other.gameObject.tag == "Enemy"){
+			SceneManager.LoadScene("Prototype");
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D other) {
+		if(other.gameObject.tag == "Respawn"){
+			SceneManager.LoadScene("Prototype");
+		}
 	}
 }
