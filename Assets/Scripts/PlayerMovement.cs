@@ -34,11 +34,11 @@ public class PlayerMovement : MonoBehaviour
 		jump = false;
 	}
 
-	private void OnCollisionEnter2D(Collision2D other) {
-		if(other.gameObject.tag == "Enemy"){
-			SceneManager.LoadScene("Prototype");
-		}
-	}
+	// private void OnCollisionEnter2D(Collision2D other) {
+	// 	if(other.gameObject.tag == "Enemy"){
+	// 		SceneManager.LoadScene("Prototype");
+	// 	}
+	// }
 
 	private void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag == "Respawn"){

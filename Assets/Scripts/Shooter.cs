@@ -6,6 +6,7 @@ public class Shooter : MonoBehaviour
 {
     public GameObject bulletProp;
     public Transform firePoint;
+    public bool canShoot = true;
 
     private void Update() {
 
@@ -17,7 +18,7 @@ public class Shooter : MonoBehaviour
 
         transform.eulerAngles = new Vector3(transform.rotation.x, rotationY, transform.rotation.z);
 
-        if(Input.GetButtonDown("Fire1")){
+        if(Input.GetButtonDown("Fire1") && canShoot){
             Shoot();
         }
     }

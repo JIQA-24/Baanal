@@ -7,11 +7,15 @@ public class EnemyFollowPlayer : MonoBehaviour
     public float speed = 5f;
     public float lineOfSight = 10f;
     private Transform player;
+    private float startingEnemyHealth = 30f;
+    private float currentEnemyHealth;
+    [SerializeField] private float damage;
 
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        currentEnemyHealth = startingEnemyHealth;
     }
 
 
@@ -26,5 +30,18 @@ public class EnemyFollowPlayer : MonoBehaviour
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, lineOfSight);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag == "Player"){
+            other.gameObject.GetComponent<Health>().TakeDamage(damage);
+        }
+    }
+
+    public void TakeDamage(float _damage){
+        currentEnemyHealth = Mathf.Clamp(currentEnemyHealth - _damage, 0, startingEnemyHealth);
+        if(currentEnemyHealth <= 0){
+            Destroy(gameObject);
+        }
     }
 }

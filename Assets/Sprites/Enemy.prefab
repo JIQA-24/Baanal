@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7464442399506963181}
   - component: {fileID: 7464442399506963170}
   - component: {fileID: 7464442399506963182}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -148,3 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   lineOfSight: 20
+  damage: 1
