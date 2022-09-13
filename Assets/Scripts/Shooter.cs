@@ -5,8 +5,16 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
     public GameObject bulletProp;
-    public Transform firePoint;
+    public GameObject arrowProp;
+    public Transform firePointSlingshot;
+    public Transform firePointBow;
     public bool canShoot = true;
+    public int fireArm = 0;
+    private IEnumerator coroutine;
+
+    private void Start() {
+        CheckFireArm();
+    }
 
     private void Update() {
 
@@ -18,13 +26,64 @@ public class Shooter : MonoBehaviour
 
         transform.eulerAngles = new Vector3(transform.rotation.x, rotationY, transform.rotation.z);
 
+        if(Input.GetKeyDown(KeyCode.R) && fireArm < 1){
+            fireArm += 1;
+            CheckFireArm();
+        }
+        if(Input.GetKeyDown(KeyCode.Q) && fireArm > 0){
+            fireArm -= 1;
+            CheckFireArm();
+        }
+
+
         if(Input.GetButtonDown("Fire1") && canShoot){
-            Shoot();
+            CheckShot();
         }
     }
 
-    private void Shoot() {
-        GameObject bullet = Instantiate(bulletProp, firePoint.transform.position, firePoint.transform.rotation);
-        Destroy(bullet, 2f);
+    private void CheckFireArm(){
+        Transform slingshot = transform.Find("Slingshot");
+        Transform bow = transform.Find("Bow");
+        switch(fireArm){
+            case 1:
+                slingshot.GetComponent<SpriteRenderer>().enabled = false;
+                bow.GetComponent<SpriteRenderer>().enabled = true;
+                break;
+            default:
+                slingshot.GetComponent<SpriteRenderer>().enabled = true;
+                bow.GetComponent<SpriteRenderer>().enabled = false;
+                break;
+        }
+    }
+
+    private void CheckShot(){
+        switch(fireArm){
+            case 1:
+                if(coroutine != null){
+                    StopCoroutine(coroutine);
+                }
+                coroutine = BowShot();
+                StartCoroutine(coroutine);
+                break;
+            default:
+                RegularShot();
+                break;
+        }
+    }
+
+    private void RegularShot() {
+        GameObject bullet = Instantiate(bulletProp, firePointSlingshot.transform.position, firePointSlingshot.transform.rotation);
+        Destroy(bullet, 1f);
+    }
+
+    private IEnumerator BowShot() {
+        int length = 2;
+        for (int i = 0; i <= length; i++)
+        {
+            GameObject arrow = Instantiate(arrowProp, firePointBow.transform.position, firePointBow.transform.rotation);
+            Destroy(arrow, 1f);
+            yield return new WaitForSeconds(0.2f);
+        }
+    
     }
 }
