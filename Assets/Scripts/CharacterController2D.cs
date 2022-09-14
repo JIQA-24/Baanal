@@ -17,9 +17,13 @@ public class CharacterController2D : MonoBehaviour
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
-	private Rigidbody2D m_Rigidbody2D;
-	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+	public Rigidbody2D m_Rigidbody2D;
+	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+
+	private GameObject gun1;
+	private GameObject gun2;
+
 	
 
 	[Header("Events")]
@@ -36,7 +40,8 @@ public class CharacterController2D : MonoBehaviour
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
-		
+		gun1 = GameObject.Find("Slingshot");
+		gun2 = GameObject.Find("Bow");
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -150,5 +155,14 @@ public class CharacterController2D : MonoBehaviour
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+
+		Vector3 gun1Scale = gun1.transform.localScale;
+		gun1Scale.x *= -1;
+		gun1.transform.localScale = gun1Scale;
+		Vector3 gun2Scale = gun2.transform.localScale;
+		gun2Scale.x *= -1;
+		gun2.transform.localScale = gun2Scale;
 	}
+
+
 }

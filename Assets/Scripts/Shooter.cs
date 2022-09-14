@@ -11,6 +11,10 @@ public class Shooter : MonoBehaviour
     public bool canShoot = true;
     public int fireArm = 0;
     private IEnumerator coroutine;
+    public GunChangeUI change;
+
+
+    
 
     private void Start() {
         CheckFireArm();
@@ -26,17 +30,20 @@ public class Shooter : MonoBehaviour
 
         transform.eulerAngles = new Vector3(transform.rotation.x, rotationY, transform.rotation.z);
 
-        if(Input.GetKeyDown(KeyCode.R) && fireArm < 1){
+        if(Input.GetKeyDown(KeyCode.R) && fireArm < 1 && !change.isChangeCooldown){
             fireArm += 1;
+            change.ChangeUI(fireArm);
             CheckFireArm();
         }
-        if(Input.GetKeyDown(KeyCode.Q) && fireArm > 0){
+        if(Input.GetKeyDown(KeyCode.Q) && fireArm > 0 && !change.isChangeCooldown){
             fireArm -= 1;
+            change.ChangeUI(fireArm);
             CheckFireArm();
         }
 
 
         if(Input.GetButtonDown("Fire1") && canShoot){
+            canShoot = false;
             CheckShot();
         }
     }
@@ -44,14 +51,17 @@ public class Shooter : MonoBehaviour
     private void CheckFireArm(){
         Transform slingshot = transform.Find("Slingshot");
         Transform bow = transform.Find("Bow");
+        Transform maskEquipable = transform.Find("MaskEquipable");
         switch(fireArm){
             case 1:
                 slingshot.GetComponent<SpriteRenderer>().enabled = false;
                 bow.GetComponent<SpriteRenderer>().enabled = true;
+                maskEquipable.GetComponent<SpriteRenderer>().enabled = true;
                 break;
             default:
                 slingshot.GetComponent<SpriteRenderer>().enabled = true;
                 bow.GetComponent<SpriteRenderer>().enabled = false;
+                maskEquipable.GetComponent<SpriteRenderer>().enabled = false;
                 break;
         }
     }
@@ -66,6 +76,7 @@ public class Shooter : MonoBehaviour
                 StartCoroutine(coroutine);
                 break;
             default:
+                canShoot = true;
                 RegularShot();
                 break;
         }
@@ -84,6 +95,8 @@ public class Shooter : MonoBehaviour
             Destroy(arrow, 1f);
             yield return new WaitForSeconds(0.2f);
         }
+        yield return new WaitForSeconds(0.5f);
+        canShoot = true;
     
     }
 }
