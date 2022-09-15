@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private TrailRenderer tr;
 
 	void Update(){
-		if(isDashing){
+		if(isDashing || PauseMenu.gameIsPaused){
 			return;
 		}
 		horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	private void FixedUpdate() {
-		if(isDashing){
+		if(isDashing || PauseMenu.gameIsPaused){
 			return;
 		}
 		controller.Move(horizontalMove, crouch, jump);

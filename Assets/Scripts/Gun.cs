@@ -5,6 +5,9 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {   public CharacterController2D facing;
     private void Update() {
+        if(PauseMenu.gameIsPaused){
+            return;
+        }
         Vector3 mousePos = Input.mousePosition;
         
 

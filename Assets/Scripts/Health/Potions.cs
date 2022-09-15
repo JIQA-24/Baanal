@@ -28,6 +28,9 @@ public class Potions : MonoBehaviour
     }
 
     private void CheckPotions(){
+        if(PauseMenu.gameIsPaused){
+            return;
+        }
         if(Input.GetKeyDown(KeyCode.E) && playerHealth.currentHealth < 4 && numberOfPotions > 0 && !isCooldown){
             isCooldown = true;
             numberOfPotions -= 1;

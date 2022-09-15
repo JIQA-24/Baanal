@@ -21,7 +21,9 @@ public class Shooter : MonoBehaviour
     }
 
     private void Update() {
-
+        if(PauseMenu.gameIsPaused){
+            return;
+        }
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float rotationY = 0f;
         if( mousePos.x < transform.position.x){

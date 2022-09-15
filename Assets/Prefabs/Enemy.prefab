@@ -147,5 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  lineOfSight: 20
+  lineOfSight: 6
   damage: 1
