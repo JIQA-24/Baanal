@@ -6,6 +6,7 @@ public class Shooter : MonoBehaviour
 {
     public GameObject bulletProp;
     public GameObject arrowProp;
+    public GameObject bombProp;
     public Transform firePointSlingshot;
     public Transform firePointBow;
     public bool canShoot = true;
@@ -48,6 +49,11 @@ public class Shooter : MonoBehaviour
             canShoot = false;
             CheckShot();
         }
+        if (Input.GetButtonDown("Fire2") && !change.isBombsCooldown && change.numberOfBombs > 0)
+        {
+            change.ChangeBomb();
+            BombThrow();
+        }
     }
 
     private void CheckFireArm(){
@@ -87,6 +93,12 @@ public class Shooter : MonoBehaviour
     private void RegularShot() {
         GameObject bullet = Instantiate(bulletProp, firePointSlingshot.transform.position, firePointSlingshot.transform.rotation);
         Destroy(bullet, 1f);
+    }
+
+    private void BombThrow()
+    {
+        GameObject bomb = Instantiate(bombProp, firePointSlingshot.transform.position, firePointSlingshot.transform.rotation);
+        Destroy(bomb, 1f);
     }
 
     private IEnumerator BowShot() {

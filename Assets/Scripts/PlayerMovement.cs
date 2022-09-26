@@ -17,29 +17,63 @@ public class PlayerMovement : MonoBehaviour
 
 	bool crouch = false;
 
+	private Vector2 dashingDir;
 	private bool canDash = true;
 	private bool isDashing;
-	private float dashingPower = 40f;
+	private float dashingPower = 15f;
 	private float dashingTime = 0.3f;
 	private float dashingCooldown = 1f;
 	[SerializeField] private TrailRenderer tr;
+
+	private GameObject currentOneWayPlatform;
+	[SerializeField] private CapsuleCollider2D playerCollider;
 
 	void Update(){
 		if(isDashing || PauseMenu.gameIsPaused){
 			return;
 		}
+
 		horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
-		if(Input.GetButtonDown("Jump")){
+		if(Input.GetButtonDown("Jump") && !crouch){
 			jump = true;
 		}
+
 		if(Input.GetButtonDown("Crouch")){
 			crouch = true;
 		} else if(Input.GetButtonUp("Crouch")){
 			crouch = false;
 		}
+		if(crouch && Input.GetButtonDown("Jump"))
+        {
+			if(currentOneWayPlatform != null)
+            {
+				StartCoroutine(DisableCollisionPlatform());
+            }
+        }
+
+
+
+
 		if(Input.GetKeyDown(KeyCode.LeftShift) && canDash){
+			isDashing = true;
+			canDash = false;
+			tr.emitting = true;
+			dashingDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+			if(dashingDir == Vector2.zero)
+            {
+				dashingDir = new Vector2(transform.localScale.x, 0);
+            }
+			//Add stopping dash
 			StartCoroutine(Dash());
 		}
+
+        if (isDashing)
+        {
+			controller.m_Rigidbody2D.velocity = dashingDir.normalized * dashingPower;
+			return;
+        }
+
+		
 	}
 
 	private void FixedUpdate() {
@@ -50,35 +84,61 @@ public class PlayerMovement : MonoBehaviour
 		jump = false;
 	}
 
-	// private void OnCollisionEnter2D(Collision2D other) {
-	// 	if(other.gameObject.tag == "Enemy"){
-	// 		SceneManager.LoadScene("Prototype");
-	// 	}
-	// }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "OneWayPlatform")
 
-	private void OnTriggerEnter2D(Collider2D other) {
+		{
+			currentOneWayPlatform = collision.gameObject;
+		}
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+		if (collision.gameObject.tag == "OneWayPlatform")
+		{
+			currentOneWayPlatform = null;
+		}
+	}
+
+	private IEnumerator DisableCollisionPlatform()
+    {
+		BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
+		Physics2D.IgnoreCollision(playerCollider, platformCollider, true);
+		yield return new WaitForSeconds(0.25f);
+		Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag == "Respawn"){
 			SceneManager.LoadScene("Prototype");
 		}
 	}
 
-	private IEnumerator Dash(){
-		canDash = false;
-		isDashing = true;
-		float originalGravity = controller.m_Rigidbody2D.gravityScale;
-		controller.m_Rigidbody2D.gravityScale = 0f;
-		if(horizontalMove < 0){
-			controller.m_Rigidbody2D.velocity = new Vector2(-transform.localScale.x * dashingPower, 0f);
-		}
-		if(horizontalMove > 0){
-			controller.m_Rigidbody2D.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-		}
-		tr.emitting = true;
-		yield return new WaitForSeconds(dashingTime);
+    private IEnumerator Dash()
+    {
+        float originalGravity = controller.m_Rigidbody2D.gravityScale;
+        controller.m_Rigidbody2D.gravityScale = 0f;
+        yield return new WaitForSeconds(dashingTime);
 		tr.emitting = false;
-		controller.m_Rigidbody2D.gravityScale = originalGravity;
 		isDashing = false;
-		yield return new WaitForSeconds(dashingCooldown);
+        controller.m_Rigidbody2D.gravityScale = originalGravity;
+        yield return new WaitForSeconds(dashingCooldown);
 		canDash = true;
-	}
+
+        //canDash = false;
+        //isDashing = true;
+        //tr.emitting = true;
+        //if(horizontalMove < 0){
+        //	controller.m_Rigidbody2D.velocity = new Vector2(-transform.localScale.x * dashingPower, 0f);
+        //}
+        //if(horizontalMove > 0){
+        //	controller.m_Rigidbody2D.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        //}
+        //yield return new WaitForSeconds(dashingTime);
+        //tr.emitting = false;
+        //isDashing = false;
+        //yield return new WaitForSeconds(dashingCooldown);
+        //canDash = true;
+    }
 }

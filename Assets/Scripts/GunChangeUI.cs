@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine;
 
 public class GunChangeUI : MonoBehaviour
@@ -10,7 +11,13 @@ public class GunChangeUI : MonoBehaviour
     [SerializeField] private Image mask1;
     [SerializeField] private Image defaultGunBlack;
     [SerializeField] private Image mask1Black;
-    private Image varToFill;
+
+    [SerializeField] private Image bombs;
+    [SerializeField] public TextMeshProUGUI numberOfBombsText;
+    public int numberOfBombs;
+    public float cooldownBombs = 3f;
+    public bool isBombsCooldown = false;
+
     private float maskCooldown = 1f;
     public bool isChangeCooldown = false;
     public Shooter fireArm;
@@ -59,6 +66,18 @@ public class GunChangeUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        numberOfBombsText.text = numberOfBombs.ToString();
+        if(isBombsCooldown)
+        {
+            bombs.fillAmount += 1 / cooldownBombs * Time.deltaTime;
+
+            if(bombs.fillAmount >= 1)
+            {
+                bombs.fillAmount = 1;
+                isBombsCooldown = false;
+            }
+        }
+
         if(isChangeCooldown && fireArm.fireArm == 1){
 
             mask1.fillAmount += 1 / maskCooldown * Time.deltaTime;
@@ -69,6 +88,7 @@ public class GunChangeUI : MonoBehaviour
             }
         
         }
+
         if(isChangeCooldown && fireArm.fireArm == 0){
 
             defaultGun.fillAmount += 1 / maskCooldown * Time.deltaTime;
@@ -80,5 +100,12 @@ public class GunChangeUI : MonoBehaviour
         
         }
 
+    }
+
+    public void ChangeBomb()
+    {
+        bombs.fillAmount = 0;
+        numberOfBombs -= 1;
+        isBombsCooldown = true;
     }
 }
