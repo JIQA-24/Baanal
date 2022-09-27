@@ -22,7 +22,7 @@ public class Potions : MonoBehaviour
     }
 
     private void CheckPotions(){
-        if(PauseMenu.gameIsPaused){
+        if(PauseMenu.gameIsPaused || playerHealth.dead){
             return;
         }
         if(Input.GetKeyDown(KeyCode.E) && playerHealth.currentHealth < 4 && numberOfPotions > 0 && !isCooldown){

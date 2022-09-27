@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	[SerializeField] private UI_Inventory uiInventory;
+
 	public CharacterController2D controller;
 
 	public float moveSpeed = 100f;
@@ -28,7 +30,15 @@ public class PlayerMovement : MonoBehaviour
 	private GameObject currentOneWayPlatform;
 	[SerializeField] private CapsuleCollider2D playerCollider;
 
-	void Update(){
+	private Inventory inventory;
+
+    private void Awake()
+    {
+		inventory = new Inventory();
+		uiInventory.SetInventory(inventory);
+    }
+
+    void Update(){
 		if(isDashing || PauseMenu.gameIsPaused){
 			return;
 		}

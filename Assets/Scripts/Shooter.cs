@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    [SerializeField] private Health ifDead;
     public GameObject bulletProp;
     public GameObject arrowProp;
     public GameObject bombProp;
@@ -22,7 +23,7 @@ public class Shooter : MonoBehaviour
     }
 
     private void Update() {
-        if(PauseMenu.gameIsPaused){
+        if(PauseMenu.gameIsPaused || ifDead.dead){
             return;
         }
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

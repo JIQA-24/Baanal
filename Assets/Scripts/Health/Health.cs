@@ -7,11 +7,10 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
-    private bool dead;
+    public bool dead;
     public int numOfHearts;
     public Image[] hearts;
     public Sprite fullHeart;
-    [SerializeField] private Color changeColor;
 
     [SerializeField] public Shooter shoot;
     [SerializeField] private float iFramesDuration;
@@ -21,7 +20,6 @@ public class Health : MonoBehaviour
     private void Awake() {
         currentHealth = startingHealth;
         spriteRend = GetComponent<SpriteRenderer>();
-        changeColor.a = 1;
     }
 
     private void Update()
@@ -80,6 +78,10 @@ public class Health : MonoBehaviour
 
     public void AddHealth(float _value){
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+    }
+    public bool GetDead()
+    {
+        return dead;
     }
 
 }
