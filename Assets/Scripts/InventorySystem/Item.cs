@@ -12,4 +12,14 @@ public class Item
 
     public ItemType itemType;
     public int amount;
+
+    public Sprite GetSprite()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.ChaacMask: return ItemAssets.Instance.chaacMaskSprite;
+            case ItemType.JaguarMask: return ItemAssets.Instance.jaguarMaskSprite;
+        }
+    }
 }

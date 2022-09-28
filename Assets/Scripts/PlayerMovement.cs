@@ -36,7 +36,10 @@ public class PlayerMovement : MonoBehaviour
     {
 		inventory = new Inventory();
 		uiInventory.SetInventory(inventory);
-    }
+
+		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, amount = 1 });
+		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, amount = 1 });
+	}
 
     void Update(){
 		if(isDashing || PauseMenu.gameIsPaused){
@@ -96,6 +99,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+		ItemWorld itemWorld = collision.gameObject.GetComponent<ItemWorld>();
+
+		if(itemWorld != null)
+        {
+			inventory.AddItem(itemWorld.GetItem());
+			itemWorld.DestroySelf();
+        }
         if (collision.gameObject.tag == "OneWayPlatform")
 
 		{
