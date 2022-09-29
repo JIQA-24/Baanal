@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 using UnityEngine;
+using CodeMonkey.Utils;
 
 public class UI_Inventory : MonoBehaviour
 {
     private Inventory inventory;
     [SerializeField] private Transform itemSlotContainer;
     [SerializeField] private Transform itemSlotTemplate;
+    private PlayerMovement player;
 
     private void Awake()
     {
         //itemSlotContainer = transform.Find("ItemSlotContainer");
         //itemSlotTemplate = itemSlotContainer.Find("itemSlotTemplate");
+    }
+
+    public void SetPlayer(PlayerMovement player)
+    {
+        this.player = player;
     }
 
     public void SetInventory(Inventory inventory)
@@ -44,6 +51,19 @@ public class UI_Inventory : MonoBehaviour
         {
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
+
+            itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>
+            {
+                //Use item
+                inventory.UseItem(item);
+            };
+            itemSlotRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
+            {
+                //Drop item
+                inventory.RemoveItem(item);
+                Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+                ItemWorld.DropItem(playerPos, item);
+            };
 
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
             Image image = itemSlotRectTransform.Find("Image").GetComponent<Image>();

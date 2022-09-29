@@ -34,12 +34,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-		inventory = new Inventory();
+		inventory = new Inventory(UseItem);
 		uiInventory.SetInventory(inventory);
 
 		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, amount = 1 });
 		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, amount = 1 });
 	}
+	private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+			default:
+			case Item.ItemType.ChaacMask:
+				inventory.RemoveItem(item);
+				break;
+			case Item.ItemType.JaguarMask:
+				inventory.RemoveItem(item);
+				break;
+        }
+    }
 
     void Update(){
 		if(isDashing || PauseMenu.gameIsPaused){
@@ -161,4 +174,5 @@ public class PlayerMovement : MonoBehaviour
         //yield return new WaitForSeconds(dashingCooldown);
         //canDash = true;
     }
+
 }

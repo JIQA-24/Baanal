@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject inventoryMenu;
 
     void Update()
     {
@@ -17,10 +18,22 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (gameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                InventoryPause();
+            }
+        }
     }
 
     public void Resume(){
         pauseMenuUI.SetActive(false);
+        inventoryMenu.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
     }
@@ -35,6 +48,12 @@ public class PauseMenu : MonoBehaviour
 
     void Pause(){
         pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+    }
+    void InventoryPause()
+    {
+        inventoryMenu.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
     }
