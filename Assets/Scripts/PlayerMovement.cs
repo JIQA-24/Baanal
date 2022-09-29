@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-		if(Input.GetKeyDown(KeyCode.LeftShift) && canDash){
+		if(Input.GetButtonDown("Fire3") && canDash){
 			isDashing = true;
 			canDash = false;
 			tr.emitting = true;
