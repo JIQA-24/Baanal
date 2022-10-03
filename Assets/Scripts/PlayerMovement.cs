@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 	public CharacterController2D characterController2D;
 
 	public CharacterController2D controller;
+	public Animator animator;
 
 	public float moveSpeed = 100f;
 
@@ -62,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+
+		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 		if(Input.GetButtonDown("Jump") && !crouch){
 			jump = true;
 		}

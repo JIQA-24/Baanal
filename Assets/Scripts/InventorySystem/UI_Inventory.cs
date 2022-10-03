@@ -47,27 +47,48 @@ public class UI_Inventory : MonoBehaviour
         int x = 0;
         int y = 0;
         float itemSlotCellSize = 30f;
-        foreach (Item item in inventory.GetItemList())
+        RectTransform itemSlotRectTransform;
+        List<Item> itemList = inventory.GetItemList();
+        int itemListLength = itemList.Count;
+        for(int i = 0; i < 8; i++)
         {
-            RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
+            Item item = null;
+            if(i < itemListLength)
+            {
+                item = itemList[i];
+            }
+            itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
+
+            if (item != null)
+            {
+                itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>
+                {
+                    //Use item
+                    inventory.UseItem(item);
+                };
+                itemSlotRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
+                {
+                    //Drop item
+                    inventory.RemoveItem(item);
+                    Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+                    ItemWorld.DropItem(playerPos, item);
+                };
+            }
+
             itemSlotRectTransform.gameObject.SetActive(true);
-
-            itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>
-            {
-                //Use item
-                inventory.UseItem(item);
-            };
-            itemSlotRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
-            {
-                //Drop item
-                inventory.RemoveItem(item);
-                Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-                ItemWorld.DropItem(playerPos, item);
-            };
-
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
             Image image = itemSlotRectTransform.Find("Image").GetComponent<Image>();
-            image.sprite = item.GetSprite();
+
+            if(item != null)
+            {
+                image.sprite = item.GetSprite();
+                image.color = new Color32(255, 255, 255, 255);
+            }
+            else
+            {
+                image.sprite = null;
+            }
+
             x += 6;
             if(x >= 24)
             {
