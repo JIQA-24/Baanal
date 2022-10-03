@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private UI_Inventory uiInventory;
 
+	public CharacterController2D characterController2D;
+
 	public CharacterController2D controller;
 
 	public float moveSpeed = 100f;
@@ -24,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 	private bool isDashing;
 	private float dashingPower = 15f;
 	private float dashingTime = 0.15f;
-	private float dashingCooldown = 1f;
+	//private float dashingCooldown = 1f;
 	[SerializeField] private TrailRenderer tr;
 
 	private GameObject currentOneWayPlatform;
@@ -77,10 +79,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+		if (CharacterController2D.m_Grounded) {
+			canDash = true;
+		}
 
 
-
-		if(Input.GetKeyDown(KeyCode.LeftShift) && canDash){
+		if(Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+		{
 			isDashing = true;
 			canDash = false;
 			tr.emitting = true;
@@ -156,8 +161,8 @@ public class PlayerMovement : MonoBehaviour
 		tr.emitting = false;
 		isDashing = false;
         controller.m_Rigidbody2D.gravityScale = originalGravity;
-        yield return new WaitForSeconds(dashingCooldown);
-		canDash = true;
+        //yield return new WaitForSeconds(dashingCooldown);
+		//canDash = true;
 
         //canDash = false;
         //isDashing = true;
