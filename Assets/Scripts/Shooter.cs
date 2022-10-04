@@ -33,12 +33,12 @@ public class Shooter : MonoBehaviour
 
         transform.eulerAngles = new Vector3(transform.rotation.x, rotationY, transform.rotation.z);
 
-        if(Input.GetKeyDown(KeyCode.R) && fireArm < 1 && !change.isChangeCooldown){
+        if(Input.GetButtonDown("next_mask") && fireArm < 1 && !change.isChangeCooldown){
             fireArm += 1;
             change.ChangeUI(fireArm);
             CheckFireArm();
         }
-        if(Input.GetKeyDown(KeyCode.Q) && fireArm > 0 && !change.isChangeCooldown){
+        if(Input.GetButtonDown("previous_mask") && fireArm > 0 && !change.isChangeCooldown){
             fireArm -= 1;
             change.ChangeUI(fireArm);
             CheckFireArm();
