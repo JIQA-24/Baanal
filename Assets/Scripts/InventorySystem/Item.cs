@@ -8,10 +8,12 @@ public class Item
     {
         ChaacMask,
         JaguarMask,
+        UnequipedMask,
+        UnequipedTalisman,
     }
 
     public ItemType itemType;
-    public int amount;
+    public int weaponChangeNum;
 
     public Sprite GetSprite()
     {
@@ -20,6 +22,18 @@ public class Item
             default:
             case ItemType.ChaacMask: return ItemAssets.Instance.chaacMaskSprite;
             case ItemType.JaguarMask: return ItemAssets.Instance.jaguarMaskSprite;
+            case ItemType.UnequipedMask: return ItemAssets.Instance.unequipedMask;
+            case ItemType.UnequipedTalisman: return ItemAssets.Instance.unequipedTalisman;
+        }
+    }
+
+    public int GetEquipPos()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.ChaacMask: return 0;
+            case ItemType.JaguarMask: return 0;
         }
     }
 }

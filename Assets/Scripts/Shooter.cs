@@ -14,6 +14,7 @@ public class Shooter : MonoBehaviour
     public int fireArm = 0;
     private IEnumerator coroutine;
     public GunChangeUI change;
+    private Inventory inventory;
 
 
     
@@ -62,12 +63,15 @@ public class Shooter : MonoBehaviour
         Transform bow = transform.Find("Bow");
         Transform maskEquipable = transform.Find("MaskEquipable");
         switch(fireArm){
+            default:
+            case 2:
+                break;
             case 1:
                 slingshot.GetComponent<SpriteRenderer>().enabled = false;
                 bow.GetComponent<SpriteRenderer>().enabled = true;
                 maskEquipable.GetComponent<SpriteRenderer>().enabled = true;
                 break;
-            default:
+            case 0:
                 slingshot.GetComponent<SpriteRenderer>().enabled = true;
                 bow.GetComponent<SpriteRenderer>().enabled = false;
                 maskEquipable.GetComponent<SpriteRenderer>().enabled = false;

@@ -10,6 +10,8 @@ public class UI_Inventory : MonoBehaviour
     private Inventory inventory;
     [SerializeField] private Transform itemSlotContainer;
     [SerializeField] private Transform itemSlotTemplate;
+    [SerializeField] private Transform itemEquipContainer;
+    [SerializeField] private Transform itemEquipTemplate;
     private PlayerMovement player;
 
     private void Awake()
@@ -44,12 +46,67 @@ public class UI_Inventory : MonoBehaviour
             if (child == itemSlotTemplate) continue;
             Destroy(child.gameObject);
         }
+        foreach (Transform child in itemEquipContainer)
+        {
+            if (child == itemEquipTemplate) continue;
+            Destroy(child.gameObject);
+        }
+
         int x = 0;
         int y = 0;
         float itemSlotCellSize = 30f;
         RectTransform itemSlotRectTransform;
+        RectTransform itemEquipRectTransform;
         List<Item> itemList = inventory.GetItemList();
+        List<Item> equipList = inventory.GetEquipedList();
         int itemListLength = itemList.Count;
+        int equipListLength = equipList.Count;
+        for (int i = 0; i < 2; i++)
+        {
+
+            Item item = null;
+            if (i < equipListLength)
+            {
+                item = equipList[i];
+            }
+            itemEquipRectTransform = Instantiate(itemEquipTemplate, itemEquipContainer).GetComponent<RectTransform>();
+
+            if (item != null)
+            {
+                itemEquipRectTransform.GetComponent<Button_UI>().ClickFunc = () =>
+                {
+                    ////Use item
+                    //inventory.EquipItem(item, i);
+                };
+                itemEquipRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
+                {
+                    //Drop item
+                    inventory.UnequipItem(item, item.GetEquipPos());
+                };
+            }
+
+            itemEquipRectTransform.gameObject.SetActive(true);
+            itemEquipRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
+            Image image = itemEquipRectTransform.Find("Image").GetComponent<Image>();
+
+            if (item.itemType != Item.ItemType.UnequipedTalisman && item.itemType != Item.ItemType.UnequipedMask)
+            {
+                image.sprite = item.GetSprite();
+                image.color = new Color32(255, 255, 255, 255);
+            }
+            else
+            {
+                image.sprite = item.GetSprite();
+                image.color = new Color32(0, 0, 0, 200);
+            }
+
+            y -= 7;
+
+        }
+
+        x = 0;
+        y = 0;
+
         for(int i = 0; i < 8; i++)
         {
             Item item = null;
@@ -64,7 +121,7 @@ public class UI_Inventory : MonoBehaviour
                 itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>
                 {
                     //Use item
-                    inventory.UseItem(item);
+                    inventory.EquipItem(item, item.GetEquipPos());
                 };
                 itemSlotRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
                 {
@@ -86,6 +143,8 @@ public class UI_Inventory : MonoBehaviour
             }
             else
             {
+                GameObject gOImage = itemSlotRectTransform.Find("Image").gameObject;
+                gOImage.SetActive(false);
                 image.sprite = null;
             }
 

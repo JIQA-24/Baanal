@@ -40,8 +40,8 @@ public class PlayerMovement : MonoBehaviour
 		inventory = new Inventory(UseItem);
 		uiInventory.SetInventory(inventory);
 
-		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, amount = 1 });
-		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, amount = 1 });
+		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, weaponChangeNum = 1});
+		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, weaponChangeNum = 2});
 	}
 	private void UseItem(Item item)
     {
@@ -54,8 +54,15 @@ public class PlayerMovement : MonoBehaviour
 			case Item.ItemType.JaguarMask:
 				inventory.RemoveItem(item);
 				break;
-        }
+			case Item.ItemType.UnequipedMask:
+				inventory.RemoveItem(item);
+				break;
+			case Item.ItemType.UnequipedTalisman:
+				inventory.RemoveItem(item);
+				break;
+		}
     }
+
 
     void Update(){
 		if(isDashing || PauseMenu.gameIsPaused){

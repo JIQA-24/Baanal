@@ -7,16 +7,40 @@ public class Inventory
 {
     public event EventHandler OnItemListChange;
     private List<Item> itemList;
+    public List<Item> equipedItems;
     private Action<Item> useItemAction;
 
     public Inventory(Action<Item> useItemAction)
     {
         this.useItemAction = useItemAction;
         itemList = new List<Item>();
+        equipedItems = new List<Item>();
 
-        //AddItem(new Item { itemType = Item.ItemType.ChaacMask, amount = 1 });
-        //AddItem(new Item { itemType = Item.ItemType.JaguarMask, amount = 1 });
+        StartEquipMenu(new Item { itemType = Item.ItemType.UnequipedMask, weaponChangeNum = 0});
+        StartEquipMenu(new Item { itemType = Item.ItemType.UnequipedTalisman });
         //Debug.Log(itemList.Count);
+    }
+
+    public void EquipItem(Item item, int pos)
+    {
+        if(equipedItems[pos].itemType != Item.ItemType.UnequipedTalisman && equipedItems[pos].itemType != Item.ItemType.UnequipedMask)
+        {
+            itemList.Add(equipedItems[pos]);
+            equipedItems[pos] = item;
+            itemList.Remove(item);
+        } else
+        {
+            equipedItems[pos] = item;
+            itemList.Remove(item);
+        }
+        
+        OnItemListChange?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void StartEquipMenu(Item item)
+    {
+        equipedItems.Add(item);
+        OnItemListChange?.Invoke(this, EventArgs.Empty);
     }
 
     public void AddItem(Item item)
@@ -31,6 +55,27 @@ public class Inventory
         OnItemListChange?.Invoke(this, EventArgs.Empty);
     }
 
+    public void UnequipItem(Item item, int pos)
+    {
+        if(item.itemType != Item.ItemType.UnequipedTalisman && item.itemType != Item.ItemType.UnequipedMask)
+        {
+            switch (pos)
+            {
+                default:
+                case 0:
+                    equipedItems[pos] = new Item { itemType = Item.ItemType.UnequipedMask, weaponChangeNum = 0 };
+                    itemList.Add(item);
+                    break;
+                case 1:
+                    equipedItems[pos] = new Item { itemType = Item.ItemType.UnequipedTalisman };
+                    itemList.Add(item);
+                    break;
+            }
+            OnItemListChange?.Invoke(this, EventArgs.Empty);
+        }
+        
+    }
+
     public void UseItem(Item item)
     {
         useItemAction(item);
@@ -39,5 +84,10 @@ public class Inventory
     public List<Item> GetItemList()
     {
         return itemList;
+    }
+
+    public List<Item> GetEquipedList()
+    {
+        return equipedItems;
     }
 }
