@@ -2690,7 +2690,7 @@ MonoBehaviour:
   chaacMaskSprite: {fileID: 21300000, guid: e73c057f74f45974fa38af71e72542b4, type: 3}
   jaguarMaskSprite: {fileID: 21300000, guid: 5d78f1876b359f548a381b4f0683bb31, type: 3}
   unequipedMask: {fileID: 21300000, guid: e73c057f74f45974fa38af71e72542b4, type: 3}
-  unequipedTalisman: {fileID: 21300000, guid: 5c080abe314f55145b350fd10a91c7e7, type: 3}
+  unequipedTalisman: {fileID: 21300000, guid: 6c640d343afc11245966507fbd62986e, type: 3}
 --- !u!4 &966937944
 Transform:
   m_ObjectHideFlags: 0
@@ -4533,7 +4533,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiInventory: {fileID: 1467303259}
-  characterController2D: {fileID: 0}
   controller: {fileID: 1382331376}
   animator: {fileID: 1382331382}
   moveSpeed: 50
@@ -4565,7 +4564,19 @@ MonoBehaviour:
   m_FacingRight: 1
   OnLandEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1382331375}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnLand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -4582,6 +4593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ifDead: {fileID: 1382331379}
+  uiInventory: {fileID: 1467303259}
   bulletProp: {fileID: 435882973066224834, guid: 1825ee35d220f1141bdfeb0e91574e0e, type: 3}
   arrowProp: {fileID: 5794113944381783742, guid: 1ddc992e44eb147439493f40ca4b77e9, type: 3}
   bombProp: {fileID: 8602989815956850491, guid: 9ad3d6c9581b3384ea0320eff859a86c, type: 3}
@@ -4899,7 +4911,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412993882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.98, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 0.31941, y: 0.31941, z: 0.31941}
   m_ConstrainProportionsScale: 0
   m_Children: []

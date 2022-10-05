@@ -5,6 +5,8 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
     [SerializeField] private Health ifDead;
+    [SerializeField] private UI_Inventory uiInventory;
+    public Inventory inventory;
     public GameObject bulletProp;
     public GameObject arrowProp;
     public GameObject bombProp;
@@ -14,10 +16,12 @@ public class Shooter : MonoBehaviour
     public int fireArm = 0;
     private IEnumerator coroutine;
     public GunChangeUI change;
-    private Inventory inventory;
 
+    private void Awake()
+    {
+        inventory = uiInventory.GetInventory();
+    }
 
-    
 
     private void Start() {
         CheckFireArm();
@@ -27,6 +31,9 @@ public class Shooter : MonoBehaviour
         if(PauseMenu.gameIsPaused || ifDead.dead){
             return;
         }
+        List<Item> equipedGun = inventory.GetEquipedList();
+
+        bool isCD = change.isChangeCooldown;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float rotationY = 0f;
         if( mousePos.x < transform.position.x){
@@ -35,12 +42,13 @@ public class Shooter : MonoBehaviour
 
         transform.eulerAngles = new Vector3(transform.rotation.x, rotationY, transform.rotation.z);
 
-        if(Input.GetKeyDown(KeyCode.R) && fireArm < 1 && !change.isChangeCooldown){
+        if(Input.GetKeyDown(KeyCode.R) && !isCD){
             fireArm += 1;
+            Debug.Log(equipedGun[0].itemType);
             change.ChangeUI(fireArm);
             CheckFireArm();
         }
-        if(Input.GetKeyDown(KeyCode.Q) && fireArm > 0 && !change.isChangeCooldown){
+        if(Input.GetKeyDown(KeyCode.Q) && fireArm > 0 && !isCD){
             fireArm -= 1;
             change.ChangeUI(fireArm);
             CheckFireArm();
@@ -81,6 +89,7 @@ public class Shooter : MonoBehaviour
 
     private void CheckShot(){
         switch(fireArm){
+            default:
             case 1:
                 if(coroutine != null){
                     StopCoroutine(coroutine);
@@ -88,7 +97,7 @@ public class Shooter : MonoBehaviour
                 coroutine = BowShot();
                 StartCoroutine(coroutine);
                 break;
-            default:
+            case 0:
                 canShoot = true;
                 RegularShot();
                 break;
