@@ -16,6 +16,7 @@ public class Shooter : MonoBehaviour
     public int fireArm = 0;
     private IEnumerator coroutine;
     public GunChangeUI change;
+    List<Item> equipedGun;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class Shooter : MonoBehaviour
         if(PauseMenu.gameIsPaused || ifDead.dead){
             return;
         }
-        List<Item> equipedGun = inventory.GetEquipedList();
+        equipedGun = inventory.GetEquipedList();
 
         bool isCD = change.isChangeCooldown;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -43,16 +44,29 @@ public class Shooter : MonoBehaviour
         transform.eulerAngles = new Vector3(transform.rotation.x, rotationY, transform.rotation.z);
 
         if(Input.GetKeyDown(KeyCode.R) && !isCD){
-            fireArm += 1;
-            Debug.Log(equipedGun[0].itemType);
-            change.ChangeUI(fireArm);
-            CheckFireArm();
+            if(fireArm == equipedGun[0].weaponChangeNum)
+            {
+                fireArm = 0;
+            }
+            else
+            {
+                fireArm = equipedGun[0].weaponChangeNum;
+            }
+
+            if(equipedGun[0].itemType != Item.ItemType.UnequipedMask)
+            {
+                change.ChangeUI(fireArm);
+                CheckFireArm();
+            }
+            
+            //Debug.Log(equipedGun[0].itemType);
+            
         }
-        if(Input.GetKeyDown(KeyCode.Q) && fireArm > 0 && !isCD){
-            fireArm -= 1;
-            change.ChangeUI(fireArm);
-            CheckFireArm();
-        }
+        //if(Input.GetKeyDown(KeyCode.Q) && fireArm > 0 && !isCD){
+        //    fireArm -= 1;
+        //    change.ChangeUI(fireArm);
+        //    CheckFireArm();
+        //}
 
 
         if(Input.GetButtonDown("Fire1") && canShoot){
@@ -73,11 +87,14 @@ public class Shooter : MonoBehaviour
         switch(fireArm){
             default:
             case 2:
+                maskEquipable.GetComponent<SpriteRenderer>().enabled = true;
+                maskEquipable.GetComponent<SpriteRenderer>().sprite = equipedGun[0].GetSprite();
                 break;
             case 1:
+                maskEquipable.GetComponent<SpriteRenderer>().enabled = true;
                 slingshot.GetComponent<SpriteRenderer>().enabled = false;
                 bow.GetComponent<SpriteRenderer>().enabled = true;
-                maskEquipable.GetComponent<SpriteRenderer>().enabled = true;
+                maskEquipable.GetComponent<SpriteRenderer>().sprite = equipedGun[0].GetSprite();
                 break;
             case 0:
                 slingshot.GetComponent<SpriteRenderer>().enabled = true;
@@ -90,6 +107,10 @@ public class Shooter : MonoBehaviour
     private void CheckShot(){
         switch(fireArm){
             default:
+            case 2:
+                canShoot = true;
+                RegularShot();
+                break;
             case 1:
                 if(coroutine != null){
                     StopCoroutine(coroutine);
