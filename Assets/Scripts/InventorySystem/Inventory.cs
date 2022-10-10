@@ -10,14 +10,13 @@ public class Inventory
     public List<Item> equipedItems;
     private Action<Item> useItemAction;
 
-    public Inventory(Action<Item> useItemAction)
+    public Inventory()
     {
-        this.useItemAction = useItemAction;
         itemList = new List<Item>();
         equipedItems = new List<Item>();
 
         StartEquipMenu(new Item { itemType = Item.ItemType.UnequipedMask, weaponChangeNum = 0});
-        StartEquipMenu(new Item { itemType = Item.ItemType.UnequipedTalisman });
+        StartEquipMenu(new Item { itemType = Item.ItemType.UnequipedTalisman, weaponChangeNum = 0});
         //Debug.Log(itemList.Count);
     }
 
@@ -67,7 +66,7 @@ public class Inventory
                     itemList.Add(item);
                     break;
                 case 1:
-                    equipedItems[pos] = new Item { itemType = Item.ItemType.UnequipedTalisman };
+                    equipedItems[pos] = new Item { itemType = Item.ItemType.UnequipedTalisman, weaponChangeNum = 0 };
                     itemList.Add(item);
                     break;
             }
@@ -76,10 +75,10 @@ public class Inventory
         
     }
 
-    public void UseItem(Item item)
-    {
-        useItemAction(item);
-    }
+    //public void UseItem(Item item)
+    //{
+    //    useItemAction(item);
+    //}
 
     public List<Item> GetItemList()
     {

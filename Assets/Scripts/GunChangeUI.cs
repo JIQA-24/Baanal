@@ -8,9 +8,11 @@ public class GunChangeUI : MonoBehaviour
 {
 
     [SerializeField] private Image defaultGun;
-    [SerializeField] private Image mask1;
     [SerializeField] private Image defaultGunBlack;
-    [SerializeField] private Image mask1Black;
+    [SerializeField] private Image chaacMask;
+    [SerializeField] private Image chaacMaskBlack;
+    [SerializeField] private Image jaguarMask;
+    [SerializeField] private Image jaguarMaskBlack;
 
     [SerializeField] private Image bombs;
     [SerializeField] public TextMeshProUGUI numberOfBombsText;
@@ -37,30 +39,39 @@ public class GunChangeUI : MonoBehaviour
 
     public void ChangeUI(int _mask){
         switch(_mask){
-            case 1:
-                defaultGun.fillAmount = 0;
-                defaultGunBlack.fillAmount = 0;
-                mask1.fillAmount = 0;
-                mask1Black.fillAmount = 1;
-                isChangeCooldown = true;
-                break;
             default:
-                defaultGun.fillAmount = 0;
+            case 2:
+                Restart();
+                jaguarMaskBlack.fillAmount = 1;
+                break;
+            case 1:
+                Restart();
+                chaacMaskBlack.fillAmount = 1;
+                break;
+            case 0:
+                Restart();
                 defaultGunBlack.fillAmount = 1;
-                mask1.fillAmount = 0;
-                mask1Black.fillAmount = 0;
-                isChangeCooldown = true;
                 break;
         }
+    }
+
+    private void Restart()
+    {
+        defaultGun.fillAmount = 0;
+        defaultGunBlack.fillAmount = 0;
+        chaacMask.fillAmount = 0;
+        chaacMaskBlack.fillAmount = 0;
+        jaguarMask.fillAmount = 0;
+        jaguarMaskBlack.fillAmount = 0;
+        isChangeCooldown = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Restart();
         defaultGun.fillAmount = 1;
-        defaultGunBlack.fillAmount = 0;
-        mask1.fillAmount = 0;
-        mask1Black.fillAmount = 0;
+        isChangeCooldown = false;
     }
 
     // Update is called once per frame
@@ -78,12 +89,25 @@ public class GunChangeUI : MonoBehaviour
             }
         }
 
-        if(isChangeCooldown && fireArm.fireArm == 1){
+        if (isChangeCooldown && fireArm.fireArm == 2)
+        {
 
-            mask1.fillAmount += 1 / maskCooldown * Time.deltaTime;
+            jaguarMask.fillAmount += 1 / maskCooldown * Time.deltaTime;
 
-            if(mask1.fillAmount >= 1){
-                mask1.fillAmount = 1;
+            if (jaguarMask.fillAmount >= 1)
+            {
+                jaguarMask.fillAmount = 1;
+                isChangeCooldown = false;
+            }
+
+        }
+
+        if (isChangeCooldown && fireArm.fireArm == 1){
+
+            chaacMask.fillAmount += 1 / maskCooldown * Time.deltaTime;
+
+            if(chaacMask.fillAmount >= 1){
+                chaacMask.fillAmount = 1;
                 isChangeCooldown = false;
             }
         

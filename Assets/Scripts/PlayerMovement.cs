@@ -9,8 +9,6 @@ public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private UI_Inventory uiInventory;
 
-	public CharacterController2D characterController2D;
-
 	public CharacterController2D controller;
 	public Animator animator;
 
@@ -37,31 +35,32 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-		inventory = new Inventory(UseItem);
+		inventory = new Inventory();
 		uiInventory.SetInventory(inventory);
 
 		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, weaponChangeNum = 1});
 		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, weaponChangeNum = 2});
 	}
-	private void UseItem(Item item)
-    {
-        switch (item.itemType)
-        {
-			default:
-			case Item.ItemType.ChaacMask:
-				inventory.RemoveItem(item);
-				break;
-			case Item.ItemType.JaguarMask:
-				inventory.RemoveItem(item);
-				break;
-			case Item.ItemType.UnequipedMask:
-				inventory.RemoveItem(item);
-				break;
-			case Item.ItemType.UnequipedTalisman:
-				inventory.RemoveItem(item);
-				break;
-		}
-    }
+
+	//private void UseItem(Item item)
+ //   {
+ //       switch (item.itemType)
+ //       {
+	//		default:
+	//		case Item.ItemType.ChaacMask:
+	//			inventory.RemoveItem(item);
+	//			break;
+	//		case Item.ItemType.JaguarMask:
+	//			inventory.RemoveItem(item);
+	//			break;
+	//		case Item.ItemType.UnequipedMask:
+	//			inventory.RemoveItem(item);
+	//			break;
+	//		case Item.ItemType.UnequipedTalisman:
+	//			inventory.RemoveItem(item);
+	//			break;
+	//	}
+ //   }
 
 
     void Update(){
@@ -72,7 +71,9 @@ public class PlayerMovement : MonoBehaviour
 		horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
 
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+
 		if(Input.GetButtonDown("Jump") && !crouch){
+			animator.SetBool("IsJumping", true);
 			jump = true;
 		}
 
@@ -105,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
 				dashingDir = new Vector2(transform.localScale.x, 0);
             }
 			//Add stopping dash
+			animator.SetBool("IsDashing", true);
 			StartCoroutine(Dash());
 		}
 
@@ -115,7 +117,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
 		
+
+
 	}
+
+	public void OnLand()
+    {
+		animator.SetBool("IsJumping", false);
+	}
+
 
 	private void FixedUpdate() {
 		if(isDashing || PauseMenu.gameIsPaused){
@@ -171,23 +181,25 @@ public class PlayerMovement : MonoBehaviour
 		tr.emitting = false;
 		isDashing = false;
         controller.m_Rigidbody2D.gravityScale = originalGravity;
-        //yield return new WaitForSeconds(dashingCooldown);
+		animator.SetBool("IsDashing", false);
+
+		//yield return new WaitForSeconds(dashingCooldown);
 		//canDash = true;
 
-        //canDash = false;
-        //isDashing = true;
-        //tr.emitting = true;
-        //if(horizontalMove < 0){
-        //	controller.m_Rigidbody2D.velocity = new Vector2(-transform.localScale.x * dashingPower, 0f);
-        //}
-        //if(horizontalMove > 0){
-        //	controller.m_Rigidbody2D.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        //}
-        //yield return new WaitForSeconds(dashingTime);
-        //tr.emitting = false;
-        //isDashing = false;
-        //yield return new WaitForSeconds(dashingCooldown);
-        //canDash = true;
-    }
+		//canDash = false;
+		//isDashing = true;
+		//tr.emitting = true;
+		//if(horizontalMove < 0){
+		//	controller.m_Rigidbody2D.velocity = new Vector2(-transform.localScale.x * dashingPower, 0f);
+		//}
+		//if(horizontalMove > 0){
+		//	controller.m_Rigidbody2D.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+		//}
+		//yield return new WaitForSeconds(dashingTime);
+		//tr.emitting = false;
+		//isDashing = false;
+		//yield return new WaitForSeconds(dashingCooldown);
+		//canDash = true;
+	}
 
 }
