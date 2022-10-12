@@ -51,9 +51,9 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float _damage){
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
-
         if(currentHealth > 0){
             StartCoroutine(Invulerability());
+            SoundManager.PlaySound(SoundManager.Sound.PlayerHit); //reproduce audio de golpe al jugador
         } else {
             if(!dead){
                 GetComponent<PlayerMovement>().enabled = false;

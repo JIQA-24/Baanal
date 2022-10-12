@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
-
+		
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
 		if(Input.GetButtonDown("Jump") && !crouch){
@@ -108,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
 			//Add stopping dash
 			animator.SetBool("IsDashing", true);
 			StartCoroutine(Dash());
+			SoundManager.PlaySound(SoundManager.Sound.Dash); //reproduce el sonido del dash
 		}
 
         if (isDashing)
