@@ -42,7 +42,7 @@ public class CharacterController2D : MonoBehaviour
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		gun1 = GameObject.Find("Slingshot");
 		gun2 = GameObject.Find("Bow");
-
+		SoundManager.Initialize();
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 
@@ -128,6 +128,9 @@ public class CharacterController2D : MonoBehaviour
 
 			// Move the character by finding the target velocity
 			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+			if (m_Grounded & move != 0) {
+				SoundManager.PlaySound(SoundManager.Sound.PlayerMove);
+			}
 			// And then smoothing it out and applying it to the character
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 			//SoundManager.PlaySound(SoundManager.Sound.FootstepGrass); //reproduce el sonido del salto
