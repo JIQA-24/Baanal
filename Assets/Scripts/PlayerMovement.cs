@@ -42,26 +42,6 @@ public class PlayerMovement : MonoBehaviour
 		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, weaponChangeNum = 2});
 	}
 
-	//private void UseItem(Item item)
- //   {
- //       switch (item.itemType)
- //       {
-	//		default:
-	//		case Item.ItemType.ChaacMask:
-	//			inventory.RemoveItem(item);
-	//			break;
-	//		case Item.ItemType.JaguarMask:
-	//			inventory.RemoveItem(item);
-	//			break;
-	//		case Item.ItemType.UnequipedMask:
-	//			inventory.RemoveItem(item);
-	//			break;
-	//		case Item.ItemType.UnequipedTalisman:
-	//			inventory.RemoveItem(item);
-	//			break;
-	//	}
- //   }
-
 
     void Update(){
 		if(isDashing || PauseMenu.gameIsPaused){

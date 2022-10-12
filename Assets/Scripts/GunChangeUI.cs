@@ -20,7 +20,8 @@ public class GunChangeUI : MonoBehaviour
     public float cooldownBombs = 3f;
     public bool isBombsCooldown = false;
 
-    private float maskCooldown = 1f;
+    private float changeCooldown = 1f;
+    private float maskCooldown = 20f;
     public bool isChangeCooldown = false;
     public Shooter fireArm;
 
@@ -42,10 +43,12 @@ public class GunChangeUI : MonoBehaviour
             default:
             case 2:
                 Restart();
+                jaguarMask.fillAmount = 1;
                 jaguarMaskBlack.fillAmount = 1;
                 break;
             case 1:
                 Restart();
+                chaacMask.fillAmount = 1;
                 chaacMaskBlack.fillAmount = 1;
                 break;
             case 0:
@@ -92,30 +95,32 @@ public class GunChangeUI : MonoBehaviour
         if (isChangeCooldown && fireArm.fireArm == 2)
         {
 
-            jaguarMask.fillAmount += 1 / maskCooldown * Time.deltaTime;
+            jaguarMask.fillAmount -= 1 / maskCooldown * Time.deltaTime;
 
-            if (jaguarMask.fillAmount >= 1)
+            if (jaguarMask.fillAmount <= 0)
             {
-                jaguarMask.fillAmount = 1;
+                fireArm.fireArm = 0;
                 isChangeCooldown = false;
+                fireArm.changeOfInventory();
             }
 
         }
 
         if (isChangeCooldown && fireArm.fireArm == 1){
 
-            chaacMask.fillAmount += 1 / maskCooldown * Time.deltaTime;
+            chaacMask.fillAmount -= 1 / maskCooldown * Time.deltaTime;
 
-            if(chaacMask.fillAmount >= 1){
-                chaacMask.fillAmount = 1;
+            if(chaacMask.fillAmount <= 0){
+                fireArm.fireArm = 0;
                 isChangeCooldown = false;
+                fireArm.changeOfInventory();
             }
         
         }
 
         if(isChangeCooldown && fireArm.fireArm == 0){
 
-            defaultGun.fillAmount += 1 / maskCooldown * Time.deltaTime;
+            defaultGun.fillAmount += 1 / changeCooldown * Time.deltaTime;
 
             if(defaultGun.fillAmount >= 1){
                 defaultGun.fillAmount = 1;

@@ -10,13 +10,16 @@ public class Shooter : MonoBehaviour
     public GameObject bulletProp;
     public GameObject arrowProp;
     public GameObject bombProp;
+    public GameObject spearProp;
     public Transform firePointSlingshot;
     public Transform firePointBow;
+    public Transform firePointSpear;
     public bool canShoot = true;
     public int fireArm = 0;
     private IEnumerator coroutine;
     public GunChangeUI change;
     List<Item> equipedGun;
+    public Animator animator;
 
     private void Awake()
     {
@@ -25,6 +28,11 @@ public class Shooter : MonoBehaviour
 
 
     private void Start() {
+        CheckFireArm();
+    }
+    public void changeOfInventory()
+    {
+        change.ChangeUI(fireArm);
         CheckFireArm();
     }
 
@@ -59,14 +67,7 @@ public class Shooter : MonoBehaviour
                 CheckFireArm();
             }
             
-            //Debug.Log(equipedGun[0].itemType);
-            
         }
-        //if(Input.GetKeyDown(KeyCode.Q) && fireArm > 0 && !isCD){
-        //    fireArm -= 1;
-        //    change.ChangeUI(fireArm);
-        //    CheckFireArm();
-        //}
 
 
         if(Input.GetButtonDown("Fire1") && canShoot){
@@ -82,23 +83,25 @@ public class Shooter : MonoBehaviour
 
     private void CheckFireArm(){
         Transform slingshot = transform.Find("Slingshot");
-        Transform bow = transform.Find("Bow");
+        Transform spear = transform.Find("Spear");
         Transform maskEquipable = transform.Find("MaskEquipable");
         switch(fireArm){
             default:
             case 2:
                 maskEquipable.GetComponent<SpriteRenderer>().enabled = true;
                 maskEquipable.GetComponent<SpriteRenderer>().sprite = equipedGun[0].GetSprite();
+                spear.GetComponent<SpriteRenderer>().enabled = true;
+                slingshot.GetComponent<SpriteRenderer>().enabled = false;
                 break;
             case 1:
                 maskEquipable.GetComponent<SpriteRenderer>().enabled = true;
                 slingshot.GetComponent<SpriteRenderer>().enabled = false;
-                bow.GetComponent<SpriteRenderer>().enabled = true;
+                spear.GetComponent<SpriteRenderer>().enabled = false;
                 maskEquipable.GetComponent<SpriteRenderer>().sprite = equipedGun[0].GetSprite();
                 break;
             case 0:
                 slingshot.GetComponent<SpriteRenderer>().enabled = true;
-                bow.GetComponent<SpriteRenderer>().enabled = false;
+                spear.GetComponent<SpriteRenderer>().enabled = false;
                 maskEquipable.GetComponent<SpriteRenderer>().enabled = false;
                 break;
         }
@@ -109,14 +112,16 @@ public class Shooter : MonoBehaviour
             default:
             case 2:
                 canShoot = true;
-                RegularShot();
+                SpearShot();
                 break;
             case 1:
+                animator.SetBool("BowShot", true);
                 if(coroutine != null){
                     StopCoroutine(coroutine);
                 }
                 coroutine = BowShot();
                 StartCoroutine(coroutine);
+                
                 break;
             case 0:
                 canShoot = true;
@@ -144,8 +149,15 @@ public class Shooter : MonoBehaviour
             Destroy(arrow, 1f);
             yield return new WaitForSeconds(0.2f);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
+        animator.SetBool("BowShot", false);
+        yield return new WaitForSeconds(0.3f);
         canShoot = true;
-    
+    }
+
+    private void SpearShot()
+    {
+        GameObject spear = Instantiate(spearProp, firePointSpear.transform.position, firePointSpear.transform.rotation);
+        Destroy(spear, 2f);
     }
 }
