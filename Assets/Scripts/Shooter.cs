@@ -40,6 +40,7 @@ public class Shooter : MonoBehaviour
         fireSlingRot = firePointSlingshot.rotation;
         fireGeneralRot = firePointBow.rotation;
         CheckFireArm();
+        inventory = uiInventory.GetInventory();
     }
     public void changeOfInventory()
     {
@@ -151,7 +152,7 @@ public class Shooter : MonoBehaviour
     private void BombThrow()
     {
         GameObject bomb = Instantiate(bombProp, firePointBow.transform.position, firePointBow.transform.rotation);
-        Destroy(bomb, 1f);
+        //Destroy(bomb, 5f);
     }
 
     private IEnumerator BowShot() {
