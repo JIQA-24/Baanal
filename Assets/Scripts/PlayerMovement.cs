@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private UI_Inventory uiInventory;
+	[SerializeField] private Shooter shooter;
 
 	public CharacterController2D controller;
 	public Animator animator;
@@ -21,12 +22,19 @@ public class PlayerMovement : MonoBehaviour
 	bool crouch = false;
 
 	private Vector2 dashingDir;
+	private Vector2 aimDir;
 	private bool canDash = true;
 	private bool isDashing;
 	private float dashingPower = 15f;
 	private float dashingTime = 0.15f;
-	//private float dashingCooldown = 1f;
+	private bool isLocked = false;
 	[SerializeField] private TrailRenderer tr;
+	private Vector3 fireBowPos;
+	private Vector3 fireSlingPos;
+	private Vector3 fireSpearPos;
+	private Quaternion fireSlingRot;
+	private Quaternion fireGeneralRot;
+	private Vector3 player;
 
 	private GameObject currentOneWayPlatform;
 	[SerializeField] private CapsuleCollider2D playerCollider;
@@ -40,6 +48,14 @@ public class PlayerMovement : MonoBehaviour
 
 		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, weaponChangeNum = 1});
 		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, weaponChangeNum = 2});
+
+		fireBowPos = shooter.firePointBow.transform.position;
+		fireSlingPos = shooter.firePointSlingshot.transform.position;
+		fireSpearPos = shooter.firePointSpear.transform.position;
+		fireSlingRot = shooter.firePointSlingshot.rotation;
+		fireGeneralRot = shooter.firePointBow.rotation;
+
+
 	}
 
 
@@ -47,8 +63,22 @@ public class PlayerMovement : MonoBehaviour
 		if(isDashing || PauseMenu.gameIsPaused){
 			return;
 		}
-
-		horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+		UpdatePosWeapons();
+		player = GetComponent<Transform>().position;
+		if (Input.GetKeyDown(KeyCode.C))
+        {
+			isLocked = !isLocked;
+        }
+        if (isLocked)
+        {
+			aimDir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+			Debug.Log(aimDir);
+			ChangeAimDir(aimDir);
+		} else
+        {
+			horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+		}
+		
 		
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
@@ -96,10 +126,6 @@ public class PlayerMovement : MonoBehaviour
 			controller.m_Rigidbody2D.velocity = dashingDir.normalized * dashingPower;
 			return;
         }
-
-		
-
-
 	}
 
 	public void OnLand()
@@ -107,6 +133,68 @@ public class PlayerMovement : MonoBehaviour
 		animator.SetBool("IsJumping", false);
 	}
 
+	public void ChangeAimDir(Vector3 _aimDir)
+    {
+        switch (_aimDir)
+        {
+			default:
+			case Vector3 n when (n.x == 0 && n.y == 0):
+				controller.CheckFlip(1);
+				shooter.firePointSlingshot.position = new Vector3(player.x + 0.60f, player.y, player.z);
+				shooter.firePointSlingshot.rotation = fireSlingRot;
+				break;
+			case Vector3 n when (n.x > 0 && n.y == 0):
+				shooter.firePointSlingshot.position = new Vector3(player.x + 0.60f, player.y, player.z);
+				shooter.firePointSlingshot.rotation = fireSlingRot;
+				controller.CheckFlip(n.x);
+				break;
+			case Vector3 n when (n.x < 0 && n.y == 0):
+				shooter.firePointSlingshot.position = new Vector3(player.x - 0.60f, player.y, player.z);
+				controller.CheckFlip(n.x);
+				break;
+			case Vector3 n when (n.x < 0 && n.y > 0):
+				shooter.firePointSlingshot.position = new Vector3(player.x + 0.60f, player.y - 1.2f, player.z);
+				controller.CheckFlip(n.x);
+				break;
+			case Vector3 n when (n.x < 0 && n.y < 0):
+				shooter.firePointSlingshot.position = new Vector3(player.x - 0.60f, player.y - 1.2f, player.z);
+				controller.CheckFlip(n.x);
+				break;
+			case Vector3 n when (n.x > 0 && n.y > 0):
+				shooter.firePointSlingshot.position = new Vector3(player.x + 0.60f, player.y + 1.2f, player.z);
+				controller.CheckFlip(n.x);
+				break;
+			case Vector3 n when (n.x > 0 && n.y < 0):
+				controller.CheckFlip(n.x);
+				break;
+			case Vector3 n when (n.x == 0 && n.y > 0):
+				shooter.firePointSlingshot.position = new Vector3(player.x, player.y + 1.2f, player.z);
+				shooter.firePointSlingshot.rotation = Quaternion.Euler(new Vector3(fireSlingRot.x, fireSlingRot.y, fireSlingRot.z));
+				break;
+			case Vector3 n when (n.x == 0 && n.y < 0):
+				shooter.firePointSlingshot.position = new Vector3(player.x, player.y - 1.2f, player.z);
+				break;
+		}
+    }
+
+	private void UpdatePosWeapons()
+    {
+		fireBowPos = shooter.firePointBow.transform.position;
+		fireSlingPos = shooter.firePointSlingshot.transform.position;
+		fireSpearPos = shooter.firePointSpear.transform.position;
+		//fireSlingRot = shooter.firePointSlingshot.rotation;
+		//fireGeneralRot = shooter.firePointBow.rotation;
+	}
+
+	//private void ResetAim()
+ //   {
+	//	shooter.firePointBow.transform.position = fireBowPos;
+	//	shooter.firePointSlingshot.transform.position = fireSlingPos;
+	//	shooter.firePointSpear.transform.position = fireSpearPos;
+	//	shooter.firePointBow.rotation = fireGeneralRot;
+	//	shooter.firePointSpear.rotation = fireGeneralRot;
+	//	shooter.firePointSlingshot.rotation = fireSlingRot;
+	//}
 
 	private void FixedUpdate() {
 		if(isDashing || PauseMenu.gameIsPaused){

@@ -144,7 +144,7 @@ public class CharacterController2D : MonoBehaviour
 			else if (move < 0 && m_FacingRight)
 			{
 				// ... flip the player.
-				//Flip();
+				Flip();
 			}
 		}
 		// If the player should jump...
@@ -157,7 +157,16 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
-
+	public void CheckFlip(float _move)
+    {
+		if(_move > 0 && !m_FacingRight)
+        {
+			Flip();
+        } else if(_move < 0 && m_FacingRight)
+        {
+			Flip();
+        }
+    }
 	private void Flip()
 	{
 		// Switch the way the player is labelled as facing.
@@ -168,12 +177,12 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 
-		Vector3 gun1Scale = gun1.transform.localScale;
-		gun1Scale.x *= -1;
-		gun1.transform.localScale = gun1Scale;
-		Vector3 gun2Scale = gun2.transform.localScale;
-		gun2Scale.x *= -1;
-		gun2.transform.localScale = gun2Scale;
+		//Vector3 gun1Scale = gun1.transform.localScale;
+		//gun1Scale.x *= -1;
+		//gun1.transform.localScale = gun1Scale;
+		//Vector3 gun2Scale = gun2.transform.localScale;
+		//gun2Scale.x *= -1;
+		//gun2.transform.localScale = gun2Scale;
 	}
 
 

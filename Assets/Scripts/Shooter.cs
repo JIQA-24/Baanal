@@ -43,13 +43,14 @@ public class Shooter : MonoBehaviour
         equipedGun = inventory.GetEquipedList();
 
         bool isCD = change.isChangeCooldown;
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float rotationY = 0f;
-        if( mousePos.x < transform.position.x){
-            rotationY = 180f;
-        }
 
-        transform.eulerAngles = new Vector3(transform.rotation.x, rotationY, transform.rotation.z);
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //float rotationY = 0f;
+        //if( mousePos.x < transform.position.x){
+        //    rotationY = 180f;
+        //}
+
+        //transform.eulerAngles = new Vector3(transform.rotation.x, rotationY, transform.rotation.z);
 
         if(Input.GetKeyDown(KeyCode.R) && !isCD){
             if(fireArm == equipedGun[0].weaponChangeNum)
