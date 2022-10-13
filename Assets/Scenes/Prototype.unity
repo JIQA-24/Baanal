@@ -1134,7 +1134,7 @@ GameObject:
   - component: {fileID: 289542673}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Right
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2752,7 +2752,7 @@ GameObject:
   - component: {fileID: 653587050}
   m_Layer: 0
   m_Name: center
-  m_TagString: Untagged
+  m_TagString: Center
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2765,7 +2765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653587049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 17.17, z: -0.069021754}
+  m_LocalPosition: {x: 0, y: 17.26, z: -0.069021754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4874,7 +4874,7 @@ GameObject:
   - component: {fileID: 1294150484}
   - component: {fileID: 1294150487}
   - component: {fileID: 1294150488}
-  - component: {fileID: 1294150489}
+  - component: {fileID: 1294150490}
   m_Layer: 0
   m_Name: El jefazo
   m_TagString: Enemy
@@ -4990,23 +4990,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1294150489
-MonoBehaviour:
+--- !u!50 &1294150490
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294150483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b04acc27f13be43a53d7f5c609559a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidad: 5
-  escalas:
-  - {fileID: 1538942507}
-  - {fileID: 653587050}
-  - {fileID: 289542673}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &1304818012 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8975185051686979620, guid: b6e3fc5a1c800eb4f95821f2f944f542, type: 3}
@@ -7071,7 +7075,7 @@ GameObject:
   - component: {fileID: 1538942507}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Left
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
