@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private UI_Inventory uiInventory;
+	[SerializeField] private Shooter shooter;
 
 	public CharacterController2D controller;
 	public Animator animator;
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 	private bool isDashing;
 	private float dashingPower = 15f;
 	private float dashingTime = 0.15f;
-	//private float dashingCooldown = 1f;
+	private bool isLocked = false;
 	[SerializeField] private TrailRenderer tr;
 
 	private GameObject currentOneWayPlatform;
@@ -40,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
 		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, weaponChangeNum = 1});
 		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, weaponChangeNum = 2});
+
+
 	}
 
 
@@ -48,7 +51,15 @@ public class PlayerMovement : MonoBehaviour
 			return;
 		}
 
-		horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+		if (Input.GetKeyDown(KeyCode.C))
+        {
+			isLocked = !isLocked;
+        }
+        if (!shooter.isLocked)
+        {
+			horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+		}
+		
 		
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
@@ -75,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 
-		if(Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+		if(Input.GetButtonDown("Dash") && canDash)
 		{
 			isDashing = true;
 			canDash = false;
@@ -96,10 +107,6 @@ public class PlayerMovement : MonoBehaviour
 			controller.m_Rigidbody2D.velocity = dashingDir.normalized * dashingPower;
 			return;
         }
-
-		
-
-
 	}
 
 	public void OnLand()

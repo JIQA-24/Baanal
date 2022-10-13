@@ -16,9 +16,13 @@ public class Arrow : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        Destroy(gameObject);
-        if(other.gameObject.tag == "Enemy"){
-            other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(arrowDamage);
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
+        {
+            Destroy(gameObject);
+            if (other.gameObject.tag == "Enemy")
+            {
+                other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(arrowDamage);
+            }
         }
     }
 }

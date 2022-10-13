@@ -18,11 +18,14 @@ public class Bomb : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject);
         SoundManager.PlaySound(SoundManager.Sound.Avispero); //reproduce audio de golpe del avispero
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
         {
-            other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(bombDamage);
+            Destroy(gameObject);
+            if (other.gameObject.tag == "Enemy")
+            {
+                other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(bombDamage);
+            }
         }
     }
 }
