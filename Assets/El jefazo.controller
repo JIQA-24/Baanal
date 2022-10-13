@@ -38,6 +38,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+--- !u!114 &-8399032646393579239
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901dbe68cd8c2da4c9d0d63abbf26019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
 --- !u!1101 &-4515161908284254039
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -175,7 +188,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: Reposition_center
     m_Type: 4
@@ -202,6 +215,19 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &287478039525380996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527633b62372f7048927185d4e322721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
 --- !u!1102 &3157631640343017501
 AnimatorState:
   serializedVersion: 6
@@ -214,7 +240,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6552939327763593130}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -8399032646393579239}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -368,7 +395,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -585446996088858293}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 287478039525380996}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -426,7 +454,7 @@ AnimatorStateMachine:
     m_Position: {x: 200, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3342983251488312450}
-    m_Position: {x: 200, y: -20, z: 0}
+    m_Position: {x: 200, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8861992162256849456}
     m_Position: {x: 200, y: -90, z: 0}

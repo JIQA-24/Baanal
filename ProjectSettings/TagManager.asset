@@ -11,6 +11,7 @@ TagManager:
   - Left
   - Center
   - Right
+  - Boss
   layers:
   - Default
   - TransparentFX
