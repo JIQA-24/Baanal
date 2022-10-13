@@ -23,8 +23,9 @@ public class CharacterController2D : MonoBehaviour
 
 	private GameObject gun1;
 	private GameObject gun2;
+	private GameObject gun3;
 
-	
+
 
 	[Header("Events")]
 	[Space]
@@ -41,7 +42,8 @@ public class CharacterController2D : MonoBehaviour
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		gun1 = GameObject.Find("Slingshot");
-		gun2 = GameObject.Find("Bow");
+		gun2 = GameObject.Find("FirePointBow");
+		gun3 = GameObject.Find("Spear");
 		SoundManager.Initialize();
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -177,13 +179,16 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 
-		//Vector3 gun1Scale = gun1.transform.localScale;
-		//gun1Scale.x *= -1;
-		//gun1.transform.localScale = gun1Scale;
-		//Vector3 gun2Scale = gun2.transform.localScale;
-		//gun2Scale.x *= -1;
-		//gun2.transform.localScale = gun2Scale;
-	}
+  //      Vector3 gun1Scale = gun1.transform.localScale;
+  //      gun1Scale.x *= -1;
+  //      gun1.transform.localScale = gun1Scale;
+  //      Vector3 gun2Scale = gun2.transform.localScale;
+  //      gun2Scale.x *= -1;
+  //      gun2.transform.localScale = gun2Scale;
+		//Vector3 gun3Scale = gun3.transform.localScale;
+		//gun3Scale.x *= -1;
+		//gun3.transform.localScale = gun3Scale;
+    }
 
 
 }

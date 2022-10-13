@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Shooter : MonoBehaviour
@@ -21,6 +23,13 @@ public class Shooter : MonoBehaviour
     List<Item> equipedGun;
     public Animator animator;
 
+    public CharacterController2D controller;
+    private Quaternion fireSlingRot;
+    private Quaternion fireGeneralRot;
+    private Vector3 playerPos;
+    private Vector2 aimDir;
+    public bool isLocked = false;
+
     private void Awake()
     {
         inventory = uiInventory.GetInventory();
@@ -28,6 +37,8 @@ public class Shooter : MonoBehaviour
 
 
     private void Start() {
+        fireSlingRot = firePointSlingshot.rotation;
+        fireGeneralRot = firePointBow.rotation;
         CheckFireArm();
     }
     public void changeOfInventory()
@@ -40,19 +51,20 @@ public class Shooter : MonoBehaviour
         if(PauseMenu.gameIsPaused || ifDead.dead){
             return;
         }
+        aimDir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        ChangeAimDir(aimDir);
+        playerPos = GetComponent<Transform>().position;
         equipedGun = inventory.GetEquipedList();
 
         bool isCD = change.isChangeCooldown;
 
-        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //float rotationY = 0f;
-        //if( mousePos.x < transform.position.x){
-        //    rotationY = 180f;
-        //}
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            isLocked = !isLocked;
+        }
 
-        //transform.eulerAngles = new Vector3(transform.rotation.x, rotationY, transform.rotation.z);
 
-        if(Input.GetKeyDown(KeyCode.R) && !isCD){
+        if (Input.GetKeyDown(KeyCode.R) && !isCD){
             if(fireArm == equipedGun[0].weaponChangeNum)
             {
                 fireArm = 0;
@@ -138,7 +150,7 @@ public class Shooter : MonoBehaviour
 
     private void BombThrow()
     {
-        GameObject bomb = Instantiate(bombProp, firePointSlingshot.transform.position, firePointSlingshot.transform.rotation);
+        GameObject bomb = Instantiate(bombProp, firePointBow.transform.position, firePointBow.transform.rotation);
         Destroy(bomb, 1f);
     }
 
@@ -160,5 +172,104 @@ public class Shooter : MonoBehaviour
     {
         GameObject spear = Instantiate(spearProp, firePointSpear.transform.position, firePointSpear.transform.rotation);
         Destroy(spear, 2f);
+    }
+
+    public void ChangeAimDir(Vector3 _aimDir)
+    {
+        switch (_aimDir)
+        {
+            default:
+            case Vector3 n when (n.x == 0 && n.y == 0):
+                if (controller.m_FacingRight)
+                {
+                    firePointSlingshot.position = new Vector3(playerPos.x + 0.6f, playerPos.y, playerPos.z);
+                    firePointBow.position = new Vector3(playerPos.x + 0.6f, playerPos.y, playerPos.z);
+                    firePointSpear.position = new Vector3(playerPos.x + 0.6f, playerPos.y, playerPos.z);
+                    firePointSlingshot.rotation = fireSlingRot;
+                    firePointBow.rotation = fireGeneralRot;
+                    firePointSpear.rotation = fireGeneralRot;
+                }
+                else if (!controller.m_FacingRight)
+                {
+                    firePointSlingshot.position = new Vector3(playerPos.x - 0.6f, playerPos.y, playerPos.z);
+                    firePointBow.position = new Vector3(playerPos.x - 0.6f, playerPos.y, playerPos.z);
+                    firePointSpear.position = new Vector3(playerPos.x - 0.6f, playerPos.y, playerPos.z);
+                    firePointSlingshot.rotation = Quaternion.Euler(new Vector3(fireSlingRot.x, fireSlingRot.y, fireSlingRot.z + 90f));
+                    firePointBow.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 180f));
+                    firePointSpear.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 180f));
+                }
+
+                break;
+            case Vector3 n when (n.x > 0 && n.y == 0):
+                firePointSlingshot.position = new Vector3(playerPos.x + 0.6f, playerPos.y, playerPos.z);
+                firePointBow.position = new Vector3(playerPos.x + 0.6f, playerPos.y, playerPos.z);
+                firePointSpear.position = new Vector3(playerPos.x + 0.6f, playerPos.y, playerPos.z);
+                firePointSlingshot.rotation = fireSlingRot;
+                firePointBow.rotation = fireGeneralRot;
+                firePointSpear.rotation = fireGeneralRot;
+                controller.CheckFlip(n.x);
+                break;
+            case Vector3 n when (n.x < 0 && n.y == 0):
+                firePointSlingshot.position = new Vector3(playerPos.x - 0.6f, playerPos.y, playerPos.z);
+                firePointBow.position = new Vector3(playerPos.x - 0.6f, playerPos.y, playerPos.z);
+                firePointSpear.position = new Vector3(playerPos.x - 0.6f, playerPos.y, playerPos.z);
+                firePointSlingshot.rotation = Quaternion.Euler(new Vector3(fireSlingRot.x, fireSlingRot.y, fireSlingRot.z + 90f));
+                firePointBow.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 180f));
+                firePointSpear.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 180f));
+                controller.CheckFlip(n.x);
+                break;
+            case Vector3 n when (n.x < 0 && n.y > 0):
+                firePointSlingshot.position = new Vector3(playerPos.x - 0.60f, playerPos.y + 0.8f, playerPos.z);
+                firePointBow.position = new Vector3(playerPos.x - 0.60f, playerPos.y + 0.8f, playerPos.z);
+                firePointSpear.position = new Vector3(playerPos.x - 0.60f, playerPos.y + 0.8f, playerPos.z);
+                firePointSlingshot.rotation = Quaternion.Euler(new Vector3(fireSlingRot.x, fireSlingRot.y, fireSlingRot.z + 45f));
+                firePointBow.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 135f));
+                firePointSpear.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 135f));
+                controller.CheckFlip(n.x);
+                break;
+            case Vector3 n when (n.x < 0 && n.y < 0):
+                firePointSlingshot.position = new Vector3(playerPos.x - 0.60f, playerPos.y - 0.8f, playerPos.z);
+                firePointBow.position = new Vector3(playerPos.x - 0.60f, playerPos.y - 0.8f, playerPos.z);
+                firePointSpear.position = new Vector3(playerPos.x - 0.60f, playerPos.y - 0.8f, playerPos.z);
+                firePointSlingshot.rotation = Quaternion.Euler(new Vector3(fireSlingRot.x, fireSlingRot.y, fireSlingRot.z + 135f));
+                firePointBow.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 225f));
+                firePointSpear.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 225f));
+                controller.CheckFlip(n.x);
+                break;
+            case Vector3 n when (n.x > 0 && n.y > 0):
+                firePointSlingshot.position = new Vector3(playerPos.x + 0.60f, playerPos.y + 0.8f, playerPos.z);
+                firePointBow.position = new Vector3(playerPos.x + 0.60f, playerPos.y + 0.8f, playerPos.z);
+                firePointSpear.position = new Vector3(playerPos.x + 0.60f, playerPos.y + 0.8f, playerPos.z);
+                firePointSlingshot.rotation = Quaternion.Euler(new Vector3(fireSlingRot.x, fireSlingRot.y, fireSlingRot.z + 315f));
+                firePointBow.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 45f));
+                firePointSpear.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 45f));
+                controller.CheckFlip(n.x);
+                break;
+            case Vector3 n when (n.x > 0 && n.y < 0):
+                firePointSlingshot.position = new Vector3(playerPos.x + 0.60f, playerPos.y - 0.8f, playerPos.z);
+                firePointBow.position = new Vector3(playerPos.x + 0.60f, playerPos.y - 0.8f, playerPos.z);
+                firePointSpear.position = new Vector3(playerPos.x + 0.60f, playerPos.y - 0.8f, playerPos.z);
+                firePointSlingshot.rotation = Quaternion.Euler(new Vector3(fireSlingRot.x, fireSlingRot.y, fireSlingRot.z + 225f));
+                firePointBow.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 315f));
+                firePointSpear.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 315f));
+                controller.CheckFlip(n.x);
+                break;
+            case Vector3 n when (n.x == 0 && n.y > 0):
+                firePointSlingshot.position = new Vector3(playerPos.x, playerPos.y + 1.2f, playerPos.z);
+                firePointBow.position = new Vector3(playerPos.x, playerPos.y + 1.2f, playerPos.z);
+                firePointSpear.position = new Vector3(playerPos.x, playerPos.y + 1.2f, playerPos.z);
+                firePointSlingshot.rotation = Quaternion.Euler(new Vector3(fireSlingRot.x, fireSlingRot.y, fireSlingRot.z));
+                firePointBow.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 90f));
+                firePointSpear.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 90f));
+                break;
+            case Vector3 n when (n.x == 0 && n.y < 0):
+                firePointSlingshot.position = new Vector3(playerPos.x, playerPos.y - 1.2f, playerPos.z);
+                firePointBow.position = new Vector3(playerPos.x, playerPos.y - 1.2f, playerPos.z);
+                firePointSpear.position = new Vector3(playerPos.x, playerPos.y - 1.2f, playerPos.z);
+                firePointSlingshot.rotation = Quaternion.Euler(new Vector3(fireSlingRot.x, fireSlingRot.y, fireSlingRot.z + 180f));
+                firePointBow.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 270f));
+                firePointSpear.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 270f));
+                break;
+        }
     }
 }

@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 285950660}
   - component: {fileID: 285950662}
   - component: {fileID: 285950661}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Floor (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3681,7 +3681,7 @@ GameObject:
   - component: {fileID: 1009064215}
   - component: {fileID: 1009064217}
   - component: {fileID: 1009064216}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Floor (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5930,6 +5930,8 @@ MonoBehaviour:
   fireArm: 0
   change: {fileID: 356417319}
   animator: {fileID: 1382331382}
+  controller: {fileID: 1382331376}
+  isLocked: 0
 --- !u!114 &1382331379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6211,7 +6213,7 @@ GameObject:
   - component: {fileID: 1402415188}
   - component: {fileID: 1402415190}
   - component: {fileID: 1402415189}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
