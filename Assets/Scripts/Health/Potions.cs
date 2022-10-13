@@ -30,6 +30,7 @@ public class Potions : MonoBehaviour
             numberOfPotions -= 1;
             potions.fillAmount = 0;
             playerHealth.AddHealth(potionValue);
+            SoundManager.PlaySound(SoundManager.Sound.Potion);
         }
         numberOfPotionsT.text = numberOfPotions.ToString();
 
