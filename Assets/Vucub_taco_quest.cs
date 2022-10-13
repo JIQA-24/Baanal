@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Vucub_taco_quest : MonoBehaviour
 {
-    public int velocidad;
+   /* public int velocidad;
     public Transform[] escalas;
     private Transform player;
     int numEscala;
@@ -51,5 +51,5 @@ public class Vucub_taco_quest : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(this.transform.position, player.position, velocidad * Time.deltaTime);
         //transform.position = Vector2.MoveTowards(this.transform.position, player.position, speed * Time.deltaTime);
-    }
+    }*/
 }
