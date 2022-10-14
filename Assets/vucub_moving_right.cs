@@ -11,7 +11,8 @@ public class vucub_moving_right : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        right = GameObject.FindGameObjectWithTag("Right").transform;
-        enemyBody = animator.GetComponent<Rigidbody2D>(); 
+        enemyBody = animator.GetComponent<Rigidbody2D>();
+        animator.SetBool("Reposition_right",true); //ELIMINAR EN VERSION 4    
         
     }
 
