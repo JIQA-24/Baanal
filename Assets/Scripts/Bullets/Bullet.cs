@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
         {
             Destroy(gameObject);
+            SoundManager.PlaySound(SoundManager.Sound.RegularShotImpact);
             if (other.gameObject.tag == "Enemy")
             {
                 other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(bulletDamage);
