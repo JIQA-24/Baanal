@@ -59,13 +59,13 @@ public class Shooter : MonoBehaviour
 
         bool isCD = change.isChangeCooldown;
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetButtonDown("previous_mask"))
         {
             isLocked = !isLocked;
         }
 
 
-        if (Input.GetKeyDown(KeyCode.R) && !isCD){
+        if (Input.GetButtonDown("next_mask") && !isCD){
             if(fireArm == equipedGun[0].weaponChangeNum)
             {
                 fireArm = 0;
