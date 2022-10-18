@@ -125,8 +125,12 @@ public class Shooter : MonoBehaviour
         switch(fireArm){
             default:
             case 2:
-                canShoot = true;
-                SpearShot();
+                if (coroutine != null)
+                {
+                    StopCoroutine(coroutine);
+                }
+                coroutine = SpearShot();
+                StartCoroutine(coroutine);
                 SoundManager.PlaySound(SoundManager.Sound.SpearShot);
                 break;
             case 1:
@@ -171,10 +175,12 @@ public class Shooter : MonoBehaviour
         canShoot = true;
     }
 
-    private void SpearShot()
+    private IEnumerator SpearShot()
     {
         GameObject spear = Instantiate(spearProp, firePointSpear.transform.position, firePointSpear.transform.rotation);
         Destroy(spear, 2f);
+        yield return new WaitForSeconds(1f);
+        canShoot = true;
     }
 
     public void ChangeAimDir(Vector3 _aimDir)

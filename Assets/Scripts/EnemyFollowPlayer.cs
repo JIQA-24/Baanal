@@ -9,6 +9,9 @@ public class EnemyFollowPlayer : MonoBehaviour
     private Transform player;
     private float startingEnemyHealth = 30f;
     private float currentEnemyHealth;
+    private Rigidbody2D rb;
+    private SpriteRenderer sRenderer;
+    private Color oGColor;
     [SerializeField] private float damage;
 
 
@@ -16,6 +19,9 @@ public class EnemyFollowPlayer : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentEnemyHealth = startingEnemyHealth;
+        rb = GetComponent<Rigidbody2D>();
+        sRenderer = GetComponent<SpriteRenderer>();
+        oGColor = sRenderer.color;    
     }
 
 
@@ -38,10 +44,21 @@ public class EnemyFollowPlayer : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float _damage){
+    public void TakeDamage(float _damage, Vector2 direction, float force){
         currentEnemyHealth = Mathf.Clamp(currentEnemyHealth - _damage, 0, startingEnemyHealth);
+        rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+        StartCoroutine(Knockback());
         if(currentEnemyHealth <= 0){
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator Knockback()
+    {
+        speed = 0;
+        sRenderer.color = Color.magenta;
+        yield return new WaitForSeconds(0.3f);
+        sRenderer.color = oGColor;
+        speed = 5f;
     }
 }
