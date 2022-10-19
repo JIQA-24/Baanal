@@ -21,6 +21,8 @@ public class GunChangeUI : MonoBehaviour
     public bool isBombsCooldown = false;
 
     private float changeCooldown = 1f;
+    private float maskReturnCooldown = 20f;
+    private bool maskReturnOnCooldown = false;
     private float maskCooldown = 20f;
     public bool isChangeCooldown = false;
     public Shooter fireArm;
@@ -92,6 +94,13 @@ public class GunChangeUI : MonoBehaviour
             }
         }
 
+
+        if(maskReturnOnCooldown)
+        {
+            MaskReturn();
+            return;
+        }
+
         if (isChangeCooldown && fireArm.fireArm == 2)
         {
 
@@ -136,5 +145,14 @@ public class GunChangeUI : MonoBehaviour
         bombs.fillAmount = 0;
         numberOfBombs -= 1;
         isBombsCooldown = true;
+    }
+
+    private void MaskReturn()
+    {
+        maskReturnCooldown -= Time.deltaTime;
+        if(maskReturnCooldown <= 0)
+        {
+            maskReturnOnCooldown = false;
+        }
     }
 }
