@@ -16,11 +16,16 @@ public class GunChangeUI : MonoBehaviour
 
     [SerializeField] private Image bombs;
     [SerializeField] public TextMeshProUGUI numberOfBombsText;
+    [SerializeField] public TextMeshProUGUI timeOfCooldownMask;
     public int numberOfBombs;
     public float cooldownBombs = 3f;
     public bool isBombsCooldown = false;
 
+    private IEnumerator coroutine;
+
     private float changeCooldown = 1f;
+    private float maskReturnCooldown = 20f;
+    public bool maskReturnOnCooldown = false;
     private float maskCooldown = 20f;
     public bool isChangeCooldown = false;
     public Shooter fireArm;
@@ -92,6 +97,23 @@ public class GunChangeUI : MonoBehaviour
             }
         }
 
+        if(isChangeCooldown && fireArm.fireArm == 0){
+
+            defaultGun.fillAmount += 1 / changeCooldown * Time.deltaTime;
+
+            if(defaultGun.fillAmount >= 1){
+                defaultGun.fillAmount = 1;
+                isChangeCooldown = false;
+            }
+        
+        }
+
+        if(maskReturnOnCooldown)
+        {
+            MaskReturn();
+            return;
+        }
+
         if (isChangeCooldown && fireArm.fireArm == 2)
         {
 
@@ -101,6 +123,7 @@ public class GunChangeUI : MonoBehaviour
             {
                 fireArm.fireArm = 0;
                 isChangeCooldown = false;
+                maskReturnOnCooldown = true;
                 fireArm.changeOfInventory();
             }
 
@@ -113,21 +136,12 @@ public class GunChangeUI : MonoBehaviour
             if(chaacMask.fillAmount <= 0){
                 fireArm.fireArm = 0;
                 isChangeCooldown = false;
+                maskReturnOnCooldown = true;
                 fireArm.changeOfInventory();
             }
         
         }
 
-        if(isChangeCooldown && fireArm.fireArm == 0){
-
-            defaultGun.fillAmount += 1 / changeCooldown * Time.deltaTime;
-
-            if(defaultGun.fillAmount >= 1){
-                defaultGun.fillAmount = 1;
-                isChangeCooldown = false;
-            }
-        
-        }
 
     }
 
@@ -136,5 +150,34 @@ public class GunChangeUI : MonoBehaviour
         bombs.fillAmount = 0;
         numberOfBombs -= 1;
         isBombsCooldown = true;
+    }
+
+    private void MaskReturn()
+    {
+        maskReturnCooldown -= Time.deltaTime;
+        timeOfCooldownMask.text = Mathf.RoundToInt(maskReturnCooldown).ToString() + "s";
+        if(maskReturnCooldown <= 0)
+        {
+            maskReturnCooldown = 20f;
+            maskReturnOnCooldown = false;
+        }
+    }
+
+    public void ButtonPressed()
+    {
+        if(coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = ShowText();
+        StartCoroutine(coroutine);
+    }
+
+    private IEnumerator ShowText()
+    {
+        timeOfCooldownMask.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        timeOfCooldownMask.gameObject.SetActive(false);
+
     }
 }
