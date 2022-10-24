@@ -127,6 +127,7 @@ public class Shooter : MonoBehaviour
             case 2:
                 canShoot = true;
                 SpearShot();
+                SoundManager.PlaySound(SoundManager.Sound.SpearShot);
                 break;
             case 1:
                 animator.SetBool("BowShot", true);
@@ -135,11 +136,12 @@ public class Shooter : MonoBehaviour
                 }
                 coroutine = BowShot();
                 StartCoroutine(coroutine);
-                
+                SoundManager.PlaySound(SoundManager.Sound.BowShot);
                 break;
             case 0:
                 canShoot = true;
                 RegularShot();
+                SoundManager.PlaySound(SoundManager.Sound.RegularShot);
                 break;
         }
     }
