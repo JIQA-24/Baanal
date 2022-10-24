@@ -15,10 +15,6 @@ public static class SoundManager {
         Potion,
         Dash,
         Jump,
-        SpearShot,
-        RegularShot,
-        BowShot,
-        RegularShotImpact,
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary;
