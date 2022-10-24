@@ -22,4 +22,9 @@ public class AudioAssets : MonoBehaviour {
         public SoundManager.Sound sound;
         public AudioClip audioClip;
     }
+
+    public void ChangeMasterVolume(float value)
+    {
+        AudioListener.volume = value;
+    }
 }
