@@ -70,5 +70,4 @@ public static class SoundManager {
         Debug.LogError("Sonido " + sound + " no encontrado");
         return null;
     }
-
 }
