@@ -7,25 +7,24 @@ public class Bomb : MonoBehaviour
     public float bombSpeed = 5f;
     public float bombDamage = 50f;
     public Vector3 launchOffSet;
-    private float force = 3f;
-    private Vector2 direction;
+
 
     void Start()
     {
-        direction = transform.right + Vector3.up;
+        var direction = transform.right + Vector3.up;
         GetComponent<Rigidbody2D>().AddForce(direction * bombSpeed, ForceMode2D.Impulse);
         transform.Translate(launchOffSet);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         SoundManager.PlaySound(SoundManager.Sound.Avispero); //reproduce audio de golpe del avispero
-        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Bullet")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
         {
             Destroy(gameObject);
-            if (collision.gameObject.tag == "Enemy")
+            if (other.gameObject.tag == "Enemy")
             {
-                collision.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(bombDamage, direction, force);
+                other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(bombDamage);
             }
         }
     }
