@@ -25,7 +25,7 @@ public class Potions : MonoBehaviour
         if(PauseMenu.gameIsPaused || playerHealth.dead){
             return;
         }
-        if(Input.GetKeyDown(KeyCode.E) && playerHealth.currentHealth < 4 && numberOfPotions > 0 && !isCooldown){
+        if(Input.GetButtonDown("potion") && playerHealth.currentHealth < 4 && numberOfPotions > 0 && !isCooldown){
             isCooldown = true;
             numberOfPotions -= 1;
             potions.fillAmount = 0;

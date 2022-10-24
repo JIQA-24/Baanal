@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 	public CharacterController2D controller;
 	public Animator animator;
 
-	public float moveSpeed = 100f;
+	public float moveSpeed = 50f;
 
 	float horizontalMove = 0f;
 
@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
 	private bool isDashing;
 	private float dashingPower = 15f;
 	private float dashingTime = 0.15f;
-	private bool isLocked = false;
 	[SerializeField] private TrailRenderer tr;
 
 	private GameObject currentOneWayPlatform;
@@ -50,17 +49,26 @@ public class PlayerMovement : MonoBehaviour
 		if(isDashing || PauseMenu.gameIsPaused){
 			return;
 		}
-
-		if (Input.GetKeyDown(KeyCode.C))
-        {
-			isLocked = !isLocked;
-        }
         if (!shooter.isLocked)
         {
+			moveSpeed = 50f;
 			horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+        }
+        if(shooter.isLocked)
+        {
+			if (moveSpeed > 0)
+            {
+				moveSpeed -= 20 * Time.fixedDeltaTime;
+				horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+			}
+			if( moveSpeed < 0)
+            {
+				horizontalMove = 0;
+            }
 		}
 		
-		
+
+
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
 		if(Input.GetButtonDown("Jump") && !crouch){
@@ -168,7 +176,8 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashingTime);
 		tr.emitting = false;
 		isDashing = false;
-        controller.m_Rigidbody2D.gravityScale = originalGravity;
+		//controller.m_Rigidbody2D.velocity = new Vector2(transform.localScale.x, 5);
+		controller.m_Rigidbody2D.gravityScale = originalGravity;
 		animator.SetBool("IsDashing", false);
 
 		//yield return new WaitForSeconds(dashingCooldown);
