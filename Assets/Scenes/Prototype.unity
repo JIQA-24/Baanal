@@ -3492,6 +3492,8 @@ MonoBehaviour:
   jaguarMaskSprite: {fileID: 21300000, guid: 5d78f1876b359f548a381b4f0683bb31, type: 3}
   unequipedMask: {fileID: 21300000, guid: e73c057f74f45974fa38af71e72542b4, type: 3}
   unequipedTalisman: {fileID: 21300000, guid: 6c640d343afc11245966507fbd62986e, type: 3}
+  jaguarTalismanSprite: {fileID: 21300000, guid: 6c640d343afc11245966507fbd62986e, type: 3}
+  aguilaTalismanSprite: {fileID: 21300000, guid: 5c080abe314f55145b350fd10a91c7e7, type: 3}
 --- !u!4 &966937944
 Transform:
   m_ObjectHideFlags: 0
@@ -5928,7 +5930,7 @@ MonoBehaviour:
   shooter: {fileID: 1382331378}
   controller: {fileID: 1382331376}
   animator: {fileID: 1382331382}
-  moveSpeed: 50
+  doubleActive: 0
   tr: {fileID: 1382331380}
   playerCollider: {fileID: 1382331381}
 --- !u!114 &1382331376
@@ -5987,6 +5989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ifDead: {fileID: 1382331379}
   uiInventory: {fileID: 1467303259}
+  player: {fileID: 1382331375}
   bulletProp: {fileID: 435882973066224834, guid: 1825ee35d220f1141bdfeb0e91574e0e, type: 3}
   arrowProp: {fileID: 5794113944381783742, guid: 1ddc992e44eb147439493f40ca4b77e9, type: 3}
   bombProp: {fileID: 8602989815956850491, guid: 9ad3d6c9581b3384ea0320eff859a86c, type: 3}
@@ -6393,7 +6396,7 @@ GameObject:
   m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6758,6 +6761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1467303258}
   - component: {fileID: 1467303259}
+  - component: {fileID: 1467303260}
   m_Layer: 5
   m_Name: InventoryMenu
   m_TagString: Untagged
@@ -6805,6 +6809,21 @@ MonoBehaviour:
   itemEquipContainer: {fileID: 452430777}
   itemEquipTemplate: {fileID: 187658413}
   shooter: {fileID: 1382331378}
+  talisman: {fileID: 1467303260}
+--- !u!114 &1467303260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467303257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f092338a1f3f64cb16f36c1b94fd55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiInventory: {fileID: 1467303259}
+  player: {fileID: 1382331375}
 --- !u!1 &1481120001
 GameObject:
   m_ObjectHideFlags: 0
@@ -8416,7 +8435,7 @@ GameObject:
   m_Layer: 6
   m_Name: CeilingCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

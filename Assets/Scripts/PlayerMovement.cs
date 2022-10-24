@@ -13,9 +13,12 @@ public class PlayerMovement : MonoBehaviour
 	public CharacterController2D controller;
 	public Animator animator;
 
-	public float moveSpeed = 50f;
+	private float moveSpeed = 50f;
 
 	float horizontalMove = 0f;
+
+	public bool doubleActive = false;
+	private int doubleCounter = 0;
 
 	bool jump = false;
 
@@ -40,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
 
 		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, weaponChangeNum = 1});
 		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, weaponChangeNum = 2});
+		ItemWorld.SpawnItemWorld(new Vector3(-10, 10), new Item { itemType = Item.ItemType.JaguarTalisman, weaponChangeNum = 1 });
+		ItemWorld.SpawnItemWorld(new Vector3(10, 10), new Item { itemType = Item.ItemType.AguilaTalisman, weaponChangeNum = 2 });
 
 
 	}
@@ -51,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
 		}
         if (!shooter.isLocked)
         {
-			moveSpeed = 50f;
 			horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
         }
         if(shooter.isLocked)
@@ -66,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 				horizontalMove = 0;
             }
 		}
-		
+		Debug.Log(moveSpeed);
 
 
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
@@ -89,6 +93,18 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (doubleActive)
+        {
+			if(doubleCounter < 2)
+            {
+				canDash = true;
+            }
+            if (CharacterController2D.m_Grounded)
+            {
+				canDash = true;
+				doubleCounter = 0;
+            }
+        }
 		if (CharacterController2D.m_Grounded) {
 			canDash = true;
 		}
@@ -103,6 +119,10 @@ public class PlayerMovement : MonoBehaviour
 			if(dashingDir == Vector2.zero)
             {
 				dashingDir = new Vector2(transform.localScale.x, 0);
+            }
+            if (doubleActive)
+            {
+				doubleCounter++;
             }
 			//Add stopping dash
 			animator.SetBool("IsDashing", true);
@@ -198,5 +218,28 @@ public class PlayerMovement : MonoBehaviour
 		//yield return new WaitForSeconds(dashingCooldown);
 		//canDash = true;
 	}
+
+	public void AddBoost(float boost)
+    {
+		float plus = moveSpeed * boost;
+		moveSpeed += plus;
+    }
+	public void RemoveBoost()
+	{
+		moveSpeed = 50f;
+	}
+
+	public void DoubleOn()
+    {
+		doubleActive = true;
+		doubleCounter = 0;
+    }
+
+	public void DoubleOff()
+	{
+		doubleActive = false;
+		doubleCounter = 0;
+	}
+
 
 }

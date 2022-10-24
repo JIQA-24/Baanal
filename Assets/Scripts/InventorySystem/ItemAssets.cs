@@ -17,5 +17,7 @@ public class ItemAssets : MonoBehaviour
     public Sprite jaguarMaskSprite;
     public Sprite unequipedMask;
     public Sprite unequipedTalisman;
+    public Sprite jaguarTalismanSprite;
+    public Sprite aguilaTalismanSprite;
 
 }

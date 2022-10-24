@@ -13,6 +13,7 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private Transform itemEquipContainer;
     [SerializeField] private Transform itemEquipTemplate;
     [SerializeField] Shooter shooter;
+    [SerializeField] TalismanEquip talisman;
 
     private void Awake()
     {
@@ -82,9 +83,13 @@ public class UI_Inventory : MonoBehaviour
                 itemEquipRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
                 {
                     //Drop item
-                    shooter.fireArm = 0;
-                    shooter.changeOfInventory();
                     inventory.UnequipItem(item, item.GetEquipPos());
+                    if(item.GetEquipPos() == 0)
+                    {
+                        shooter.fireArm = 0;
+                        shooter.changeOfInventory();
+                    }
+                    talisman.ResetChanges();
                 };
             }
 
@@ -124,9 +129,13 @@ public class UI_Inventory : MonoBehaviour
                 itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () =>
                 {
                     //Use item
-                    shooter.fireArm = 0;
-                    shooter.changeOfInventory();
                     inventory.EquipItem(item, item.GetEquipPos());
+                    if(item.GetEquipPos() == 0)
+                    {
+                        shooter.fireArm = 0;
+                        shooter.changeOfInventory();
+                    }
+                    talisman.ResetChanges();
                 };
                 itemSlotRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
                 {

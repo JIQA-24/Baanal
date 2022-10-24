@@ -8,6 +8,7 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] private Health ifDead;
     [SerializeField] private UI_Inventory uiInventory;
+    [SerializeField] private PlayerMovement player;
     public Inventory inventory;
     public GameObject bulletProp;
     public GameObject arrowProp;
@@ -63,9 +64,13 @@ public class Shooter : MonoBehaviour
 
         bool isCD = change.isChangeCooldown;
 
-        if (Input.GetButtonDown("previous_mask"))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             isLocked = !isLocked;
+            if (!isLocked)
+            {
+                player.RemoveBoost();
+            }
         }
 
 
