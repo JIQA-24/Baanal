@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
-    public GameObject pauseMenuUI;
+    public RectTransform pauseMenuUI;
     public GameObject inventoryMenu;
 
     void Update()
@@ -32,14 +32,14 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Resume(){
-        pauseMenuUI.SetActive(false);
+        pauseMenuUI.localScale = new Vector3(0,0,0);
         inventoryMenu.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
     }
 
     public void MenuButton(){
-        pauseMenuUI.SetActive(false);
+        pauseMenuUI.localScale = new Vector3(0, 0, 0);
         Time.timeScale = 1f;
         gameIsPaused = false;
         SceneManager.LoadScene("Menu");
@@ -47,7 +47,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     void Pause(){
-        pauseMenuUI.SetActive(true);
+        pauseMenuUI.localScale = new Vector3(1, 1, 1);
         Time.timeScale = 0f;
         gameIsPaused = true;
     }
