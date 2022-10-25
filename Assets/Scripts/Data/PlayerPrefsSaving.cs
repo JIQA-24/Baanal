@@ -23,11 +23,11 @@ public class PlayerPrefsSaving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))//Cambiar este para que se guarden los valores
+        if (Input.GetKeyDown(KeyCode.Escape))//Cambiar este para que se guarden los valores
             SaveData();
 
-        if (Input.GetKeyUp(KeyCode.L))//Cambiar este para que se carguen los valores
-            LoadData();
+        //if (Input.GetKeyUp(KeyCode.Escape))//Cambiar este para que se carguen los valores
+        //    LoadData();
     }
 
     public void SaveData() {

@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class UIMenuButtons : MonoBehaviour
 {
+    [SerializeField] private PlayerPrefsSaving Test;
     public void StartGame()
     {
+        
         SceneManager.LoadScene("Prototype");
+        Test.LoadData();
     }
     public void StartTutorial()
     {
