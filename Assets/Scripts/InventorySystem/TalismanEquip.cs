@@ -21,11 +21,12 @@ public class TalismanEquip : MonoBehaviour
     {
         equipedItems = inventory.GetEquipedList();
         equipedTalisman = equipedItems[1].weaponChangeNum;
-        ChangeTalisman();
     }
 
     public void ChangeTalisman()
     {
+        equipedItems = inventory.GetEquipedList();
+        equipedTalisman = equipedItems[1].weaponChangeNum;
         switch (equipedTalisman)
         {
             default:
@@ -34,7 +35,7 @@ public class TalismanEquip : MonoBehaviour
             case 1:
                 if(boostcount < 1)
                 {
-                    player.AddBoost(0.2f);
+                    player.AddBoost(0.3f);
                     boostcount++;
                 }
                 break;

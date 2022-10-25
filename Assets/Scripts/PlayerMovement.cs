@@ -70,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
 				horizontalMove = 0;
             }
 		}
-		Debug.Log(moveSpeed);
 
 
 		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));

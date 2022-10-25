@@ -90,6 +90,10 @@ public class UI_Inventory : MonoBehaviour
                         shooter.changeOfInventory();
                     }
                     talisman.ResetChanges();
+                    if (item.GetEquipPos() == 1)
+                    {
+                        talisman.ChangeTalisman();
+                    }
                 };
             }
 
@@ -136,6 +140,10 @@ public class UI_Inventory : MonoBehaviour
                         shooter.changeOfInventory();
                     }
                     talisman.ResetChanges();
+                    if(item.GetEquipPos() == 1)
+                    {
+                        talisman.ChangeTalisman();
+                    }
                 };
                 itemSlotRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () =>
                 {
