@@ -21,6 +21,10 @@ public class CharacterController2D : MonoBehaviour
 	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
+	private GameObject gun1;
+	private GameObject gun2;
+	private GameObject gun3;
+
 
 
 	[Header("Events")]
@@ -37,6 +41,9 @@ public class CharacterController2D : MonoBehaviour
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		gun1 = GameObject.Find("Slingshot");
+		gun2 = GameObject.Find("FirePointBow");
+		gun3 = GameObject.Find("Spear");
 		SoundManager.Initialize();
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();

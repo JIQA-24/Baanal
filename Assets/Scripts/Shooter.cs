@@ -45,10 +45,6 @@ public class Shooter : MonoBehaviour
     }
     public void changeOfInventory()
     {
-        if (change.isChangeCooldown)
-        {
-            change.maskReturnOnCooldown = true;
-        }
         change.ChangeUI(fireArm);
         CheckFireArm();
     }
@@ -74,19 +70,8 @@ public class Shooter : MonoBehaviour
         }
 
 
-        if (Input.GetButtonDown("next_mask")){
-            if (change.maskReturnOnCooldown)
-            {
-                change.ButtonPressed();
-            }
-            else if (fireArm != 0 && isCD)
-            {
-                fireArm = 0;
-                change.maskReturnOnCooldown = true;
-                change.ChangeUI(fireArm);
-                CheckFireArm();
-            }
-            else if (fireArm == equipedGun[0].weaponChangeNum)
+        if (Input.GetKeyDown(KeyCode.R) && !isCD){
+            if(fireArm == equipedGun[0].weaponChangeNum)
             {
                 fireArm = 0;
             }
@@ -97,16 +82,8 @@ public class Shooter : MonoBehaviour
 
             if(equipedGun[0].itemType != Item.ItemType.UnequipedMask)
             {
-                if(fireArm != 0 && !change.maskReturnOnCooldown)
-                {
-                    change.ChangeUI(fireArm);
-                    CheckFireArm();
-                }
-                else
-                {
-                    fireArm = 0;
-                }
-                
+                change.ChangeUI(fireArm);
+                CheckFireArm();
             }
             
         }
@@ -153,12 +130,8 @@ public class Shooter : MonoBehaviour
         switch(fireArm){
             default:
             case 2:
-                if (coroutine != null)
-                {
-                    StopCoroutine(coroutine);
-                }
-                coroutine = SpearShot();
-                StartCoroutine(coroutine);
+                canShoot = true;
+                SpearShot();
                 SoundManager.PlaySound(SoundManager.Sound.SpearShot);
                 break;
             case 1:
@@ -203,12 +176,10 @@ public class Shooter : MonoBehaviour
         canShoot = true;
     }
 
-    private IEnumerator SpearShot()
+    private void SpearShot()
     {
         GameObject spear = Instantiate(spearProp, firePointSpear.transform.position, firePointSpear.transform.rotation);
         Destroy(spear, 2f);
-        yield return new WaitForSeconds(1f);
-        canShoot = true;
     }
 
     public void ChangeAimDir(Vector3 _aimDir)

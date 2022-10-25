@@ -7,8 +7,6 @@ public class Spear : MonoBehaviour
     private float spearSpeed = 10f;
     private float spearDamage = 20f;
     private int bodiesPassed = 0;
-    private float force = 3f;
-    private Vector2 direction;
 
     Rigidbody2D rigidBody;
     Collider2D spearCollider;
@@ -16,18 +14,29 @@ public class Spear : MonoBehaviour
     {
         spearCollider = GetComponent<Collider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
-        direction = transform.right * spearSpeed;
-        rigidBody.AddForce(direction, ForceMode2D.Impulse);
+        Vector2 force = transform.right * spearSpeed;
+        rigidBody.AddForce(force, ForceMode2D.Impulse);
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
+        {
+            Destroy(gameObject);
+            if(other.gameObject.tag == "Enemy")
+            {
+                other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(spearDamage);
+            }
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Bullet")
         {
-            if (collision.gameObject.tag == "Enemy" && bodiesPassed < 2)
+            if (collision.gameObject.tag == "Enemy")
             {
-                collision.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(spearDamage, direction, force);
+                collision.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(spearDamage);
                 bodiesPassed += 1;
                 spearDamage += 10;
             }
@@ -38,11 +47,7 @@ public class Spear : MonoBehaviour
         }
         if (bodiesPassed >= 2)
         {
-            Destroy(gameObject);
-            if (collision.gameObject.tag == "Enemy")
-            {
-                collision.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(spearDamage, direction, force);
-            }
+            spearCollider.isTrigger = false;
         }
     }
 }
