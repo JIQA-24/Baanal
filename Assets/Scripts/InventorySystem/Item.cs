@@ -10,6 +10,8 @@ public class Item
         JaguarMask,
         UnequipedMask,
         UnequipedTalisman,
+        JaguarTalisman,
+        AguilaTalisman,
     }
 
     public ItemType itemType;
@@ -24,6 +26,8 @@ public class Item
             case ItemType.JaguarMask: return ItemAssets.Instance.jaguarMaskSprite;
             case ItemType.UnequipedMask: return ItemAssets.Instance.unequipedMask;
             case ItemType.UnequipedTalisman: return ItemAssets.Instance.unequipedTalisman;
+            case ItemType.JaguarTalisman: return ItemAssets.Instance.jaguarTalismanSprite;
+            case ItemType.AguilaTalisman: return ItemAssets.Instance.aguilaTalismanSprite;
         }
     }
 
@@ -34,6 +38,8 @@ public class Item
             default:
             case ItemType.ChaacMask: return 0;
             case ItemType.JaguarMask: return 0;
+            case ItemType.AguilaTalisman: return 1;
+            case ItemType.JaguarTalisman: return 1;
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class vucub_moving_center : StateMachineBehaviour
+public class vucub_moving_center_from_left : StateMachineBehaviour
 {
     Transform center;
     public float speed = 0f;
@@ -12,7 +12,7 @@ public class vucub_moving_center : StateMachineBehaviour
     {
        center = GameObject.FindGameObjectWithTag("Center").transform;
         enemyBody = animator.GetComponent<Rigidbody2D>();
-        animator.SetBool("Reposition_center",true); //ELIMINAR EN VESRION 4  
+        animator.SetBool("Reposition_center_left",true); //ELIMINAR EN VESRION 4  
         
     }
 
@@ -24,7 +24,7 @@ public class vucub_moving_center : StateMachineBehaviour
         enemyBody.MovePosition(newPosition);    
 
         if(Vector2.Distance(center.position,enemyBody.position) <= 1)
-          animator.SetBool("Reposition_center",false);   
+          animator.SetBool("Reposition_center_left",false);   
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
