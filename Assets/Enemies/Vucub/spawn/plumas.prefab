@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 205919797666430771}
   - component: {fileID: 5324362727913926749}
   - component: {fileID: 8661934363480624306}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pixil-frame-0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 920674057814521101}
   - component: {fileID: 3245815247473649271}
   - component: {fileID: 7330851134136767565}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pixil-frame-0 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6345193041742072189}
   - component: {fileID: 1020492837226701059}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: plumas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 3471040559246605242}
   - component: {fileID: 1853113796454126630}
   - component: {fileID: 4025444950318291399}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pixil-frame-0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
