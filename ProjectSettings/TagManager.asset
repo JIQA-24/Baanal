@@ -12,6 +12,11 @@ TagManager:
   - Center
   - Right
   - Boss
+  - Coin
+  - Coin5
+  - Coin10
+  - Coin50
+  - Floor
   layers:
   - Default
   - TransparentFX

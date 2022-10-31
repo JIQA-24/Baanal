@@ -10,12 +10,14 @@ public class EnemyFollowPlayer : MonoBehaviour
     private float startingEnemyHealth = 30f;
     private float currentEnemyHealth;
     [SerializeField] private float damage;
+    private CacaoScript cacao;
 
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentEnemyHealth = startingEnemyHealth;
+        cacao = GameObject.Find("ItemAssets").GetComponent<CacaoScript>();
     }
 
 
@@ -42,6 +44,7 @@ public class EnemyFollowPlayer : MonoBehaviour
         currentEnemyHealth = Mathf.Clamp(currentEnemyHealth - _damage, 0, startingEnemyHealth);
         if(currentEnemyHealth <= 0){
             Destroy(gameObject);
+            cacao.SpawnCacao(GetComponent<Transform>().position, 120);
         }
     }
 
