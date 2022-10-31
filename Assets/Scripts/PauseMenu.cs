@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject inventoryMenu;
+    public GameObject optionsMenu;
     [SerializeField] private PlayerPrefsSaving PrefsSaving;
 
     void Update()
@@ -36,6 +37,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume(){
         pauseMenuUI.SetActive(false);
         inventoryMenu.SetActive(false);
+        optionsMenu.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
         PrefsSaving.SaveData();

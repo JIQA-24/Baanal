@@ -44,4 +44,6 @@ public class EnemyFollowPlayer : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
 }
