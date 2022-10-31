@@ -17,9 +17,13 @@ public class Health : MonoBehaviour
     [SerializeField] private int numberOfFlashes;
     private SpriteRenderer spriteRend;
 
+    public GameObject myIU;
+    private PauseMenu _menuScript;
+
     private void Awake() {
         currentHealth = startingHealth;
         spriteRend = GetComponent<SpriteRenderer>();
+        _menuScript = myIU.GetComponent<PauseMenu>();
     }
 
     private void Update()
@@ -60,6 +64,8 @@ public class Health : MonoBehaviour
                 shoot.canShoot = false;
                 dead = true;
                 spriteRend.color = new Color(1,0,0,1);
+                _menuScript.MenuButton();
+                //Time.timeScale = 0f;
             }
         }
     }

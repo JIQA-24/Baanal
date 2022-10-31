@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
+    public bool isDead;
     public GameObject pauseMenuUI;
     public GameObject inventoryMenu;
     [SerializeField] private PlayerPrefsSaving PrefsSaving;
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)){
+
+        if (Input.GetKeyDown(KeyCode.Escape)){
             PrefsSaving.SaveData();
             if (gameIsPaused){
                 Resume();
@@ -49,11 +51,19 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    public void DeadMenu()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+    }
+
     void Pause(){
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
     }
+
     void InventoryPause()
     {
         inventoryMenu.SetActive(true);
