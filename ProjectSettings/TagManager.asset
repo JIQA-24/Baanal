@@ -17,11 +17,12 @@ TagManager:
   - Coin10
   - Coin50
   - Floor
+  - DetectionZone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - OuterWorld
   - Water
   - UI
   - Player
@@ -56,4 +57,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: WorldDamadge
+    uniqueID: 2578537503
     locked: 0
