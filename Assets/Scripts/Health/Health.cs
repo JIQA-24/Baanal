@@ -60,6 +60,7 @@ public class Health : MonoBehaviour
                 shoot.canShoot = false;
                 dead = true;
                 spriteRend.color = new Color(1,0,0,1);
+                Physics2D.IgnoreLayerCollision(6, 7, true);
             }
         }
     }
