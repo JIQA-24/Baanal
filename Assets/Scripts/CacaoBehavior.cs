@@ -11,6 +11,8 @@ public class CacaoBehavior : MonoBehaviour
     private void Start()
     {
         cacaoScript = GameObject.Find("ItemAssets").GetComponent<CacaoScript>();
+        Physics2D.IgnoreLayerCollision(7, 10, true);
+        Physics2D.IgnoreLayerCollision(10, 11, true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

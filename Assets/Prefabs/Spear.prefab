@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8770194014765004271}
   - component: {fileID: 7289991012133422716}
   - component: {fileID: -3395875741261919533}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spear
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -146,5 +146,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4997173fe3e8f9e41aa2906c76c72304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spearSpeed: 10
-  spearDamage: 50
