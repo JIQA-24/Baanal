@@ -89,9 +89,9 @@ public class UI_Inventory : MonoBehaviour
                         shooter.fireArm = 0;
                         shooter.changeOfInventory();
                     }
-                    talisman.ResetChanges();
                     if (item.GetEquipPos() == 1)
                     {
+                        talisman.ResetChanges();
                         talisman.ChangeTalisman();
                     }
                 };
@@ -139,9 +139,9 @@ public class UI_Inventory : MonoBehaviour
                         shooter.fireArm = 0;
                         shooter.changeOfInventory();
                     }
-                    talisman.ResetChanges();
                     if(item.GetEquipPos() == 1)
                     {
+                        talisman.ResetChanges();
                         talisman.ChangeTalisman();
                     }
                 };
