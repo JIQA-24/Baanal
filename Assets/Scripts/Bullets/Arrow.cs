@@ -23,6 +23,10 @@ public class Arrow : MonoBehaviour
             {
                 other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(arrowDamage);
             }
+            if (other.gameObject.tag == "Boss")
+            {
+                other.gameObject.GetComponent<BossHealthSystem>().BossTakeDamage(arrowDamage);
+            }
         }
     }
 }

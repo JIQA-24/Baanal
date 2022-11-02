@@ -8,11 +8,25 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject inventoryMenu;
+    public GameObject optionsMenu;
+    public GameObject deadMenu;
     [SerializeField] private PlayerPrefsSaving PrefsSaving;
+    [SerializeField] private Health ifDead;
 
+
+    private void Start()
+    {
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+    }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if (ifDead.GetDead())
+        {
+            DeadMenu();
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)){
             PrefsSaving.SaveData();
             if (gameIsPaused){
                 Resume();
@@ -36,6 +50,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume(){
         pauseMenuUI.SetActive(false);
         inventoryMenu.SetActive(false);
+        optionsMenu.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
         PrefsSaving.SaveData();
@@ -63,5 +78,18 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame(){
         Application.Quit();
+    }
+
+    public void RestartButton()
+    {
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void DeadMenu()
+    {
+        deadMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

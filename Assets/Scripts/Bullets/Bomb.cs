@@ -26,6 +26,10 @@ public class Bomb : MonoBehaviour
             {
                 other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(bombDamage);
             }
+            if (other.gameObject.tag == "Boss")
+            {
+                other.gameObject.GetComponent<BossHealthSystem>().BossTakeDamage(bombDamage);
+            }
         }
     }
 }

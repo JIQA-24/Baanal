@@ -24,6 +24,10 @@ public class Bullet : MonoBehaviour
             {
                 other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(bulletDamage);
             }
+            if (other.gameObject.tag == "Boss")
+            {
+                other.gameObject.GetComponent<BossHealthSystem>().BossTakeDamage(bulletDamage);
+            }
         }
     }
 }

@@ -27,6 +27,10 @@ public class Spear : MonoBehaviour
             {
                 other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(spearDamage);
             }
+            if (other.gameObject.tag == "Boss")
+            {
+                other.gameObject.GetComponent<BossHealthSystem>().BossTakeDamage(spearDamage);
+            }
         }
     }
 
@@ -40,7 +44,13 @@ public class Spear : MonoBehaviour
                 bodiesPassed += 1;
                 spearDamage += 10;
             }
-            if(collision.gameObject.tag == "Stage" || collision.gameObject.tag == "OneWayPlatform")
+            if (collision.gameObject.tag == "Boss")
+            {
+                collision.gameObject.GetComponent<BossHealthSystem>().BossTakeDamage(spearDamage);
+                bodiesPassed += 1;
+                spearDamage += 10;
+            }
+            if (collision.gameObject.tag == "Stage" || collision.gameObject.tag == "OneWayPlatform")
             {
                 Destroy(gameObject);
             }
