@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class projectile : MonoBehaviour
 {
-
+    
     private Transform player;
     [SerializeField] private float damage;
 
@@ -19,6 +19,7 @@ public class projectile : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        Physics2D.IgnoreLayerCollision(7,10,true);
     }
 
     // Update is called once per frame

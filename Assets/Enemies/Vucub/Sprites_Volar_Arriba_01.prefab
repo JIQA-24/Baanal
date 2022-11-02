@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Boss: {fileID: 0}
   projectile: {fileID: 4090289148606162379, guid: bd0c3f65ad1393343be4964104c91a25, type: 3}
-  spawnLocation: {fileID: 3578010740336193318}
+  spawnLocation: {fileID: 2861397637839776702}
   spawnRotation: {x: 0, y: 0, z: 0, w: 0}
   spawnTime: 5
   detectionZone: {fileID: 5949443423626778358}

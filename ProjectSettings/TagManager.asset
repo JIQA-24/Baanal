@@ -13,6 +13,7 @@ TagManager:
   - Right
   - Boss
   - DetectionZone
+  - Pointer
   layers:
   - Default
   - TransparentFX
