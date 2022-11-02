@@ -45,6 +45,10 @@ public class Shooter : MonoBehaviour
     }
     public void changeOfInventory()
     {
+        if (change.isChangeCooldown)
+        {
+            change.maskReturnOnCooldown = true;
+        }
         change.ChangeUI(fireArm);
         CheckFireArm();
     }
@@ -70,8 +74,20 @@ public class Shooter : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.R) && !isCD){
-            if(fireArm == equipedGun[0].weaponChangeNum)
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (change.maskReturnOnCooldown)
+            {
+                change.ButtonPressed();
+            }
+            else if (fireArm != 0 && isCD)
+            {
+                fireArm = 0;
+                change.maskReturnOnCooldown = true;
+                change.ChangeUI(fireArm);
+                CheckFireArm();
+            }
+            else if (fireArm == equipedGun[0].weaponChangeNum)
             {
                 fireArm = 0;
             }
@@ -80,16 +96,26 @@ public class Shooter : MonoBehaviour
                 fireArm = equipedGun[0].weaponChangeNum;
             }
 
-            if(equipedGun[0].itemType != Item.ItemType.UnequipedMask)
+            if (equipedGun[0].itemType != Item.ItemType.UnequipedMask)
             {
                 change.ChangeUI(fireArm);
                 CheckFireArm();
+                if (fireArm != 0 && !change.maskReturnOnCooldown)
+                {
+                    change.ChangeUI(fireArm);
+                    CheckFireArm();
+                }
+                else
+                {
+                    fireArm = 0;
+                }
+
             }
-            
+
         }
 
 
-        if(Input.GetButtonDown("Fire1") && canShoot){
+        if (Input.GetButtonDown("Fire1") && canShoot){
             canShoot = false;
             CheckShot();
         }
