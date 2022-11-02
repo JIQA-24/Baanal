@@ -66,6 +66,7 @@ public class Health : MonoBehaviour
 
     private IEnumerator Invulerability(){
         Physics2D.IgnoreLayerCollision(6,7,true);
+        Physics2D.IgnoreLayerCollision(6,10,true);
         for (int i = 0; i < numberOfFlashes; i++)
         {
             spriteRend.color = new Color(1, 0, 0, 0.5f);
@@ -74,6 +75,7 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(6,7,false);
+        Physics2D.IgnoreLayerCollision(6,10,false);
     } 
 
     public void AddHealth(float _value){
