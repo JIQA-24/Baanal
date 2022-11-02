@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4336278160455083583}
   - component: {fileID: 645567107095334715}
   - component: {fileID: 1023481116056318133}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cacao1
   m_TagString: Coin
   m_Icon: {fileID: 0}
@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinValue: 1
+  cacaoScript: {fileID: 0}

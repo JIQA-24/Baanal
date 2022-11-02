@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1288963469878059194}
   - component: {fileID: 1288963469878059192}
   - component: {fileID: 1288963469878059195}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 8337461066064655124}
   - component: {fileID: 2593866547394178648}
   - component: {fileID: -2313709714731330035}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cacao5
   m_TagString: Coin5
   m_Icon: {fileID: 0}
