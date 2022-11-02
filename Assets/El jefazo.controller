@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cf45467cfbcf2429be970dad196726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 4
 --- !u!1101 &-8517329639689119670
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901dbe68cd8c2da4c9d0d63abbf26019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 4
 --- !u!1101 &-6494386870852872784
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -301,12 +301,6 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: Reposition_center_right
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Feather
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
