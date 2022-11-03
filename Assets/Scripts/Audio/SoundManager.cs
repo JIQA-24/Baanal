@@ -19,6 +19,8 @@ public static class SoundManager {
         RegularShot,
         BowShot,
         RegularShotImpact,
+        OpenInventory,
+        EquipInventory,
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary;

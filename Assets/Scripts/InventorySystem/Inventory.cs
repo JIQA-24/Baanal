@@ -32,7 +32,7 @@ public class Inventory
             equipedItems[pos] = item;
             itemList.Remove(item);
         }
-        
+        SoundManager.PlaySound(SoundManager.Sound.EquipInventory);
         OnItemListChange?.Invoke(this, EventArgs.Empty);
     }
 
