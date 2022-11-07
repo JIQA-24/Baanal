@@ -14,6 +14,10 @@ TagManager:
   - Boss
   - DetectionZone
   - Pointer
+  - Coin
+  - Coin5
+  - Coin10
+  - Coin50
   layers:
   - Default
   - TransparentFX
@@ -25,10 +29,10 @@ TagManager:
   - Enemy
   - Platforms
   - Stage
-  - Bullets
-  - 
-  - 
-  - 
+  - BossBullets
+  - Coins
+  - Items
+  - PlayerBullets
   - 
   - 
   - 

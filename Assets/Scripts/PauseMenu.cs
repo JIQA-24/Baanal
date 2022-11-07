@@ -18,6 +18,9 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         gameIsPaused = false;
+        pauseMenuUI.SetActive(false);
+        inventoryMenu.SetActive(false);
+        optionsMenu.SetActive(false);
     }
     void Update()
     {
@@ -89,6 +92,9 @@ public class PauseMenu : MonoBehaviour
 
     public void DeadMenu()
     {
+        pauseMenuUI.SetActive(false);
+        inventoryMenu.SetActive(false);
+        optionsMenu.SetActive(false);
         deadMenu.SetActive(true);
         Time.timeScale = 0f;
     }
