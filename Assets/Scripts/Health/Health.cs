@@ -20,6 +20,8 @@ public class Health : MonoBehaviour
     private void Awake() {
         currentHealth = startingHealth;
         spriteRend = GetComponent<SpriteRenderer>();
+        Physics2D.IgnoreLayerCollision(6, 7, false);
+        Physics2D.IgnoreLayerCollision(6, 10, false);
     }
 
     private void Update()

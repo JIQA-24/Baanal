@@ -112,7 +112,7 @@ public class UI_Inventory : MonoBehaviour
                 image.color = new Color32(0, 0, 0, 200);
             }
 
-            y -= 7;
+            y -= 5;
 
         }
 
