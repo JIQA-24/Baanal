@@ -47,6 +47,7 @@ public class PauseMenu : MonoBehaviour
             else
             {
                 InventoryPause();
+                SoundManager.PlaySound(SoundManager.Sound.OpenInventory);
             }
         }
     }
@@ -119,5 +120,9 @@ public class PauseMenu : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(deadMenuFirstButton);
+    }
+
+    public void SoundMenu() {
+        SoundManager.PlaySound(SoundManager.Sound.UIButton);
     }
 }

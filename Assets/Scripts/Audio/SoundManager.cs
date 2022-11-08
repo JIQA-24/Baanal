@@ -21,6 +21,7 @@ public static class SoundManager {
         RegularShotImpact,
         OpenInventory,
         EquipInventory,
+        UIButton,
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary;
