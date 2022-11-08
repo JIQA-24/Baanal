@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject inventoryMenu;
     public GameObject optionsMenu;
     public GameObject deadMenu;
+    public GameObject pauseMenuFirstButton, optionsMenuFirstButton, deadMenuFirstButton, optionsClosedButton;
     [SerializeField] private PlayerPrefsSaving PrefsSaving;
     [SerializeField] private Health ifDead;
 
@@ -26,7 +28,6 @@ public class PauseMenu : MonoBehaviour
     {
         if (ifDead.GetDead())
         {
-            DeadMenu();
             return;
         }
         if (Input.GetKeyDown(KeyCode.Escape)){
@@ -59,6 +60,22 @@ public class PauseMenu : MonoBehaviour
         PrefsSaving.SaveData();
     }
 
+    public void OptionsMenuOpen()
+    {
+        optionsMenu.SetActive(true);
+        pauseMenuUI.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsMenuFirstButton);
+    }
+
+    public void OptionsMenuClosed()
+    {
+        optionsMenu.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsClosedButton);
+    }
+
     public void MenuButton(){
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -71,6 +88,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPaused = true;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseMenuFirstButton);
     }
     void InventoryPause()
     {
@@ -97,5 +116,8 @@ public class PauseMenu : MonoBehaviour
         optionsMenu.SetActive(false);
         deadMenu.SetActive(true);
         Time.timeScale = 0f;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(deadMenuFirstButton);
     }
 }

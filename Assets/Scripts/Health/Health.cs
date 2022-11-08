@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     [SerializeField] public Shooter shoot;
     [SerializeField] private float iFramesDuration;
     [SerializeField] private int numberOfFlashes;
+    [SerializeField] private PauseMenu deadUI;
     private SpriteRenderer spriteRend;
 
     private void Awake() {
@@ -62,6 +63,7 @@ public class Health : MonoBehaviour
                 shoot.canShoot = false;
                 dead = true;
                 spriteRend.color = new Color(1,0,0,1);
+                deadUI.DeadMenu();
             }
         }
     }
