@@ -101,7 +101,6 @@ namespace CodeMonkey.Utils {
                 if (MouseRightClickFunc != null) MouseRightClickFunc();
             if (eventData.button == PointerEventData.InputButton.Middle)
                 if (MouseMiddleClickFunc != null) MouseMiddleClickFunc();
-            
         }
 
         public void Manual_OnPointerExit() {
