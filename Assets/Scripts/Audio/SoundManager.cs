@@ -22,6 +22,7 @@ public static class SoundManager {
         OpenInventory,
         EquipInventory,
         UIButton,
+        UIButtonAccept,
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary;

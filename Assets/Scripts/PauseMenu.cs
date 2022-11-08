@@ -122,7 +122,13 @@ public class PauseMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(deadMenuFirstButton);
     }
 
-    public void SoundMenu() {
+    public void SoundMenu()
+    {
         SoundManager.PlaySound(SoundManager.Sound.UIButton);
+    }
+
+    public void SoundMenuAccept()
+    {
+        SoundManager.PlaySound(SoundManager.Sound.UIButtonAccept);
     }
 }
