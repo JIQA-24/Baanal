@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private UI_Inventory uiInventory;
 	[SerializeField] private Shooter shooter;
+	[SerializeField] private PauseMenu pauseMenu;
 
 	public CharacterController2D controller;
 	public Animator animator;
@@ -57,11 +58,20 @@ public class PlayerMovement : MonoBehaviour
 			return;
 		}
 
-		if (Input.GetKeyDown(KeyCode.C))
+        if (shooter.isLocked || pauseMenu.inventoryPause)
         {
-			isLocked = !isLocked;
-        }
-        if (!shooter.isLocked)
+			moveSpeed--;
+			if(moveSpeed > 0)
+            {
+				horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+			}
+            else
+            {
+				moveSpeed = 0;
+				horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+			}
+			
+		} else
         {
 			horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
 		}
