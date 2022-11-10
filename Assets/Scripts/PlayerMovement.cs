@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 {
 	[SerializeField] private UI_Inventory uiInventory;
 	[SerializeField] private Shooter shooter;
+	[SerializeField] private PauseMenu pauseMenu;
 
 	public CharacterController2D controller;
 	public Animator animator;
@@ -62,17 +63,28 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 			return;
 		}
 
-		if (Input.GetKeyDown(KeyCode.C))
+        if (shooter.isLocked || PauseMenu.inventoryPause)
         {
-			isLocked = !isLocked;
-        }
-        if (!shooter.isLocked)
+			moveSpeed--;
+			if(moveSpeed > 0)
+            {
+				horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+			}
+            else
+            {
+				moveSpeed = 0;
+				horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+			}
+			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+			return;
+		} else
         {
 			horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 		}
 
-		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-
+		
+		
 		if(Input.GetButtonDown("Jump") && !crouch){
 			animator.SetBool("IsJumping", true);
 			jump = true;

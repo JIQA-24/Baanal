@@ -25,7 +25,7 @@ public class vucub_moving_center_from_right : StateMachineBehaviour
 
         if(Vector2.Distance(center.position,enemyBody.position) <= 1)
           animator.SetBool("Reposition_center_right",false);
-          animator.SetBool("Reposition_bottom",true);   
+          //animator.SetBool("Reposition_bottom",true);   
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

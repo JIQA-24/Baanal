@@ -32,6 +32,7 @@ public class CacaoBehavior : MonoBehaviour
         {
             Destroy(gameObject);
             cacaoScript.cacaoTotal += coinValue;
+            SoundManager.PlaySound(SoundManager.Sound.CacaoPick);
         }
     }
 }
