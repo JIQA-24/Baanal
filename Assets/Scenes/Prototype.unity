@@ -1214,7 +1214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1997376779517031674, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2355969764711320195, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
       propertyPath: m_RootOrder
@@ -2612,6 +2612,7 @@ GameObject:
   - component: {fileID: 305239126}
   - component: {fileID: 305239127}
   - component: {fileID: 305239128}
+  - component: {fileID: 305239129}
   m_Layer: 5
   m_Name: VolumeSlider
   m_TagString: Untagged
@@ -3958,8 +3959,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 451.78, y: 170.018}
+  m_AnchoredPosition: {x: 1.1411, y: 150}
+  m_SizeDelta: {x: 481.2, y: 170.018}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &488446790
 MonoBehaviour:
@@ -5558,7 +5559,7 @@ GameObject:
   - component: {fileID: 793781631}
   m_Layer: 9
   m_Name: DetectionZone 3
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6495,7 +6496,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 2.5, y: 0}
   m_SizeDelta: {x: 5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7568,7 +7569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c8c968b46c80d468de862c3e1d45d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPause: 0
   pauseMenuUI: {fileID: 541529059}
   inventoryMenu: {fileID: 1467303257}
   optionsMenu: {fileID: 1289413290}
@@ -7983,7 +7983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1083850235
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9600,7 +9600,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -26.895874}
+  m_AnchoredPosition: {x: 0, y: -26.895996}
   m_SizeDelta: {x: -1172, y: -638.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1294961050
@@ -9616,7 +9616,7 @@ GameObject:
   - component: {fileID: 1294961052}
   m_Layer: 9
   m_Name: DetectionZone 2
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11629,7 +11629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1467303258
 RectTransform:
   m_ObjectHideFlags: 0
