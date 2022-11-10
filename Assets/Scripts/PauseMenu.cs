@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
-    public bool inventoryPause = false;
+    public static bool inventoryPause = false;
     public GameObject pauseMenuUI;
     public GameObject inventoryMenu;
     public GameObject optionsMenu;
@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape)){
             PrefsSaving.SaveData();
-            if (gameIsPaused){
+            if (gameIsPaused || inventoryPause){
                 Resume();
             } else{
                 Pause();

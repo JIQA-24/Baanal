@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 			return;
 		}
 
-        if (shooter.isLocked || pauseMenu.inventoryPause)
+        if (shooter.isLocked || PauseMenu.inventoryPause)
         {
 			moveSpeed--;
 			if(moveSpeed > 0)
@@ -70,14 +70,16 @@ public class PlayerMovement : MonoBehaviour
 				moveSpeed = 0;
 				horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
 			}
-			
+			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+			return;
 		} else
         {
 			horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 		}
 
-		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-
+		
+		
 		if(Input.GetButtonDown("Jump") && !crouch){
 			animator.SetBool("IsJumping", true);
 			jump = true;

@@ -54,7 +54,7 @@ public class Shooter : MonoBehaviour
     }
 
     private void Update() {
-        if(PauseMenu.gameIsPaused || ifDead.dead){
+        if(PauseMenu.gameIsPaused || ifDead.dead || PauseMenu.inventoryPause){
             return;
         }
         aimDir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
