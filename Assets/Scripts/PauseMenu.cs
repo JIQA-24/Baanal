@@ -7,15 +7,13 @@ using UnityEngine.EventSystems;
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
-    public static bool inventoryPause = false;
     public GameObject pauseMenuUI;
     public GameObject inventoryMenu;
     public GameObject optionsMenu;
     public GameObject deadMenu;
-    public GameObject pauseMenuFirstButton, optionsMenuFirstButton, deadMenuFirstButton, optionsClosedButton, inventoryMenuFirstButton;
+    public GameObject pauseMenuFirstButton, optionsMenuFirstButton, deadMenuFirstButton, optionsClosedButton;
     [SerializeField] private PlayerPrefsSaving PrefsSaving;
     [SerializeField] private Health ifDead;
-    [SerializeField] private PlayerMovement player;
 
 
     private void Start()
@@ -34,7 +32,7 @@ public class PauseMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape)){
             PrefsSaving.SaveData();
-            if (gameIsPaused || inventoryPause){
+            if (gameIsPaused){
                 Resume();
             } else{
                 Pause();
@@ -42,14 +40,13 @@ public class PauseMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (inventoryPause)
+            if (gameIsPaused)
             {
                 Resume();
             }
             else
             {
                 InventoryPause();
-                SoundManager.PlaySound(SoundManager.Sound.OpenInventory);
             }
         }
     }
@@ -60,9 +57,7 @@ public class PauseMenu : MonoBehaviour
         optionsMenu.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
-        inventoryPause = false;
         PrefsSaving.SaveData();
-        player.RemoveBoost();
     }
 
     public void OptionsMenuOpen()
@@ -100,9 +95,7 @@ public class PauseMenu : MonoBehaviour
     {
         inventoryMenu.SetActive(true);
         //Time.timeScale = 0f;
-        inventoryPause = true;
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(inventoryMenuFirstButton);
+        gameIsPaused = true;
     }
 
     public void QuitGame(){
@@ -126,15 +119,5 @@ public class PauseMenu : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(deadMenuFirstButton);
-    }
-
-    public void SoundMenu()
-    {
-        SoundManager.PlaySound(SoundManager.Sound.UIButton);
-    }
-
-    public void SoundMenuAccept()
-    {
-        SoundManager.PlaySound(SoundManager.Sound.UIButtonAccept);
     }
 }

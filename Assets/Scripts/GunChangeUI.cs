@@ -125,7 +125,6 @@ public class GunChangeUI : MonoBehaviour
             {
                 fireArm.fireArm = 0;
                 isChangeCooldown = false;
-                maskReturnOnCooldown = true;
                 fireArm.changeOfInventory();
             }
 
