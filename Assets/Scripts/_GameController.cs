@@ -33,24 +33,21 @@ public class _GameController : MonoBehaviourPunCallbacks
     [PunRPC]
     void InGame()
     {
-        playerInGame++;
+        playerInGame++; // contador de jugadores
         if(playerInGame == PhotonNetwork.PlayerList.Length)
         {
-            SpawnPlayer();
+            SpawnPlayer();// mandar llamar posicionamiento de player
         }
     }
 
     void SpawnPlayer()
     {
+        int randomPosition = Random.Range(0, spawnPlayer.Length);
         GameObject playerObj = PhotonNetwork.Instantiate(playerPrefab, spawnPlayer[0].position, Quaternion.identity);
         
         PlayerMovement playScript = playerObj.GetComponent<PlayerMovement>();
         playScript.photonView.RPC("Init", RpcTarget.All, PhotonNetwork.LocalPlayer);
 
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
