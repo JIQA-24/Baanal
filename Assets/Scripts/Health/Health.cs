@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
         {
             currentHealth = numOfHearts;
         }
-        for (int i = 0; i < hearts.Length; i++)
+        /*for (int i = 0; i < hearts.Length; i++) Network Problem
         {
             if(i < currentHealth)
             {
@@ -49,7 +49,7 @@ public class Health : MonoBehaviour
             {
                 hearts[i].enabled = false;
             }
-        }
+        }*/
     }
 
     public void TakeDamage(float _damage){

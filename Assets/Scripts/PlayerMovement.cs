@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks
 {
 	[SerializeField] private UI_Inventory uiInventory;
 	[SerializeField] private Shooter shooter;
@@ -38,10 +40,13 @@ public class PlayerMovement : MonoBehaviour
 
 	private Inventory inventory;
 
+	public int id;
+	public Player photonPlayer;
+
     private void Awake()
     {
 		inventory = new Inventory();
-		uiInventory.SetInventory(inventory);
+		//uiInventory.SetInventory(inventory); Network Problem
 
 		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, weaponChangeNum = 1});
 		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, weaponChangeNum = 2});
@@ -231,6 +236,19 @@ public class PlayerMovement : MonoBehaviour
 	{
 		doubleActive = false;
 		doubleCounter = 0;
+	}
+
+	[PunRPC]
+	public void Init( Player player)
+	{
+		photonPlayer = player;
+		id = player.ActorNumber;
+		_GameController.instance.players[id - 1] = this;    
+
+		if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
+        {
+            controller.m_Rigidbody2D.isKinematic = true;
+        }
 	}
 
 

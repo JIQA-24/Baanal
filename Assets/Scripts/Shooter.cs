@@ -33,7 +33,7 @@ public class Shooter : MonoBehaviour
 
     private void Awake()
     {
-        inventory = uiInventory.GetInventory();
+        //inventory = uiInventory.GetInventory(); Network Problem
     }
 
 
@@ -41,7 +41,7 @@ public class Shooter : MonoBehaviour
         fireSlingRot = firePointSlingshot.rotation;
         fireGeneralRot = firePointBow.rotation;
         CheckFireArm();
-        inventory = uiInventory.GetInventory();
+        //inventory = uiInventory.GetInventory(); Network Problem
     }
     public void changeOfInventory()
     {
@@ -60,9 +60,9 @@ public class Shooter : MonoBehaviour
         aimDir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         ChangeAimDir(aimDir);
         playerPos = GetComponent<Transform>().position;
-        equipedGun = inventory.GetEquipedList();
+        //equipedGun = inventory.GetEquipedList(); Network Problem
 
-        bool isCD = change.isChangeCooldown;
+        //bool isCD = change.isChangeCooldown; Network Problem
 
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -80,13 +80,13 @@ public class Shooter : MonoBehaviour
             {
                 change.ButtonPressed();
             }
-            else if (fireArm != 0 && isCD)
+            /*else if (fireArm != 0 && isCD) Network Problem
             {
                 fireArm = 0;
                 change.maskReturnOnCooldown = true;
                 change.ChangeUI(fireArm);
                 CheckFireArm();
-            }
+            }*/
             else if (fireArm == equipedGun[0].weaponChangeNum)
             {
                 fireArm = 0;
