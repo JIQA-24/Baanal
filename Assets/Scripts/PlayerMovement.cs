@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public CharacterController2D controller;
 	public Animator animator;
+	private IEnumerator coroutine;
 
 	private float moveSpeed = 50f;
 
@@ -87,8 +88,10 @@ public class PlayerMovement : MonoBehaviour
 
 		if(Input.GetButtonDown("Crouch")){
 			crouch = true;
+			animator.SetBool("IsCrouching", true);
 		} else if(Input.GetButtonUp("Crouch")){
 			crouch = false;
+			animator.SetBool("IsCrouching", false);
 		}
 		if(crouch && Input.GetButtonDown("Jump"))
         {
@@ -162,6 +165,12 @@ public class PlayerMovement : MonoBehaviour
 
 		if(itemWorld != null)
         {
+			if(coroutine != null)
+            {
+				StopCoroutine(coroutine);
+            }
+			coroutine = PickUpAnimation();
+			StartCoroutine(coroutine);
 			inventory.AddItem(itemWorld.GetItem());
 			itemWorld.DestroySelf();
         }
@@ -170,6 +179,13 @@ public class PlayerMovement : MonoBehaviour
 		{
 			currentOneWayPlatform = collision.gameObject;
 		}
+    }
+
+	private IEnumerator PickUpAnimation()
+    {
+		animator.SetBool("Interact", true);
+		yield return new WaitForSeconds(0.5f);
+		animator.SetBool("Interact", false);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
