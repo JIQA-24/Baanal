@@ -81,8 +81,6 @@ public class UI_Inventory : MonoBehaviour
             }
 
         }
-        
-
     }
 
     public void InventoryButtonClicked(int buttonNum)

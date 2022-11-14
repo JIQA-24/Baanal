@@ -127,26 +127,18 @@ public class Shooter : MonoBehaviour
     }
 
     private void CheckFireArm(){
-        Transform slingshot = transform.Find("Slingshot");
-        Transform spear = transform.Find("Spear");
         Transform maskEquipable = transform.Find("MaskEquipable");
         switch(fireArm){
             default:
             case 2:
                 maskEquipable.GetComponent<SpriteRenderer>().enabled = true;
                 maskEquipable.GetComponent<SpriteRenderer>().sprite = equipedGun[0].GetSprite();
-                spear.GetComponent<SpriteRenderer>().enabled = true;
-                slingshot.GetComponent<SpriteRenderer>().enabled = false;
                 break;
             case 1:
                 maskEquipable.GetComponent<SpriteRenderer>().enabled = true;
-                slingshot.GetComponent<SpriteRenderer>().enabled = false;
-                spear.GetComponent<SpriteRenderer>().enabled = false;
                 maskEquipable.GetComponent<SpriteRenderer>().sprite = equipedGun[0].GetSprite();
                 break;
             case 0:
-                slingshot.GetComponent<SpriteRenderer>().enabled = true;
-                spear.GetComponent<SpriteRenderer>().enabled = false;
                 maskEquipable.GetComponent<SpriteRenderer>().enabled = false;
                 break;
         }
@@ -156,8 +148,13 @@ public class Shooter : MonoBehaviour
         switch(fireArm){
             default:
             case 2:
-                canShoot = true;
-                SpearShot();
+                animator.SetBool("SpearShot", true);
+                if(coroutine != null)
+                {
+                    StopCoroutine(coroutine);
+                }
+                coroutine = SpearShot();
+                StartCoroutine(coroutine);
                 SoundManager.PlaySound(SoundManager.Sound.SpearShot);
                 break;
             case 1:
@@ -170,16 +167,25 @@ public class Shooter : MonoBehaviour
                 SoundManager.PlaySound(SoundManager.Sound.BowShot);
                 break;
             case 0:
-                canShoot = true;
-                RegularShot();
+                animator.SetBool("SlingShot", true);
+                if(coroutine != null)
+                {
+                    StopCoroutine(coroutine);
+                }
+                coroutine = RegularShot();
+                StartCoroutine(coroutine);
                 SoundManager.PlaySound(SoundManager.Sound.RegularShot);
                 break;
         }
     }
 
-    private void RegularShot() {
+    private IEnumerator RegularShot() {
+
         GameObject bullet = Instantiate(bulletProp, firePointSlingshot.transform.position, firePointSlingshot.transform.rotation);
         Destroy(bullet, 1f);
+        yield return new WaitForSeconds(0.2f);
+        animator.SetBool("SlingShot", false);
+        canShoot = true;
     }
 
     private void BombThrow()
@@ -202,10 +208,13 @@ public class Shooter : MonoBehaviour
         canShoot = true;
     }
 
-    private void SpearShot()
-    {
+    private IEnumerator SpearShot()
+    { 
         GameObject spear = Instantiate(spearProp, firePointSpear.transform.position, firePointSpear.transform.rotation);
         Destroy(spear, 2f);
+        yield return new WaitForSeconds(0.5f);
+        animator.SetBool("SpearShot", false);
+        canShoot = true;
     }
 
     public void ChangeAimDir(Vector3 _aimDir)
