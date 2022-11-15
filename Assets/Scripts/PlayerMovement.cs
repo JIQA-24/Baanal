@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
 	private bool isDashing;
 	private float dashingPower = 15f;
 	private float dashingTime = 0.15f;
-	private bool isLocked = false;
 	[SerializeField] private TrailRenderer tr;
 
 	private GameObject currentOneWayPlatform;

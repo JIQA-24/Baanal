@@ -115,7 +115,7 @@ public class Shooter : MonoBehaviour
         }
 
 
-        if (Input.GetButtonDown("Fire1") && canShoot){
+        if (Input.GetButton("Fire1") && canShoot){
             canShoot = false;
             CheckShot();
         }
