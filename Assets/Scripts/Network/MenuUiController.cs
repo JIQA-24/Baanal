@@ -75,6 +75,6 @@ public class MenuUiController : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        _NetworkManager.instance.photonView.RPC("LoadScene",RpcTarget.All,"Prototype");
+        _NetworkManager.instance.photonView.RPC("LoadScene",RpcTarget.All,"PrototypeMultiplayer");
     }
 }

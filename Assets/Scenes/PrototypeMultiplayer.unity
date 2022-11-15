@@ -11008,6 +11008,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6e3fc5a1c800eb4f95821f2f944f542, type: 3}
+--- !u!1 &1874315161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1874315163}
+  - component: {fileID: 1874315162}
+  m_Layer: 0
+  m_Name: ReferenceObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1874315162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874315161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289f3f1f748265f469d99d1df88c60e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1013376921}
+  _Inventory: {fileID: 1467303259}
+  gunUI: {fileID: 356417319}
+  hearts:
+  - {fileID: 510388398}
+  - {fileID: 1808545115}
+  - {fileID: 157368837}
+  - {fileID: 901464122}
+  - {fileID: 1187406477}
+  - {fileID: 1304818012}
+  - {fileID: 896606953}
+  - {fileID: 275541066}
+  - {fileID: 1356556910}
+  - {fileID: 2105588101}
+--- !u!4 &1874315163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874315161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.959833, y: 2.5690272, z: 0.24057244}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1886358997
 PrefabInstance:
   m_ObjectHideFlags: 0

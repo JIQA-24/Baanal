@@ -234,7 +234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398dc5530869d094799a8fb8348a332f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiInventory: {fileID: 0}
   shooter: {fileID: 5010394831220479281}
   controller: {fileID: 5010394831220479283}
   animator: {fileID: 5010394831220479285}
@@ -297,7 +296,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ifDead: {fileID: 5010394831220479280}
-  uiInventory: {fileID: 0}
   player: {fileID: 5010394831220479276}
   bulletProp: {fileID: 435882973066224834, guid: 1825ee35d220f1141bdfeb0e91574e0e, type: 3}
   arrowProp: {fileID: 5794113944381783742, guid: 1ddc992e44eb147439493f40ca4b77e9, type: 3}
@@ -308,7 +306,6 @@ MonoBehaviour:
   firePointSpear: {fileID: 5010394831574128922}
   canShoot: 1
   fireArm: 0
-  change: {fileID: 0}
   animator: {fileID: 5010394831220479285}
   controller: {fileID: 5010394831220479283}
   isLocked: 0
@@ -327,22 +324,10 @@ MonoBehaviour:
   startingHealth: 4
   dead: 0
   numOfHearts: 4
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   fullHeart: {fileID: 21300000, guid: 260b1feb175258e47a853ce78f977371, type: 3}
   shoot: {fileID: 5010394831220479281}
   iFramesDuration: 3
   numberOfFlashes: 3
-  deadUI: {fileID: 0}
 --- !u!96 &5010394831220479287
 TrailRenderer:
   serializedVersion: 2

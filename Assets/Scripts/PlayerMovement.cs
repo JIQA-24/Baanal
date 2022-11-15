@@ -9,7 +9,8 @@ using Photon.Realtime;
 
 public class PlayerMovement : MonoBehaviourPunCallbacks
 {
-	[SerializeField] private UI_Inventory uiInventory;
+	private ReferenceScript reference;
+	private UI_Inventory uiInventory;
 	[SerializeField] private Shooter shooter;
 
 	public CharacterController2D controller;
@@ -45,8 +46,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+		reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
+		uiInventory = reference.GetInventoryMenu();
 		inventory = new Inventory();
-		//uiInventory.SetInventory(inventory); Network Problem
+		uiInventory.SetInventory(inventory);
+
+
 
 		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, weaponChangeNum = 1});
 		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, weaponChangeNum = 2});

@@ -9,17 +9,21 @@ public class Health : MonoBehaviour
     public float currentHealth { get; private set; }
     public bool dead;
     public int numOfHearts;
-    public Image[] hearts;
+    private Image[] hearts;
     public Sprite fullHeart;
 
     [SerializeField] public Shooter shoot;
     [SerializeField] private float iFramesDuration;
     [SerializeField] private int numberOfFlashes;
-    [SerializeField] private PauseMenu deadUI;
+    private ReferenceScript reference;
+    private PauseMenu deadUI;
     private SpriteRenderer spriteRend;
 
     private void Awake() {
+        reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
+        deadUI = reference.GetPauseMenu();
         currentHealth = startingHealth;
+        hearts = reference.GetHeartList();
         spriteRend = GetComponent<SpriteRenderer>();
         Physics2D.IgnoreLayerCollision(6, 7, false);
         Physics2D.IgnoreLayerCollision(6, 10, false);

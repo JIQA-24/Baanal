@@ -7,7 +7,8 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
     [SerializeField] private Health ifDead;
-    [SerializeField] private UI_Inventory uiInventory;
+    private ReferenceScript reference;
+    private UI_Inventory uiInventory;
     [SerializeField] private PlayerMovement player;
     public Inventory inventory;
     public GameObject bulletProp;
@@ -20,7 +21,7 @@ public class Shooter : MonoBehaviour
     public bool canShoot = true;
     public int fireArm = 0;
     private IEnumerator coroutine;
-    public GunChangeUI change;
+    private GunChangeUI change;
     List<Item> equipedGun;
     public Animator animator;
 
@@ -33,11 +34,17 @@ public class Shooter : MonoBehaviour
 
     private void Awake()
     {
+        reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
+        uiInventory = reference.GetInventoryMenu();
+        change = reference.GetGunMenu();
         inventory = uiInventory.GetInventory(); //Network Problem
     }
 
 
     private void Start() {
+        reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
+        uiInventory = reference.GetInventoryMenu();
+        change = reference.GetGunMenu();
         fireSlingRot = firePointSlingshot.rotation;
         fireGeneralRot = firePointBow.rotation;
         CheckFireArm();
@@ -61,6 +68,7 @@ public class Shooter : MonoBehaviour
         ChangeAimDir(aimDir);
         playerPos = GetComponent<Transform>().position;
         equipedGun = inventory.GetEquipedList(); //Network Problem
+        //Debug.Log(inventory.GetEquipedList());
 
         bool isCD = change.isChangeCooldown; //Network Problem
 

@@ -7,7 +7,7 @@ using CodeMonkey.Utils;
 
 public class UI_Inventory : MonoBehaviour
 {
-    private Inventory inventory;
+    [SerializeField] public Inventory inventory;
     [SerializeField] private Transform itemSlotContainer;
     [SerializeField] private Transform itemSlotTemplate;
     [SerializeField] private Transform itemEquipContainer;
@@ -35,7 +35,6 @@ public class UI_Inventory : MonoBehaviour
     {
         return inventory;
     }
-
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)
     {
         RefreshInventoryItems();
