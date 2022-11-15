@@ -57,6 +57,7 @@ public class Health : MonoBehaviour
         if(currentHealth > 0){
             StartCoroutine(Invulerability());
             SoundManager.PlaySound(SoundManager.Sound.PlayerHit); //reproduce audio de golpe al jugador
+            gameObject.GetComponent<TimeStop>().StopTime(0.1f, 10, 0.1f);
         } else {
             if(!dead){
                 GetComponent<PlayerMovement>().enabled = false;
