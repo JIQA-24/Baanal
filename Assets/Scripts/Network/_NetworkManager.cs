@@ -7,7 +7,6 @@ public class _NetworkManager : MonoBehaviourPunCallbacks
 {
     //Singleton
     public static _NetworkManager instance;
-
     private void Awake()
     {
         if(instance != null && instance != this)
@@ -48,6 +47,11 @@ public class _NetworkManager : MonoBehaviourPunCallbacks
     public void JoinRoom(string _name)
     {
         PhotonNetwork.JoinRoom(_name);
+    }
+
+    public void LeveaRoom()
+    {
+        PhotonNetwork.LeaveRoom();
     }
 
     [PunRPC]
