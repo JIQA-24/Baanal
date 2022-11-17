@@ -48,8 +48,13 @@ public class Shooter : MonoBehaviour
         if (change.isChangeCooldown)
         {
             change.maskReturnOnCooldown = true;
+            change.maskReturnCooldownVariable = change.maskReturnCooldown;
+            change.Restart();
         }
-        change.ChangeUI(fireArm);
+        if (!change.maskReturnOnCooldown)
+        {
+            change.ChangeUI(equipedGun[0].weaponChangeNum);
+        }
         CheckFireArm();
     }
 
@@ -82,9 +87,12 @@ public class Shooter : MonoBehaviour
             }
             else if (fireArm != 0 && isCD)
             {
+                if (!change.maskReturnOnCooldown)
+                {
+                    change.Restart();
+                }
                 fireArm = 0;
                 change.maskReturnOnCooldown = true;
-                change.ChangeUI(fireArm);
                 CheckFireArm();
             }
             else if (fireArm == equipedGun[0].weaponChangeNum)
@@ -98,11 +106,15 @@ public class Shooter : MonoBehaviour
 
             if (equipedGun[0].itemType != Item.ItemType.UnequipedMask)
             {
-                change.ChangeUI(fireArm);
+                if (!change.maskReturnOnCooldown)
+                {
+                    change.ChangeUI(equipedGun[0].weaponChangeNum);
+                }
                 CheckFireArm();
+                change.ActivateMask();
                 if (fireArm != 0 && !change.maskReturnOnCooldown)
                 {
-                    change.ChangeUI(fireArm);
+                    change.ChangeUI(equipedGun[0].weaponChangeNum);
                     CheckFireArm();
                 }
                 else
@@ -124,6 +136,11 @@ public class Shooter : MonoBehaviour
             change.ChangeBomb();
             BombThrow();
         }
+    }
+
+    public List<Item> GetEquippedItems()
+    {
+        return equipedGun;
     }
 
     private void CheckFireArm(){
