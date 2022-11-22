@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviourPunCallbacks
 {
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
@@ -18,6 +20,10 @@ public class Health : MonoBehaviour
     private ReferenceScript reference;
     private PauseMenu deadUI;
     private SpriteRenderer spriteRend;
+
+    public int id;
+	public Player photonPlayer; 
+    public CharacterController2D controller;
 
     private void Awake() {
         reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
@@ -94,4 +100,16 @@ public class Health : MonoBehaviour
         return dead;
     }
 
+	[PunRPC]
+	public void Init( Player player)
+	{
+		photonPlayer = player;
+		id = player.ActorNumber;
+		_GameController.instance.players[id - 1] = this;    
+
+		if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
+        {
+            controller.m_Rigidbody2D.isKinematic = true;
+        }
+	}
 }

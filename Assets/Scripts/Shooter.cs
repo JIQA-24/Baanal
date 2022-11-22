@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Shooter : MonoBehaviour
+public class Shooter : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Health ifDead;
     private ReferenceScript reference;
@@ -32,6 +34,9 @@ public class Shooter : MonoBehaviour
     private Vector2 aimDir;
     public bool isLocked = false;
 
+    public int id;
+	public Player photonPlayer;
+    
     private void Awake()
     {
         reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
@@ -314,4 +319,17 @@ public class Shooter : MonoBehaviour
                 break;
         }
     }
+
+	[PunRPC]
+	public void Init( Player player)
+	{
+		photonPlayer = player;
+		id = player.ActorNumber;
+		_GameController.instance.players[id - 1] = this;    
+
+		if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
+        {
+            controller.m_Rigidbody2D.isKinematic = true;
+        }
+	}
 }

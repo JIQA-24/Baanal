@@ -2,8 +2,10 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class CharacterController2D : MonoBehaviour
+public class CharacterController2D : MonoBehaviourPunCallbacks
 {
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -37,6 +39,10 @@ public class CharacterController2D : MonoBehaviour
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
+
+	public int id;
+	public Player photonPlayer;
+	public CharacterController2D controller;
 
 	private void Awake()
 	{
@@ -190,5 +196,17 @@ public class CharacterController2D : MonoBehaviour
 		//gun3.transform.localScale = gun3Scale;
     }
 
+	[PunRPC]
+	public void Init( Player player)
+	{
+		photonPlayer = player;
+		id = player.ActorNumber;
+		_GameController.instance.players[id - 1] = this;    
+
+		if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
+        {
+            controller.m_Rigidbody2D.isKinematic = true;
+        }
+	}
 
 }
