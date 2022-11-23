@@ -256,5 +256,20 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         }
 	}
 
+	[PunRPC]
+	public void Prueba(Player player)
+    {
+		photonPlayer = player;
+		id = player.ActorNumber;
+		_GameController.instance.players[id - 1] = this;
+		this.GetComponent<Shooter>().Prueba1(player);
+		this.GetComponent<Health>().Prueba2(player);
+		this.GetComponent<CharacterController2D>().Prueba3(player);
+		if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
+		{
+			controller.m_Rigidbody2D.isKinematic = true;
+		}
+	}
+
 
 }

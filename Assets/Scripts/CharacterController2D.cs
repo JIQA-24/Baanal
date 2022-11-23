@@ -197,11 +197,11 @@ public class CharacterController2D : MonoBehaviourPunCallbacks
     }
 
 	[PunRPC]
-	public void Init( Player player)
+	public void Prueba3( Player player)
 	{
 		photonPlayer = player;
 		id = player.ActorNumber;
-		_GameController.instance.players[id - 1] = this;    
+		//_GameController.instance.players[id - 1] = this.GetComponent<PlayerMovement>();    
 
 		if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
         {

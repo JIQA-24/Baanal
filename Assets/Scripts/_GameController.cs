@@ -46,7 +46,16 @@ public class _GameController : MonoBehaviourPunCallbacks
         GameObject playerObj = PhotonNetwork.Instantiate(playerPrefab, spawnPlayer[0].position, Quaternion.identity);
         
         PlayerMovement playScript = playerObj.GetComponent<PlayerMovement>();
-        playScript.photonView.RPC("Init", RpcTarget.All, PhotonNetwork.LocalPlayer);
+        playScript.photonView.RPC("Prueba", RpcTarget.All, PhotonNetwork.LocalPlayer);
+
+        Shooter playScript_1 = playerObj.GetComponent<Shooter>();
+        playScript_1.photonView.RPC("Prueba1", RpcTarget.All, PhotonNetwork.LocalPlayer);
+
+        Health playScript_2 = playerObj.GetComponent<Health>();
+        playScript_2.photonView.RPC("Prueba2", RpcTarget.All, PhotonNetwork.LocalPlayer);
+
+        CharacterController2D playScript_3 = playerObj.GetComponent<CharacterController2D>();
+        playScript_3.photonView.RPC("Prueba3", RpcTarget.All, PhotonNetwork.LocalPlayer);
 
     }
 
