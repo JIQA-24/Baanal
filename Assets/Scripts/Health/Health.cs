@@ -23,7 +23,7 @@ public class Health : MonoBehaviourPunCallbacks
 
     public int id;
 	public Player photonPlayer; 
-    public CharacterController2D controller;
+    private CharacterController2D controller;
 
     private void Awake() {
         reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
@@ -33,6 +33,7 @@ public class Health : MonoBehaviourPunCallbacks
         spriteRend = GetComponent<SpriteRenderer>();
         Physics2D.IgnoreLayerCollision(6, 7, false);
         Physics2D.IgnoreLayerCollision(6, 10, false);
+        controller = this.GetComponent<CharacterController2D>();
     }
 
     private void Update()
@@ -111,5 +112,5 @@ public class Health : MonoBehaviourPunCallbacks
         {
             controller.m_Rigidbody2D.isKinematic = true;
         }
-	}
+    }
 }

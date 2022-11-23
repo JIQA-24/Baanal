@@ -332,7 +332,6 @@ MonoBehaviour:
   iFramesDuration: 3
   numberOfFlashes: 3
   id: 0
-  controller: {fileID: 0}
 --- !u!96 &5010394831220479287
 TrailRenderer:
   serializedVersion: 2

@@ -331,5 +331,5 @@ public class Shooter : MonoBehaviourPunCallbacks
         {
             controller.m_Rigidbody2D.isKinematic = true;
         }
-	}
+    }
 }

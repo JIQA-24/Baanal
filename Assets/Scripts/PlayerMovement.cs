@@ -268,7 +268,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 		if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
 		{
 			controller.m_Rigidbody2D.isKinematic = true;
-		}
+        }
 	}
 
 
