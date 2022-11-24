@@ -66,7 +66,8 @@ public class Shooter : MonoBehaviourPunCallbacks
     }
 
     private void Update() {
-        if(PauseMenu.gameIsPaused || ifDead.dead){
+        if(PauseMenu.gameIsPaused || ifDead.dead || controller.m_Rigidbody2D.isKinematic)
+        {
             return;
         }
         aimDir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

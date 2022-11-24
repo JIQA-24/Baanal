@@ -63,7 +63,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
 
     void Update(){
-		if(isDashing || PauseMenu.gameIsPaused){
+		if(isDashing || PauseMenu.gameIsPaused || controller.m_Rigidbody2D.isKinematic)
+		{
 			return;
 		}
 
