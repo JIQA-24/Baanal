@@ -23,9 +23,6 @@ public class Health : MonoBehaviour
         spriteRend = GetComponent<SpriteRenderer>();
         Physics2D.IgnoreLayerCollision(6, 7, false);
         Physics2D.IgnoreLayerCollision(6, 10, false);
-        Physics2D.IgnoreLayerCollision(11, 13, true);
-        Physics2D.IgnoreLayerCollision(7, 12, true);
-        Physics2D.IgnoreLayerCollision(12, 13, true);
     }
 
     private void Update()
