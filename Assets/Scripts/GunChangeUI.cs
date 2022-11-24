@@ -24,11 +24,13 @@ public class GunChangeUI : MonoBehaviour
     private IEnumerator coroutine;
 
     private float changeCooldown = 1f;
-    private float maskReturnCooldown = 20f;
+    public float maskReturnCooldown = 20f;
+    public float maskReturnCooldownVariable = 20f;
     public bool maskReturnOnCooldown = false;
     private float maskCooldown = 20f;
     public bool isChangeCooldown = false;
     public Shooter fireArm;
+
 
     
     // private void Cooldown(int var){
@@ -58,12 +60,17 @@ public class GunChangeUI : MonoBehaviour
                 break;
             case 0:
                 Restart();
-                defaultGunBlack.fillAmount = 1;
+                chaacMaskBlack.fillAmount = 1;
                 break;
         }
     }
 
-    private void Restart()
+    public void ActivateMask()
+    {
+        isChangeCooldown = true;
+    }
+
+    public void Restart()
     {
         defaultGun.fillAmount = 0;
         defaultGunBlack.fillAmount = 0;
@@ -71,14 +78,13 @@ public class GunChangeUI : MonoBehaviour
         chaacMaskBlack.fillAmount = 0;
         jaguarMask.fillAmount = 0;
         jaguarMaskBlack.fillAmount = 0;
-        isChangeCooldown = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         Restart();
-        defaultGun.fillAmount = 1;
+        chaacMaskBlack.fillAmount = 1;
         isChangeCooldown = false;
     }
 
@@ -97,18 +103,18 @@ public class GunChangeUI : MonoBehaviour
             }
         }
 
-        if (isChangeCooldown && fireArm.fireArm == 0)
-        {
+        //if (isChangeCooldown && fireArm.fireArm == 0)
+        //{
 
-            defaultGun.fillAmount += 1 / changeCooldown * Time.deltaTime;
+        //    defaultGun.fillAmount += 1 / changeCooldown * Time.deltaTime;
 
-            if (defaultGun.fillAmount >= 1)
-            {
-                defaultGun.fillAmount = 1;
-                isChangeCooldown = false;
-            }
+        //    if (defaultGun.fillAmount >= 1)
+        //    {
+        //        chaacMaskBlack.fillAmount = 1;
+        //        isChangeCooldown = false;
+        //    }
 
-        }
+        //}
 
         if (maskReturnOnCooldown)
         {
@@ -160,7 +166,30 @@ public class GunChangeUI : MonoBehaviour
         if (maskReturnCooldown <= 0)
         {
             maskReturnCooldown = 20f;
+            maskReturnCooldownVariable = 20f;
             maskReturnOnCooldown = false;
+        }
+        if (fireArm.GetEquippedItems()[0].weaponChangeNum == 2)
+        {
+            jaguarMaskBlack.fillAmount = 1;
+            jaguarMask.fillAmount += 1 / maskReturnCooldownVariable * Time.deltaTime;
+
+            if (jaguarMask.fillAmount >= 1)
+            {
+                jaguarMask.fillAmount = 1;
+            }
+
+        }
+        if (fireArm.GetEquippedItems()[0].weaponChangeNum == 1)
+        {
+            chaacMaskBlack.fillAmount = 1;
+            chaacMask.fillAmount += 1 / maskReturnCooldownVariable * Time.deltaTime;
+
+            if (chaacMask.fillAmount >= 1)
+            {
+                chaacMask.fillAmount = 1;
+            }
+
         }
     }
 
