@@ -3358,8 +3358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainWindow: {fileID: 794127628}
   lobbyWidow: {fileID: 174975749}
-  createRoomBtn: {fileID: 1847771032}
-  joinRoomBtn: {fileID: 38621936}
+  createRoomBtn: {fileID: 38621936}
+  joinRoomBtn: {fileID: 1847771032}
   StartGameBtn: {fileID: 177750198}
   playertextList: {fileID: 390609271}
 --- !u!114 &1000626370
