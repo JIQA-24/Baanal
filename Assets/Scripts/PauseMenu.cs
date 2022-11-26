@@ -137,4 +137,18 @@ public class PauseMenu : MonoBehaviour
     {
         SoundManager.PlaySound(SoundManager.Sound.UIButtonAccept);
     }
+
+    public void FullScreenMode()
+    {
+        if(Screen.fullScreen)
+        {
+            // Toggle fullscreen
+            Screen.fullScreen = false;
+            Debug.Log("Fullscreen desactivado UwU");
+        } else 
+        {
+            Screen.fullScreen = true;
+            Debug.Log("Fullscreen activado UwU");
+        }
+    }
 }
