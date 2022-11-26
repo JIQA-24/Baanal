@@ -86,7 +86,7 @@ public class UIMenuButtons : MonoBehaviour
     public void StartGame()
     {
         PrefsSaving.SaveData();
-        SceneManager.LoadScene("Prototype");
+        SceneManager.LoadScene("SceneCharger");
     }
     public void StartTutorial()
     {
