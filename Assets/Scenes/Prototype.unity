@@ -1324,12 +1324,16 @@ PrefabInstance:
       objectReference: {fileID: 971010092}
     - target: {fileID: 7608706601627614479, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
       propertyPath: spawnTime
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7608706601627614479, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
       propertyPath: projectile
       value: 
       objectReference: {fileID: 4090289148606162379, guid: bd0c3f65ad1393343be4964104c91a25, type: 3}
+    - target: {fileID: 7608706601627614479, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
+      propertyPath: Feather_num
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7608706601627614479, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
       propertyPath: detectionZone
       value: 
@@ -1338,6 +1342,22 @@ PrefabInstance:
       propertyPath: spawnLocation
       value: 
       objectReference: {fileID: 1036235126}
+    - target: {fileID: 7608706601627614479, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
+      propertyPath: spawnRotation2.w
+      value: -0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608706601627614479, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
+      propertyPath: spawnRotation2.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7608706601627614479, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
+      propertyPath: spawnLocation_left
+      value: 
+      objectReference: {fileID: 1036235126}
+    - target: {fileID: 7608706601627614479, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
+      propertyPath: spawnLocation_right
+      value: 
+      objectReference: {fileID: 758819436}
     - target: {fileID: 7608706601627614479, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
       propertyPath: spawnLocation.Array.size
       value: 4
@@ -7027,10 +7047,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Boss: {fileID: 971010092}
   projectile: {fileID: 4090289148606162379, guid: bd0c3f65ad1393343be4964104c91a25, type: 3}
-  spawnLocation: {fileID: 1809728833}
-  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
-  spawnTime: 4
-  detectionZone: {fileID: 225306165}
+  spawnLocation_left: {fileID: 1694866994}
+  spawnLocation_right: {fileID: 1281163024}
+  spawnRotation1: {x: 0, y: 0, z: 0, w: 0}
+  spawnRotation2: {x: 0, y: 0, z: 1, w: -0.00000004371139}
+  spawnTime: 6
+  detectionZone: {fileID: 793781632}
+  Feather_num: 4
 --- !u!114 &971010106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7045,10 +7068,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Boss: {fileID: 971010092}
   projectile: {fileID: 4090289148606162379, guid: bd0c3f65ad1393343be4964104c91a25, type: 3}
-  spawnLocation: {fileID: 1809728833}
-  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
-  spawnTime: 4
-  detectionZone: {fileID: 225306165}
+  spawnLocation_left: {fileID: 2067035482}
+  spawnLocation_right: {fileID: 1201752112}
+  spawnRotation1: {x: 0, y: 0, z: 0, w: 0}
+  spawnRotation2: {x: 0, y: 0, z: 1, w: -0.00000004371139}
+  spawnTime: 6
+  detectionZone: {fileID: 508958304}
+  Feather_num: 3
 --- !u!114 &971010107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7063,10 +7089,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Boss: {fileID: 971010092}
   projectile: {fileID: 4090289148606162379, guid: bd0c3f65ad1393343be4964104c91a25, type: 3}
-  spawnLocation: {fileID: 121353363}
-  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
-  spawnTime: 4
+  spawnLocation_left: {fileID: 121353363}
+  spawnLocation_right: {fileID: 1386025753}
+  spawnRotation1: {x: 0, y: 0, z: 0, w: 0}
+  spawnRotation2: {x: 0, y: 0, z: 1, w: -0.00000004371139}
+  spawnTime: 6
   detectionZone: {fileID: 1294961053}
+  Feather_num: 2
 --- !u!114 &971010108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7081,10 +7110,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Boss: {fileID: 971010092}
   projectile: {fileID: 4090289148606162379, guid: bd0c3f65ad1393343be4964104c91a25, type: 3}
-  spawnLocation: {fileID: 1694866994}
-  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
-  spawnTime: 4
-  detectionZone: {fileID: 793781632}
+  spawnLocation_left: {fileID: 1809728833}
+  spawnLocation_right: {fileID: 840590246}
+  spawnRotation1: {x: 0, y: 0, z: 0, w: 0}
+  spawnRotation2: {x: 0, y: 0, z: 1, w: -0.00000004371139}
+  spawnTime: 6
+  detectionZone: {fileID: 225306165}
+  Feather_num: 1
+--- !u!114 &971010112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971010091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a3f3143cd017e42a9c287919276e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Boss: {fileID: 971010092}
 --- !u!1 &975625811
 GameObject:
   m_ObjectHideFlags: 0

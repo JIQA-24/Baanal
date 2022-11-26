@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossHealthSystem : MonoBehaviour
 {
 
-    private float startingBossHealth = 500f;
+    private float startingBossHealth = 700f;
     private float currentBossHealth;
     public BossHealthBar healthBar;
     // Start is called before the first frame update

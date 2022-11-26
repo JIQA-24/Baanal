@@ -7,7 +7,6 @@ public class Minion_spawner : MonoBehaviour
     Animator animator;
     public GameObject projectile;//projectile to spawn
     //public Transform[] spawnLocation;//where to spawn the projectile
-    int Zone;
     public Transform spawnLocation;
     public Quaternion spawnRotation;//rotation of projectile on Spawn
     public float spawnTime = 0.5f;
@@ -17,7 +16,6 @@ public class Minion_spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Zone = 0;
         //transform.LookAt(spawnLocation[Zone].position);   
     }
 

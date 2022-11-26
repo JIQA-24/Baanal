@@ -11,7 +11,8 @@ public class projectile_launcher : MonoBehaviour
     int Zone;
     public Transform spawnLocation_left;
     public Transform spawnLocation_right;
-    public Quaternion spawnRotation;//rotation of projectile on Spawn
+    public Quaternion spawnRotation1;//rotation of projectile on Spawn
+    public Quaternion spawnRotation2;
     public float spawnTime = 0.5f;
     private float timeSinceSpawned = 0f;
     public DetectionZone detectionZone;
@@ -20,7 +21,6 @@ public class projectile_launcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Zone = 0;
         //transform.LookAt(spawnLocation[Zone].position);   
     }
 
@@ -37,8 +37,16 @@ public class projectile_launcher : MonoBehaviour
 
         if((Boss.GetBool("Feather "+ Feather_num)) == true){
             if(timeSinceSpawned >= spawnTime) {
+                Zone = Random.Range(1,3);
+                if(Zone == 1)
+                {
+                    Instantiate(projectile, spawnLocation_left.position, spawnRotation1);
+                }
+                else
+                {
+                    Instantiate(projectile, spawnLocation_right.position, spawnRotation2);
+                }
                 //Instantiate(projectile, spawnLocation[Zone].position, spawnRotation);
-                Instantiate(projectile, spawnLocation_left.position, spawnRotation);
                 timeSinceSpawned = 0f;
             }
         }            
