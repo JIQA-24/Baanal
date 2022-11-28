@@ -916,6 +916,8 @@ MonoBehaviour:
   numberOfPotionsT: {fileID: 1422513068}
   numberOfPotions: 5
   potionValue: 1
+  PotionEffect: {fileID: 1590415177872986601, guid: acdb90624a404aa438447006f1026065, type: 3}
+  player: {fileID: 1382331369}
   cooldown: 5
 --- !u!1001 &146235380
 PrefabInstance:
