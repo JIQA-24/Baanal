@@ -9,8 +9,10 @@ public class Potions : MonoBehaviour
     [SerializeField] private Health playerHealth;
     [SerializeField] private Image potions;
     [SerializeField] public TextMeshProUGUI numberOfPotionsT;
-    [SerializeField] private int numberOfPotions;
+    [SerializeField] private int numberOfPotions; 
     [SerializeField] private float potionValue;
+    public GameObject PotionEffect;
+    public GameObject player;
     public float cooldown = 5f;
     bool isCooldown = false;
 
@@ -31,6 +33,7 @@ public class Potions : MonoBehaviour
             potions.fillAmount = 0;
             playerHealth.AddHealth(potionValue);
             SoundManager.PlaySound(SoundManager.Sound.Potion);
+            Instantiate(PotionEffect, player.transform.position, Quaternion.identity);
         }
         numberOfPotionsT.text = numberOfPotions.ToString();
 

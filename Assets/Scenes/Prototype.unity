@@ -11782,7 +11782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4078445b923d3e64cbcc2fa433ff1feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImpactEffect: {fileID: 1865206285545925359, guid: fcef5415e95f4bd4c808b07d547854ce, type: 3}
+  ImpactEffect: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
   cameraShake: {fileID: 384852091}
 --- !u!1 &1384654041
 GameObject:
