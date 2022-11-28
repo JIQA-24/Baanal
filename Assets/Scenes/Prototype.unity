@@ -2933,7 +2933,6 @@ GameObject:
   - component: {fileID: 384852088}
   - component: {fileID: 384852087}
   - component: {fileID: 384852091}
-  - component: {fileID: 384852092}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3019,19 +3018,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c288fbd91205a46be852646ebfd89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &384852092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384852086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8aeef211d019c644a5003350a186fa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thingToFollow: {fileID: 1382331369}
 --- !u!1 &385355789
 GameObject:
   m_ObjectHideFlags: 0
@@ -10938,6 +10924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1346826984}
+  - component: {fileID: 1346826985}
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
@@ -10961,6 +10948,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1346826985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346826983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8aeef211d019c644a5003350a186fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thingToFollow: {fileID: 1382331369}
 --- !u!1 &1351676012
 GameObject:
   m_ObjectHideFlags: 0
@@ -15017,16 +15017,16 @@ Transform:
   - {fileID: 285950660}
   - {fileID: 1009064215}
   - {fileID: 681855309}
+  - {fileID: 1560906695}
+  - {fileID: 1779658883}
   - {fileID: 683996059}
-  - {fileID: 1916532760}
   - {fileID: 1437281046}
   - {fileID: 1156439518}
-  - {fileID: 1270529786}
-  - {fileID: 1718361306}
-  - {fileID: 1779658883}
-  - {fileID: 1085950761}
   - {fileID: 1423386436}
-  - {fileID: 1560906695}
+  - {fileID: 1270529786}
+  - {fileID: 1916532760}
+  - {fileID: 1718361306}
+  - {fileID: 1085950761}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
