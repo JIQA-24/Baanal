@@ -103,19 +103,6 @@ public class GunChangeUI : MonoBehaviour
             }
         }
 
-        //if (isChangeCooldown && fireArm.fireArm == 0)
-        //{
-
-        //    defaultGun.fillAmount += 1 / changeCooldown * Time.deltaTime;
-
-        //    if (defaultGun.fillAmount >= 1)
-        //    {
-        //        chaacMaskBlack.fillAmount = 1;
-        //        isChangeCooldown = false;
-        //    }
-
-        //}
-
         if (maskReturnOnCooldown)
         {
             MaskReturn();
@@ -177,6 +164,7 @@ public class GunChangeUI : MonoBehaviour
             if (jaguarMask.fillAmount >= 1)
             {
                 jaguarMask.fillAmount = 1;
+                isChangeCooldown = false;
             }
 
         }
@@ -188,6 +176,7 @@ public class GunChangeUI : MonoBehaviour
             if (chaacMask.fillAmount >= 1)
             {
                 chaacMask.fillAmount = 1;
+                isChangeCooldown = false;
             }
 
         }
