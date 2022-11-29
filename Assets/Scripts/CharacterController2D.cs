@@ -22,6 +22,7 @@ public class CharacterController2D : MonoBehaviourPunCallbacks
 	public Rigidbody2D m_Rigidbody2D;
 	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+	Vector3 targetVelocity;
 
 	private GameObject gun1;
 	private GameObject gun2;
@@ -44,9 +45,11 @@ public class CharacterController2D : MonoBehaviourPunCallbacks
 
 	public int id;
 	public Player photonPlayer;
+	public CharacterController2D controller;
 
 	private void Awake()
 	{
+		controller = this.GetComponent<CharacterController2D>();
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		gun1 = GameObject.Find("Slingshot");
 		gun2 = GameObject.Find("FirePointBow");
@@ -136,12 +139,15 @@ public class CharacterController2D : MonoBehaviourPunCallbacks
 			}
 
 			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+			 if (!controller.m_Rigidbody2D.isKinematic)
+            {
+				targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+				m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			}
 			if (m_Grounded & move != 0) {
 				SoundManager.PlaySound(SoundManager.Sound.PlayerMove);
 			}
-			// And then smoothing it out and applying it to the character
-			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			
 			//SoundManager.PlaySound(SoundManager.Sound.FootstepGrass); //reproduce el sonido del salto
 			// If the input is moving the player right and the player is facing left...
 			if (move > 0 && !m_FacingRight)
@@ -200,7 +206,7 @@ public class CharacterController2D : MonoBehaviourPunCallbacks
     }
 
 	[PunRPC]
-	public void Init(Player player)
+	public void Prueba3(Player player)
 	{
 		photonPlayer = player;
 		id = player.ActorNumber;

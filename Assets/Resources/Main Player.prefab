@@ -104,6 +104,8 @@ GameObject:
   - component: {fileID: 7392323108899438955}
   - component: {fileID: 7392323108899438954}
   - component: {fileID: 7392323108899438949}
+  - component: {fileID: 4673322961801740492}
+  - component: {fileID: -4071469399426915374}
   m_Layer: 6
   m_Name: Main Player
   m_TagString: Player
@@ -233,9 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398dc5530869d094799a8fb8348a332f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiInventory: {fileID: 0}
   shooter: {fileID: 7392323108899438959}
-  pauseMenu: {fileID: 0}
   controller: {fileID: 7392323108899438957}
   animator: {fileID: 7392323108899438955}
   doubleActive: 0
@@ -285,6 +285,8 @@ MonoBehaviour:
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
+  id: 0
+  controller: {fileID: 0}
 --- !u!114 &7392323108899438959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ifDead: {fileID: 7392323108899438958}
-  uiInventory: {fileID: 0}
   player: {fileID: 7392323108899438962}
   bulletProp: {fileID: 435882973066224834, guid: 1825ee35d220f1141bdfeb0e91574e0e, type: 3}
   arrowProp: {fileID: 5794113944381783742, guid: 1ddc992e44eb147439493f40ca4b77e9, type: 3}
@@ -309,10 +310,10 @@ MonoBehaviour:
   firePointSpear: {fileID: 7392323109017652548}
   canShoot: 1
   fireArm: 0
-  change: {fileID: 0}
   animator: {fileID: 7392323108899438955}
   controller: {fileID: 7392323108899438957}
   isLocked: 0
+  id: 0
 --- !u!114 &7392323108899438958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,22 +329,11 @@ MonoBehaviour:
   startingHealth: 4
   dead: 0
   numOfHearts: 4
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   fullHeart: {fileID: 21300000, guid: 260b1feb175258e47a853ce78f977371, type: 3}
   shoot: {fileID: 7392323108899438959}
   iFramesDuration: 3
   numberOfFlashes: 3
-  deadUI: {fileID: 0}
+  id: 0
 --- !u!96 &7392323108899438953
 TrailRenderer:
   serializedVersion: 2
@@ -581,7 +571,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ImpactEffect: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
-  cameraShake: {fileID: 0}
+--- !u!114 &4673322961801740492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392323108899438964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: -4071469399426915374}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-4071469399426915374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392323108899438964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &7392323108926972359
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,6 +37,7 @@ public class Health : MonoBehaviourPunCallbacks
         Physics2D.IgnoreLayerCollision(11, 13, true);
         Physics2D.IgnoreLayerCollision(7, 12, true);
         Physics2D.IgnoreLayerCollision(12, 13, true);
+        controller = this.GetComponent<CharacterController2D>();
     }
 
     private void Update()
@@ -106,11 +107,11 @@ public class Health : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void Init(Player player)
+    public void Prueba2(Player player)
     {
         photonPlayer = player;
         id = player.ActorNumber;
-        //_GameController.instance.players[id - 1] = this;
+        //_GameController.instance.GetComponent<PlayerMovement>();
 
         if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
         {
