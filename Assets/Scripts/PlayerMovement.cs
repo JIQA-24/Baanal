@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 	public CharacterController2D controller;
 	public Animator animator;
 	private IEnumerator coroutine;
+	private Health dead;
 
 	private float moveSpeed = 50f;
 
@@ -43,13 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
 		inventory = new Inventory();
 		uiInventory.SetInventory(inventory);
-
-		ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item { itemType = Item.ItemType.ChaacMask, weaponChangeNum = 1});
-		ItemWorld.SpawnItemWorld(new Vector3(-20, 20), new Item { itemType = Item.ItemType.JaguarMask, weaponChangeNum = 2});
-		ItemWorld.SpawnItemWorld(new Vector3(-10, 10), new Item { itemType = Item.ItemType.JaguarTalisman, weaponChangeNum = 1 });
-		ItemWorld.SpawnItemWorld(new Vector3(10, 10), new Item { itemType = Item.ItemType.AguilaTalisman, weaponChangeNum = 2 });
-
-
+		dead = GetComponent<Health>();
 	}
 
 
@@ -87,10 +82,8 @@ public class PlayerMovement : MonoBehaviour
 
 		if(Input.GetButtonDown("Crouch")){
 			crouch = true;
-			animator.SetBool("IsCrouching", true);
 		} else if(Input.GetButtonUp("Crouch")){
 			crouch = false;
-			animator.SetBool("IsCrouching", false);
 		}
 		if(crouch && Input.GetButtonDown("Jump"))
         {
@@ -174,10 +167,10 @@ public class PlayerMovement : MonoBehaviour
 			itemWorld.DestroySelf();
         }
         if (collision.gameObject.tag == "OneWayPlatform")
-
 		{
 			currentOneWayPlatform = collision.gameObject;
 		}
+		
     }
 
 	private IEnumerator PickUpAnimation()
@@ -206,6 +199,10 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag == "Respawn"){
 			SceneManager.LoadScene("Prototype");
+		}
+		if (other.gameObject.tag == "PuertaTutorial")
+		{
+			pauseMenu.DeadMenu();
 		}
 	}
 

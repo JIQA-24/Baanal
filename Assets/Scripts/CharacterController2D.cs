@@ -25,6 +25,8 @@ public class CharacterController2D : MonoBehaviour
 	private GameObject gun2;
 	private GameObject gun3;
 
+	public Animator animator;
+
 
 
 	[Header("Events")]
@@ -157,6 +159,8 @@ public class CharacterController2D : MonoBehaviour
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 			SoundManager.PlaySound(SoundManager.Sound.Jump); //reproduce el sonido del salto
 		}
+
+		animator.SetBool("IsCrouching", crouch);
 	}
 
 	public void CheckFlip(float _move)

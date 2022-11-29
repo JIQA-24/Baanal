@@ -23,7 +23,6 @@ public class GunChangeUI : MonoBehaviour
 
     private IEnumerator coroutine;
 
-    private float changeCooldown = 1f;
     public float maskReturnCooldown = 20f;
     public float maskReturnCooldownVariable = 20f;
     public bool maskReturnOnCooldown = false;
@@ -31,19 +30,6 @@ public class GunChangeUI : MonoBehaviour
     public bool isChangeCooldown = false;
     public Shooter fireArm;
 
-
-    
-    // private void Cooldown(int var){
-    //     while(isChangeCooldown){
-    //         if(var.fillAmount >= 1){
-    //             var.fillAmount = 1;
-    //             isChangeCooldown = false;
-    //         }else{
-    //             var.fillAmount += 1 / maskCooldown * Time.deltaTime;
-    //         }
-        
-    //     }
-    // }
 
     public void ChangeUI(int _mask){
         switch(_mask){
