@@ -2,24 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviourPunCallbacks
 {
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
     public bool dead;
     public int numOfHearts;
-    public Image[] hearts;
+    private Image[] hearts;
     public Sprite fullHeart;
 
     [SerializeField] public Shooter shoot;
     [SerializeField] private float iFramesDuration;
     [SerializeField] private int numberOfFlashes;
-    [SerializeField] private PauseMenu deadUI;
+    private ReferenceScript reference;
+    private PauseMenu deadUI;
     private SpriteRenderer spriteRend;
 
+    public int id;
+    public Player photonPlayer;
+    private CharacterController2D controller;
+
     private void Awake() {
+        reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
+        controller = gameObject.GetComponent<CharacterController2D>();
+        deadUI = reference.GetPauseMenu();
         currentHealth = startingHealth;
+        hearts = reference.GetHeartList();
         spriteRend = GetComponent<SpriteRenderer>();
         Physics2D.IgnoreLayerCollision(6, 7, false);
         Physics2D.IgnoreLayerCollision(6, 10, false);
@@ -92,6 +103,19 @@ public class Health : MonoBehaviour
     public bool GetDead()
     {
         return dead;
+    }
+
+    [PunRPC]
+    public void Init(Player player)
+    {
+        photonPlayer = player;
+        id = player.ActorNumber;
+        //_GameController.instance.players[id - 1] = this;
+
+        if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
+        {
+            controller.m_Rigidbody2D.isKinematic = true;
+        }
     }
 
 }

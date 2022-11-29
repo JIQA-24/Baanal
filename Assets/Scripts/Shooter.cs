@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Shooter : MonoBehaviour
+public class Shooter : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Health ifDead;
-    [SerializeField] private UI_Inventory uiInventory;
+    private ReferenceScript reference;
+    private UI_Inventory uiInventory;
     [SerializeField] private PlayerMovement player;
     public Inventory inventory;
     public GameObject bulletProp;
@@ -20,7 +23,7 @@ public class Shooter : MonoBehaviour
     public bool canShoot = true;
     public int fireArm = 0;
     private IEnumerator coroutine;
-    public GunChangeUI change;
+    private GunChangeUI change;
     List<Item> equipedGun;
     public Animator animator;
 
@@ -30,14 +33,22 @@ public class Shooter : MonoBehaviour
     private Vector3 playerPos;
     private Vector2 aimDir;
     public bool isLocked = false;
+    public int id;
+    public Player photonPlayer;
 
     private void Awake()
     {
+        reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
+        uiInventory = reference.GetInventoryMenu();
+        change = reference.GetGunMenu();
         inventory = uiInventory.GetInventory();
     }
 
 
     private void Start() {
+        reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
+        uiInventory = reference.GetInventoryMenu();
+        change = reference.GetGunMenu();
         fireSlingRot = firePointSlingshot.rotation;
         fireGeneralRot = firePointBow.rotation;
         CheckFireArm();
@@ -330,6 +341,18 @@ public class Shooter : MonoBehaviour
                 firePointBow.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 270f));
                 firePointSpear.rotation = Quaternion.Euler(new Vector3(fireGeneralRot.x, fireGeneralRot.y, fireGeneralRot.z + 270f));
                 break;
+        }
+    }
+    [PunRPC]
+    public void Init(Player player)
+    {
+        photonPlayer = player;
+        id = player.ActorNumber;
+        //_GameController.instance.players[id - 1] = this;
+
+        if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
+        {
+            controller.m_Rigidbody2D.isKinematic = true;
         }
     }
 }

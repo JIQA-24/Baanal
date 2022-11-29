@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks
 {
-	[SerializeField] private UI_Inventory uiInventory;
+	private ReferenceScript reference;
+	private UI_Inventory uiInventory;
 	[SerializeField] private Shooter shooter;
-	[SerializeField] private PauseMenu pauseMenu;
+	private PauseMenu pauseMenu;
 
 	public CharacterController2D controller;
 	public Animator animator;
@@ -40,8 +43,14 @@ public class PlayerMovement : MonoBehaviour
 
 	private Inventory inventory;
 
-    private void Awake()
+	public int id;
+	public Player photonPlayer;
+
+	private void Awake()
     {
+		reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
+		uiInventory = reference.GetInventoryMenu();
+		pauseMenu = reference.GetPauseMenu();
 		inventory = new Inventory();
 		uiInventory.SetInventory(inventory);
 		dead = GetComponent<Health>();
@@ -261,5 +270,16 @@ public class PlayerMovement : MonoBehaviour
 		doubleCounter = 0;
 	}
 
+	[PunRPC]
+	public void Init(Player player)
+	{
+		photonPlayer = player;
+		id = player.ActorNumber;
+		_GameController.instance.players[id - 1] = this;
 
+		if (!photonView.IsMine) // Verificar si el movimiento es del usuario actual
+		{
+			controller.m_Rigidbody2D.isKinematic = true;
+		}
+	}
 }

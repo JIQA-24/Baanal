@@ -8,11 +8,14 @@ public class TimeStop : MonoBehaviour
     private bool RestoreTime;
     // Start is called before the first frame update
     public GameObject ImpactEffect;
-    public CameraShake cameraShake;
+    private CameraShake cameraShake;
+    private ReferenceScript reference;
     private Animator Anim;
 
     private void Start()
     {
+        reference = GameObject.Find("ReferenceObject").GetComponent<ReferenceScript>();
+        cameraShake = reference.GetCameraShake();
         RestoreTime = false;
         //Anim = GetComponentInChildren<Animator>();
     }
