@@ -931,6 +931,10 @@ PrefabInstance:
       value: Sprites_Volar_Arriba_01
       objectReference: {fileID: 0}
     - target: {fileID: 492719954253776457, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 492719954253776457, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
       propertyPath: m_TagString
       value: Boss
       objectReference: {fileID: 0}

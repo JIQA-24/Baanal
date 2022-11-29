@@ -170,6 +170,10 @@ public class PlayerMovement : MonoBehaviour
 		{
 			currentOneWayPlatform = collision.gameObject;
 		}
+		if(collision.gameObject.tag == "Boss")
+        {
+			dead.TakeDamage(1f);
+        }
 		
     }
 
