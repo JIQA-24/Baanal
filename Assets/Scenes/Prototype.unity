@@ -11455,6 +11455,7 @@ MonoBehaviour:
   m_PlayerCollider: {fileID: 1382331381}
   m_Rigidbody2D: {fileID: 1382331370}
   m_FacingRight: 1
+  animator: {fileID: 1382331382}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
