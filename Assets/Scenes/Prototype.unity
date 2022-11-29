@@ -838,7 +838,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 121353363}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawner_left 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -964,7 +964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1997376779517031674, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: DetectionZones
       objectReference: {fileID: 0}
     - target: {fileID: 2355969764711320195, guid: 520f2df7a7fe5834a9a67e7ad735cecb, type: 3}
       propertyPath: m_RootOrder
@@ -1763,7 +1763,7 @@ GameObject:
   - component: {fileID: 225306164}
   m_Layer: 9
   m_Name: DetectionZone 1
-  m_TagString: Untagged
+  m_TagString: DetectionZones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4252,7 +4252,7 @@ GameObject:
   - component: {fileID: 508958303}
   m_Layer: 9
   m_Name: DetectionZone 3
-  m_TagString: Untagged
+  m_TagString: DetectionZones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5959,7 +5959,7 @@ GameObject:
   - component: {fileID: 793781631}
   m_Layer: 9
   m_Name: DetectionZone 4
-  m_TagString: Untagged
+  m_TagString: DetectionZones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6309,7 +6309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 840590246}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawner_right 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7023,7 +7023,7 @@ MonoBehaviour:
   unequipedMask: {fileID: 21300000, guid: 718ac2bc7c6020241b8ef0c4ac67f698, type: 3}
   unequipedTalisman: {fileID: 21300000, guid: 7af5541c6a6efa34bb0e255524f6a02a, type: 3}
   jaguarTalismanSprite: {fileID: 21300000, guid: 7af5541c6a6efa34bb0e255524f6a02a, type: 3}
-  aguilaTalismanSprite: {fileID: 21300000, guid: 5c080abe314f55145b350fd10a91c7e7, type: 3}
+  aguilaTalismanSprite: {fileID: 21300000, guid: 917d36112b36a81489d8d0c3f4f3fceb, type: 3}
 --- !u!4 &966937944
 Transform:
   m_ObjectHideFlags: 0
@@ -9410,7 +9410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1163013182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9804,7 +9804,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1201752112}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawner_right 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10815,7 +10815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1281163024}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawner_right 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11126,7 +11126,7 @@ GameObject:
   - component: {fileID: 1294961052}
   m_Layer: 9
   m_Name: DetectionZone 2
-  m_TagString: Untagged
+  m_TagString: DetectionZones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12459,7 +12459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386025753}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawner_right 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15155,7 +15155,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1694866994}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawner_left 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15979,7 +15979,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1809728833}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawner_left 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16809,7 +16809,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2067035482}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawner_left 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -128,6 +128,7 @@ public class PauseMenu : MonoBehaviour
         optionsMenu.SetActive(false);
         deadMenu.SetActive(true);
         Time.timeScale = 0f;
+        ifDead.dead = true;
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(deadMenuFirstButton);

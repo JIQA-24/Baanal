@@ -6,27 +6,29 @@ public class Bullet : MonoBehaviour
 {
     public float bulletSpeed = 40f;
     public float bulletDamage = 10f;
-
+    private float force = 3f;
+    private Vector2 direction;
     Rigidbody2D rigidBody;
 
     private void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
-        Vector2 force = transform.up * bulletSpeed;
-        rigidBody.AddForce(force, ForceMode2D.Impulse);
+        direction = transform.up * bulletSpeed;
+        rigidBody.AddForce(direction, ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "DetectionZones")
         {
             Destroy(gameObject);
             SoundManager.PlaySound(SoundManager.Sound.RegularShotImpact);
-            if (other.gameObject.tag == "Enemy")
+            if (collision.gameObject.tag == "Enemy")
             {
-                other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(bulletDamage);
+                collision.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(bulletDamage, direction, force);
             }
-            if (other.gameObject.tag == "Boss")
+            if (collision.gameObject.tag == "Boss")
             {
-                other.gameObject.GetComponent<BossHealthSystem>().BossTakeDamage(bulletDamage);
+                collision.gameObject.GetComponent<BossHealthSystem>().BossTakeDamage(bulletDamage);
             }
         }
     }

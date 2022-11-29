@@ -19,6 +19,7 @@ TagManager:
   - Coin10
   - Coin50
   - PuertaTutorial
+  - DetectionZones
   layers:
   - Default
   - TransparentFX

@@ -6,26 +6,28 @@ public class Arrow : MonoBehaviour
 {
     public float arrowSpeed = 20f;
     public float arrowDamage = 20f;
-
+    private float force = 3f;
+    private Vector2 direction;
     Rigidbody2D rigidBody;
 
     private void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
-        Vector2 force = transform.right * arrowSpeed;
-        rigidBody.AddForce(force, ForceMode2D.Impulse);
+        direction = transform.right * arrowSpeed;
+        rigidBody.AddForce(direction, ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Bullet" && collision.gameObject.tag != "DetectionZones")
         {
             Destroy(gameObject);
-            if (other.gameObject.tag == "Enemy")
+            if (collision.gameObject.tag == "Enemy")
             {
-                other.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(arrowDamage);
+                collision.gameObject.GetComponent<EnemyFollowPlayer>().TakeDamage(arrowDamage, direction, force);
             }
-            if (other.gameObject.tag == "Boss")
+            if (collision.gameObject.tag == "Boss")
             {
-                other.gameObject.GetComponent<BossHealthSystem>().BossTakeDamage(arrowDamage);
+                collision.gameObject.GetComponent<BossHealthSystem>().BossTakeDamage(arrowDamage);
             }
         }
     }
