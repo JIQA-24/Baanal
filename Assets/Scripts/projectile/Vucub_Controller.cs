@@ -11,6 +11,13 @@ public class Vucub_Controller : MonoBehaviour
     private float timeSpent3 = 0f;
     private float timeSpent4 = 0f;
     private float timeSpent5 = 0f;
+    private float totalTime = 0f;
+    private float percentage1 = 0f;
+    private float percentage2 = 0f;
+    private float percentage3 = 0f;
+    private float percentage4 = 0f;
+    private float percentage5 = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,5 +51,9 @@ public class Vucub_Controller : MonoBehaviour
         {
             timeSpent5 += Time.deltaTime;
         }
+        totalTime = (timeSpent1 + timeSpent2 + timeSpent3 + timeSpent4 + timeSpent5);
+        Debug.Log("Tiempo total: " + totalTime);
+        percentage1 =  timeSpent1 *(totalTime/100);
+        Debug.Log("Porcentaje: " + percentage1);
     }
 }
