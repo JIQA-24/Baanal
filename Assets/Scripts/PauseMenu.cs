@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
@@ -12,7 +13,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject inventoryMenu;
     public GameObject optionsMenu;
     public GameObject deadMenu;
-    public GameObject pauseMenuFirstButton, optionsMenuFirstButton, deadMenuFirstButton, optionsClosedButton, inventoryMenuFirstButton;
+    public GameObject pauseMenuFirstButton, optionsMenuFirstButton, deadMenuFirstButton, optionsClosedButton, inventoryMenuFirstButton, endScreenButton;
+    public GameObject endScreen;
+    public GameObject endScreenText;
     [SerializeField] private PlayerPrefsSaving PrefsSaving;
     [SerializeField] private Health ifDead;
     [SerializeField] private PlayerMovement player;
@@ -25,6 +28,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         inventoryMenu.SetActive(false);
         optionsMenu.SetActive(false);
+        deadMenu.SetActive(false);
+        endScreen.SetActive(false);
     }
     void Update()
     {
@@ -126,6 +131,29 @@ public class PauseMenu : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(deadMenuFirstButton);
+    }
+
+    public void EndScreen()
+    {
+        pauseMenuUI.SetActive(false);
+        inventoryMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        deadMenu.SetActive(false);
+        StartCoroutine(EndScreenActivables());
+
+    }
+
+    private IEnumerator EndScreenActivables()
+    {
+        endScreen.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        endScreenButton.SetActive(true);
+        endScreenText.SetActive(true);
+        Time.timeScale = 0f;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(endScreenButton);
+
+
     }
 
     public void SoundMenu()

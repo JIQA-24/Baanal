@@ -8,6 +8,7 @@ public class BossHealthSystem : MonoBehaviour
     private float startingBossHealth = 700f;
     private float currentBossHealth;
     public BossHealthBar healthBar;
+    [SerializeField] private PauseMenu pauseMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class BossHealthSystem : MonoBehaviour
         {
             Destroy(gameObject);
             healthBar.DeactivateHealthBar();
+            pauseMenu.EndScreen();
         }
     }
 
