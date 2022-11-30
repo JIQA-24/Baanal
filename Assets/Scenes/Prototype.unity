@@ -1006,7 +1006,7 @@ MonoBehaviour:
   numberOfPotionsT: {fileID: 1422513068}
   numberOfPotions: 5
   potionValue: 1
-  PotionEffect: {fileID: 1590415177872986601, guid: acdb90624a404aa438447006f1026065, type: 3}
+  PotionEffect: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
   player: {fileID: 1382331369}
   cooldown: 5
 --- !u!1001 &146235380
@@ -7259,6 +7259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1013376922}
+  ImpactEffect: {fileID: 2353600328335836179, guid: ceec7516237b4104b94300043ca39784, type: 3}
   pauseMenu: {fileID: 1013376921}
 --- !u!114 &971010102
 MonoBehaviour:
@@ -16980,7 +16981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7392323108899438964, guid: 10fc6dbb5dd12f741941df8ddb3a78a3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10fc6dbb5dd12f741941df8ddb3a78a3, type: 3}

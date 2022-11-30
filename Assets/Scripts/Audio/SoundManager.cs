@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class SoundManager {
 
-    public enum Sound { 
+    public enum Sound {
         PlayerMove,
         PlayerHit,
         PlayerAttackCervatana,
@@ -25,6 +25,7 @@ public static class SoundManager {
         UIButtonAccept,
         JumpImpact,
         CacaoPick,
+        VucubImpacto,
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary;
@@ -34,6 +35,7 @@ public static class SoundManager {
     public static void Initialize() {
         soundTimerDictionary = new Dictionary<Sound, float>();
         soundTimerDictionary[Sound.PlayerMove] = 0f;
+        soundTimerDictionary[Sound.VucubImpacto] = 0f;
     }
 
     public static void PlaySound(Sound sound) {
@@ -63,6 +65,25 @@ public static class SoundManager {
                     else {
                         return false;
                     } 
+                }
+                else
+                {
+                    return true;
+                }
+            case Sound.VucubImpacto:
+                if (soundTimerDictionary.ContainsKey(sound))
+                {
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float vucubImpactTimerMax = 0.7f;
+                    if (lastTimePlayed + vucubImpactTimerMax < Time.time)
+                    {
+                        soundTimerDictionary[sound] = Time.time;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {

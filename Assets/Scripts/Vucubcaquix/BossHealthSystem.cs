@@ -8,6 +8,7 @@ public class BossHealthSystem : MonoBehaviour
     private float startingBossHealth = 700f;
     private float currentBossHealth;
     public BossHealthBar healthBar;
+    public GameObject ImpactEffect;
     [SerializeField] private PauseMenu pauseMenu;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,8 @@ public class BossHealthSystem : MonoBehaviour
     {
         currentBossHealth = Mathf.Clamp(currentBossHealth - _damage, 0, startingBossHealth);
         healthBar.SetHealth(currentBossHealth, startingBossHealth);
+        Instantiate(ImpactEffect, transform.position, Quaternion.identity);
+        SoundManager.PlaySound(SoundManager.Sound.VucubImpacto);
         if (currentBossHealth <= 0)
         {
             Destroy(gameObject);
