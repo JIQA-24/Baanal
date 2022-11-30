@@ -15,6 +15,7 @@ public class _GameController : MonoBehaviourPunCallbacks
 
     public Transform[] spawnPlayer;
     public PlayerMovement[] players;
+    public GameObject singlePlayer;
 
     private int playerInGame;
 
@@ -42,6 +43,7 @@ public class _GameController : MonoBehaviourPunCallbacks
 
     void SpawnPlayer()
     {
+        singlePlayer.SetActive(false);
         GameObject playerObj = PhotonNetwork.Instantiate(playerPrefab, spawnPlayer[0].position, Quaternion.identity);
 
         PlayerMovement playScript = playerObj.GetComponent<PlayerMovement>();

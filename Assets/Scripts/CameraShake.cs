@@ -6,7 +6,7 @@ public class CameraShake : MonoBehaviour
 {
     public IEnumerator Shake(float duration, float magnitude)
     {
-        Vector3 originalPos = transform.localPosition;
+        Vector3 originalPos = gameObject.transform.localPosition;
         float elapsed = 0.0f;
 
         while (elapsed < duration)

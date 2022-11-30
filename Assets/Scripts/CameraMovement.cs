@@ -30,14 +30,14 @@ public class CameraMovement : MonoBehaviour
         newPosition = thingToFollow.transform.position + new Vector3(0, 2, -20);
         if (!isTutorialActive)
         {
-            if (newPosition.x <= -13 || newPosition.x >= 13)
-            {
-                transform.position = new Vector3(lastPosition.x, newPosition.y, -20);
-            }
-            else
-            {
-                transform.position = newPosition;
-            }
+            //if (newPosition.x <= -13 || newPosition.x >= 13)
+            //{
+            //    transform.position = new Vector3(lastPosition.x, newPosition.y, -20);
+            //}
+            //else
+            //{
+            //    transform.position = newPosition;
+            //}
         }
         else
         {

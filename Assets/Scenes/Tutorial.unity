@@ -5344,6 +5344,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &545679311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 545679313}
+  - component: {fileID: 545679312}
+  m_Layer: 0
+  m_Name: ReferenceObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &545679312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545679311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7343cd3a94fed447ad70a5d9bb4384d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 316177004}
+  _Inventory: {fileID: 1998020198}
+  gunUI: {fileID: 312429009}
+  hearts:
+  - {fileID: 1582152253}
+  - {fileID: 1493061299}
+  - {fileID: 743311306}
+  - {fileID: 703460191}
+  - {fileID: 513999564}
+  - {fileID: 1250412651}
+  - {fileID: 1826439038}
+  - {fileID: 161995723}
+  - {fileID: 23765827}
+  - {fileID: 1087165963}
+  cameraShake: {fileID: 1421760185}
+--- !u!4 &545679313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545679311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &546463991
 GameObject:
   m_ObjectHideFlags: 0
@@ -10225,14 +10284,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398dc5530869d094799a8fb8348a332f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiInventory: {fileID: 1998020198}
   shooter: {fileID: 1162548192}
-  pauseMenu: {fileID: 316177004}
   controller: {fileID: 1162548188}
   animator: {fileID: 1162548187}
   doubleActive: 0
   tr: {fileID: 1162548186}
   playerCollider: {fileID: 1162548185}
+  id: 0
 --- !u!70 &1162548185
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -10420,6 +10478,8 @@ MonoBehaviour:
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
+  id: 0
+  controller: {fileID: 0}
 --- !u!50 &1162548189
 Rigidbody2D:
   serializedVersion: 4
@@ -10477,22 +10537,11 @@ MonoBehaviour:
   startingHealth: 4
   dead: 0
   numOfHearts: 4
-  hearts:
-  - {fileID: 1582152253}
-  - {fileID: 1493061299}
-  - {fileID: 743311306}
-  - {fileID: 703460191}
-  - {fileID: 513999564}
-  - {fileID: 1250412651}
-  - {fileID: 1826439038}
-  - {fileID: 161995723}
-  - {fileID: 23765827}
-  - {fileID: 1087165963}
   fullHeart: {fileID: 21300000, guid: 260b1feb175258e47a853ce78f977371, type: 3}
   shoot: {fileID: 1162548192}
   iFramesDuration: 3
   numberOfFlashes: 3
-  deadUI: {fileID: 316177004}
+  id: 0
 --- !u!114 &1162548192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10506,7 +10555,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ifDead: {fileID: 1162548191}
-  uiInventory: {fileID: 1998020198}
   player: {fileID: 1162548184}
   bulletProp: {fileID: 435882973066224834, guid: 1825ee35d220f1141bdfeb0e91574e0e, type: 3}
   arrowProp: {fileID: 5794113944381783742, guid: 1ddc992e44eb147439493f40ca4b77e9, type: 3}
@@ -10517,10 +10565,10 @@ MonoBehaviour:
   firePointSpear: {fileID: 2066484538}
   canShoot: 1
   fireArm: 0
-  change: {fileID: 312429009}
   animator: {fileID: 1162548187}
   controller: {fileID: 1162548188}
   isLocked: 0
+  id: 0
 --- !u!114 &1162548193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10534,7 +10582,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ImpactEffect: {fileID: 1865206285545925359, guid: fcef5415e95f4bd4c808b07d547854ce, type: 3}
-  cameraShake: {fileID: 1421760185}
 --- !u!82 &1162548194
 AudioSource:
   m_ObjectHideFlags: 0
