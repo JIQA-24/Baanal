@@ -8,7 +8,7 @@ using Photon.Realtime;
 public class BossHealthSystem : MonoBehaviourPunCallbacks
 {
 
-    private float startingBossHealth = 100;
+    private float startingBossHealth = 600;
     private float currentBossHealth;
     public BossHealthBar healthBar;
     public GameObject ImpactEffect;
@@ -38,7 +38,7 @@ public class BossHealthSystem : MonoBehaviourPunCallbacks
             healthBar.DeactivateHealthBar();
             pauseMenu.EndScreen();
         }
-        
+
     }
     
     public float GetBossHealth()
