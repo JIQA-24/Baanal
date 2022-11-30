@@ -52,8 +52,8 @@ public class Vucub_Controller : MonoBehaviour
             timeSpent5 += Time.deltaTime;
         }
         totalTime = (timeSpent1 + timeSpent2 + timeSpent3 + timeSpent4 + timeSpent5);
-        Debug.Log("Tiempo total: " + totalTime);
+        //Debug.Log("Tiempo total: " + totalTime);
         percentage1 =  timeSpent1 *(totalTime/100);
-        Debug.Log("Porcentaje: " + percentage1);
+        //Debug.Log("Porcentaje: " + percentage1);
     }
 }

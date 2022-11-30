@@ -57,6 +57,7 @@ public class UIMenuButtons : MonoBehaviour
         codeMenu.SetActive(true);
         optionsMenu.SetActive(false);
         codeDeploy.SetActive(false);
+
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(inputTextFieldCodeMenu);
     }
@@ -79,6 +80,7 @@ public class UIMenuButtons : MonoBehaviour
         codeMenu.SetActive(false);
         optionsMenu.SetActive(false);
         codeDeploy.SetActive(true);
+        
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(copyCodeButton);
     }

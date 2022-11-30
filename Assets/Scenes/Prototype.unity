@@ -11635,6 +11635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thingToFollow: {fileID: 1382331369}
+  gameController: {fileID: 1920546769}
 --- !u!1 &1351676012
 GameObject:
   m_ObjectHideFlags: 0
