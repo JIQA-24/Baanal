@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Comic.unity
+    guid: 368e0ade312c8474daa6206bcf8d37ce
+  - enabled: 1
     path: Assets/Scenes/SceneCharger.unity
     guid: db4e5af3e7711ee41a20cbdc5b0a3874
   - enabled: 1
