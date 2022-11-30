@@ -523,8 +523,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CARGANDO...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1feabd6793ac89f49a710abec09ad246, type: 2}
-  m_sharedMaterial: {fileID: 4483628329383258472, guid: 1feabd6793ac89f49a710abec09ad246, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 11feb02a9b608974995b87b09e95502a, type: 2}
+  m_sharedMaterial: {fileID: 4483628329383258472, guid: 11feb02a9b608974995b87b09e95502a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
