@@ -56,7 +56,14 @@ public class CameraMovement : MonoBehaviour
         }
         else
         {
-            newPosition = thingToFollow.transform.position + new Vector3(3, 2, -20);
+            if (isTutorialActive)
+            {
+                newPosition = thingToFollow.transform.position + new Vector3(0, 2, -20);
+            }
+            else
+            {
+                newPosition = thingToFollow.transform.position + new Vector3(3, 2, -20);
+            }
             transform.position = newPosition;
         }
 
