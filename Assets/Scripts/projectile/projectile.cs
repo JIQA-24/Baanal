@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class projectile : MonoBehaviour
+public class projectile : MonoBehaviourPunCallbacks
 {
     
     private Transform player;
@@ -14,6 +17,10 @@ public class projectile : MonoBehaviour
     //Time until projectile expires
     public float timeToLive = 5f;
     private float timeSinceSpawned = 0f;
+
+    public int id;
+    public Player photonPlayer;
+    private CharacterController2D controller;
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +39,18 @@ public class projectile : MonoBehaviour
         if(timeSinceSpawned > timeToLive){
             Destroy(gameObject);
         }
-            
+        //photonView.RPC("start_mult", RpcTarget.All,gameObject.GetComponent<PhotonView>().ViewID);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player"){
             other.gameObject.GetComponent<Health>().TakeDamage(damage);
         }
+    }
+
+    [PunRPC]
+    void start_mult(int _id)
+    {
+        //GameObject obj = PhotonNetwork.GetPhotonView(_id).gameObject;
     }
 }

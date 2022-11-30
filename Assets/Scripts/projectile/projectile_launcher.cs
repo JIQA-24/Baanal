@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class projectile_launcher : MonoBehaviour
+public class projectile_launcher : MonoBehaviourPunCallbacks
 {
     Animator animator;
     public Animator Boss;
@@ -17,6 +20,10 @@ public class projectile_launcher : MonoBehaviour
     private float timeSinceSpawned = 0f;
     public DetectionZone detectionZone;
     public int Feather_num = 0;
+
+    public int id;
+    public Player photonPlayer;
+    private CharacterController2D controller;
 
     // Start is called before the first frame update
     void Start()
@@ -41,15 +48,23 @@ public class projectile_launcher : MonoBehaviour
                 if(Zone == 1)
                 {
                     Instantiate(projectile, spawnLocation_left.position, spawnRotation1);
+                    //photonView.RPC("start_mult", RpcTarget.All,collision.gameObject.GetComponent<PhotonView>().ViewID);
                 }
                 else
                 {
                     Instantiate(projectile, spawnLocation_right.position, spawnRotation2);
+                    //photonView.RPC("start_mult", RpcTarget.All,collision.gameObject.GetComponent<PhotonView>().ViewID);
                 }
                 //Instantiate(projectile, spawnLocation[Zone].position, spawnRotation);
                 timeSinceSpawned = 0f;
             }
         }            
+    }
+
+    [PunRPC]
+    void start_mult(int _id)
+    {
+        //GameObject obj = PhotonNetwork.GetPhotonView(_id).gameObject;
     }
 }
  

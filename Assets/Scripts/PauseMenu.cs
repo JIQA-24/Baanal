@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviourPunCallbacks
 {
     public static bool gameIsPaused = false;
     public static bool inventoryPause = false;
@@ -16,6 +20,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuFirstButton, optionsMenuFirstButton, deadMenuFirstButton, optionsClosedButton, inventoryMenuFirstButton, endScreenButton;
     public GameObject endScreen;
     public GameObject endScreenText;
+    public GameObject DontDestroyOnLoad;
     [SerializeField] private PlayerPrefsSaving PrefsSaving;
     [SerializeField] private Health ifDead;
     [SerializeField] private PlayerMovement player;
@@ -91,6 +96,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         gameIsPaused = false;
         PrefsSaving.SaveData();
+        Destroy(DontDestroyOnLoad);
         SceneManager.LoadScene("Menu");
     }
 
