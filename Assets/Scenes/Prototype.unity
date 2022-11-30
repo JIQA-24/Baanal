@@ -318,7 +318,7 @@ MonoBehaviour:
   - {fileID: 275541066}
   - {fileID: 1356556910}
   - {fileID: 2105588101}
-  cameraShake: {fileID: 384852091}
+  cameraShake: {fileID: 0}
 --- !u!4 &32071092
 Transform:
   m_ObjectHideFlags: 0
@@ -3028,7 +3028,6 @@ GameObject:
   - component: {fileID: 384852089}
   - component: {fileID: 384852088}
   - component: {fileID: 384852087}
-  - component: {fileID: 384852091}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3102,18 +3101,6 @@ Transform:
   m_Father: {fileID: 1346826984}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &384852091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384852086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c288fbd91205a46be852646ebfd89a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &385355789
 GameObject:
   m_ObjectHideFlags: 0
@@ -16069,7 +16056,6 @@ MonoBehaviour:
   - {fileID: 96065242}
   - {fileID: 1785328835}
   players: []
-  singlePlayer: {fileID: 1382331369}
 --- !u!4 &1920546770
 Transform:
   m_ObjectHideFlags: 0
@@ -16872,7 +16858,7 @@ PrefabInstance:
     - target: {fileID: 7392323108899438949, guid: 10fc6dbb5dd12f741941df8ddb3a78a3, type: 3}
       propertyPath: cameraShake
       value: 
-      objectReference: {fileID: 384852091}
+      objectReference: {fileID: 0}
     - target: {fileID: 7392323108899438958, guid: 10fc6dbb5dd12f741941df8ddb3a78a3, type: 3}
       propertyPath: deadUI
       value: 
