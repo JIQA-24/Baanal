@@ -58,178 +58,203 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
 
     void Update(){
-		if(isDashing || PauseMenu.gameIsPaused || controller.m_Rigidbody2D.isKinematic)
+		if(!controller.m_Rigidbody2D.isKinematic)
 		{
-			return;
-		}
-
-        if (shooter.isLocked || PauseMenu.inventoryPause)
-        {
-			moveSpeed--;
-			if(moveSpeed > 0)
-            {
-				horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+			if(isDashing || PauseMenu.gameIsPaused || controller.m_Rigidbody2D.isKinematic)
+			{
+				return;
 			}
-            else
-            {
-				moveSpeed = 0;
+
+			if (shooter.isLocked || PauseMenu.inventoryPause)
+			{
+				moveSpeed--;
+				if(moveSpeed > 0)
+				{
+					horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+				}
+				else
+				{
+					moveSpeed = 0;
+					horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+				}
+				animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+				return;
+			} else
+			{
 				horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
+				animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 			}
-			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-			return;
-		} else
-        {
-			horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime;
-			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-		}
 
-		
-		
-		if(Input.GetButtonDown("Jump") && !crouch){
-			animator.SetBool("IsJumping", true);
-			jump = true;
-		}
+			
+			
+			if(Input.GetButtonDown("Jump") && !crouch){
+				animator.SetBool("IsJumping", true);
+				jump = true;
+			}
 
-		if(Input.GetButtonDown("Crouch")){
-			crouch = true;
-		} else if(Input.GetButtonUp("Crouch")){
-			crouch = false;
-		}
-		if(crouch && Input.GetButtonDown("Jump"))
-        {
-			if(currentOneWayPlatform != null)
-            {
-				StartCoroutine(DisableCollisionPlatform());
-            }
-        }
+			if(Input.GetButtonDown("Crouch")){
+				crouch = true;
+			} else if(Input.GetButtonUp("Crouch")){
+				crouch = false;
+			}
+			if(crouch && Input.GetButtonDown("Jump"))
+			{
+				if(currentOneWayPlatform != null)
+				{
+					StartCoroutine(DisableCollisionPlatform());
+				}
+			}
 
-        if (doubleActive)
-        {
-			if(doubleCounter < 2)
-            {
+			if (doubleActive)
+			{
+				if(doubleCounter < 2)
+				{
+					canDash = true;
+				}
+				if (CharacterController2D.m_Grounded)
+				{
+					canDash = true;
+					doubleCounter = 0;
+				}
+			}
+			if (CharacterController2D.m_Grounded) {
 				canDash = true;
-            }
-            if (CharacterController2D.m_Grounded)
-            {
-				canDash = true;
-				doubleCounter = 0;
-            }
-        }
-		if (CharacterController2D.m_Grounded) {
-			canDash = true;
+			}
+
+
+			if(Input.GetButtonDown("Dash") && canDash)
+			{
+				isDashing = true;
+				canDash = false;
+				tr.emitting = true;
+				dashingDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+				if(dashingDir == Vector2.zero)
+				{
+					dashingDir = new Vector2(transform.localScale.x, 0);
+				}
+				if (doubleActive)
+				{
+					doubleCounter++;
+				}
+				//Add stopping dash
+				animator.SetBool("IsDashing", true);
+				StartCoroutine(Dash());
+				SoundManager.PlaySound(SoundManager.Sound.Dash); //reproduce el sonido del dash
+			}
+
+			if (isDashing)
+			{
+				controller.m_Rigidbody2D.velocity = dashingDir.normalized * dashingPower;
+				return;
+			}
 		}
-
-
-		if(Input.GetButtonDown("Dash") && canDash)
-		{
-			isDashing = true;
-			canDash = false;
-			tr.emitting = true;
-			dashingDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-			if(dashingDir == Vector2.zero)
-            {
-				dashingDir = new Vector2(transform.localScale.x, 0);
-            }
-            if (doubleActive)
-            {
-				doubleCounter++;
-            }
-			//Add stopping dash
-			animator.SetBool("IsDashing", true);
-			StartCoroutine(Dash());
-			SoundManager.PlaySound(SoundManager.Sound.Dash); //reproduce el sonido del dash
-		}
-
-        if (isDashing)
-        {
-			controller.m_Rigidbody2D.velocity = dashingDir.normalized * dashingPower;
-			return;
-        }
 	}
 
 	public void OnLand()
     {
-		animator.SetBool("IsJumping", false);
+		if(!controller.m_Rigidbody2D.isKinematic)
+		{
+			animator.SetBool("IsJumping", false);
+		}
 	}
 
 
 	private void FixedUpdate() {
-		if(isDashing || PauseMenu.gameIsPaused){
-			return;
+		if(!controller.m_Rigidbody2D.isKinematic)
+		{
+			if(isDashing || PauseMenu.gameIsPaused){
+				return;
+			}
+			controller.Move(horizontalMove, crouch, jump);
+			jump = false;
 		}
-		controller.Move(horizontalMove, crouch, jump);
-		jump = false;
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-		ItemWorld itemWorld = collision.gameObject.GetComponent<ItemWorld>();
-
-		if(itemWorld != null)
-        {
-			if(coroutine != null)
-            {
-				StopCoroutine(coroutine);
-            }
-			coroutine = PickUpAnimation();
-			StartCoroutine(coroutine);
-			inventory.AddItem(itemWorld.GetItem());
-			itemWorld.DestroySelf();
-        }
-        if (collision.gameObject.tag == "OneWayPlatform")
+		if(!controller.m_Rigidbody2D.isKinematic)
 		{
-			currentOneWayPlatform = collision.gameObject;
+			ItemWorld itemWorld = collision.gameObject.GetComponent<ItemWorld>();
+
+			if(itemWorld != null)
+			{
+				if(coroutine != null)
+				{
+					StopCoroutine(coroutine);
+				}
+				coroutine = PickUpAnimation();
+				StartCoroutine(coroutine);
+				inventory.AddItem(itemWorld.GetItem());
+				itemWorld.DestroySelf();
+			}
+			if (collision.gameObject.tag == "OneWayPlatform")
+			{
+				currentOneWayPlatform = collision.gameObject;
+			}
+			if(collision.gameObject.tag == "Boss")
+			{
+				dead.TakeDamage(1f);
+			}
 		}
-		if(collision.gameObject.tag == "Boss")
-        {
-			dead.TakeDamage(1f);
-        }
-		
     }
 
 	private IEnumerator PickUpAnimation()
     {
-		animator.SetBool("Interact", true);
-		yield return new WaitForSeconds(0.5f);
-		animator.SetBool("Interact", false);
+		if(!controller.m_Rigidbody2D.isKinematic)
+		{
+			animator.SetBool("Interact", true);
+			yield return new WaitForSeconds(0.5f);
+			animator.SetBool("Interact", false);
+		}
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-		if (collision.gameObject.tag == "OneWayPlatform")
+		if(!controller.m_Rigidbody2D.isKinematic)
 		{
-			currentOneWayPlatform = null;
+			if (collision.gameObject.tag == "OneWayPlatform")
+			{
+				currentOneWayPlatform = null;
+			}
 		}
 	}
 
 	private IEnumerator DisableCollisionPlatform()
     {
-		BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
-		Physics2D.IgnoreCollision(playerCollider, platformCollider, true);
-		yield return new WaitForSeconds(0.25f);
-		Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
+		if(!controller.m_Rigidbody2D.isKinematic)
+		{
+			BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
+			Physics2D.IgnoreCollision(playerCollider, platformCollider, true);
+			yield return new WaitForSeconds(0.25f);
+			Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
+		}
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-		if(other.gameObject.tag == "Respawn"){
-			SceneManager.LoadScene("Prototype");
-		}
-		if (other.gameObject.tag == "PuertaTutorial")
+		if(!controller.m_Rigidbody2D.isKinematic)
 		{
-			pauseMenu.DeadMenu();
+			if(other.gameObject.tag == "Respawn"){
+				SceneManager.LoadScene("Prototype");
+			}
+			if (other.gameObject.tag == "PuertaTutorial")
+			{
+				pauseMenu.DeadMenu();
+			}
 		}
 	}
 
     private IEnumerator Dash()
     {
-        float originalGravity = controller.m_Rigidbody2D.gravityScale;
-        controller.m_Rigidbody2D.gravityScale = 0f;
-        yield return new WaitForSeconds(dashingTime);
-		tr.emitting = false;
-		isDashing = false;
-        controller.m_Rigidbody2D.gravityScale = originalGravity;
-		animator.SetBool("IsDashing", false);
-
+		if(!controller.m_Rigidbody2D.isKinematic)
+		{
+			float originalGravity = controller.m_Rigidbody2D.gravityScale;
+			controller.m_Rigidbody2D.gravityScale = 0f;
+			yield return new WaitForSeconds(dashingTime);
+			tr.emitting = false;
+			isDashing = false;
+			controller.m_Rigidbody2D.gravityScale = originalGravity;
+			animator.SetBool("IsDashing", false);
+		}
 		//yield return new WaitForSeconds(dashingCooldown);
 		//canDash = true;
 
@@ -251,24 +276,36 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
 	public void AddBoost(float boost)
     {
-		float plus = moveSpeed * boost;
-		moveSpeed += plus;
+		if(!controller.m_Rigidbody2D.isKinematic)
+		{
+			float plus = moveSpeed * boost;
+			moveSpeed += plus;
+		}
     }
 	public void RemoveBoost()
 	{
-		moveSpeed = 50f;
+		if(!controller.m_Rigidbody2D.isKinematic)
+		{
+			moveSpeed = 50f;
+		}
 	}
 
 	public void DoubleOn()
     {
-		doubleActive = true;
-		doubleCounter = 0;
+		if(!controller.m_Rigidbody2D.isKinematic)
+		{
+			doubleActive = true;
+			doubleCounter = 0;
+		}
     }
 
 	public void DoubleOff()
 	{
-		doubleActive = false;
-		doubleCounter = 0;
+		if(!controller.m_Rigidbody2D.isKinematic)
+		{
+			doubleActive = false;
+			doubleCounter = 0;
+		}
 	}
 
 [PunRPC]

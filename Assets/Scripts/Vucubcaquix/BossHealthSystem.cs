@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class BossHealthSystem : MonoBehaviour
+public class BossHealthSystem : MonoBehaviourPunCallbacks
 {
 
     private float startingBossHealth = 700f;
@@ -10,6 +13,10 @@ public class BossHealthSystem : MonoBehaviour
     public BossHealthBar healthBar;
     public GameObject ImpactEffect;
     [SerializeField] private PauseMenu pauseMenu;
+
+    public int id;
+    public Player photonPlayer;
+    private CharacterController2D controller;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +37,15 @@ public class BossHealthSystem : MonoBehaviour
             pauseMenu.EndScreen();
         }
     }
-
+    
     public float GetBossHealth()
     {
-        return currentBossHealth;
+        return currentBossHealth;   
+    }
+
+    [PunRPC]
+    void boss_health(int _id)
+    {
+        photonView.RPC("Update", RpcTarget.All);
     }
 }
