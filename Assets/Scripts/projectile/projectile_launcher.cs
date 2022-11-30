@@ -49,11 +49,13 @@ public class projectile_launcher : MonoBehaviourPunCallbacks
                 {
                     Instantiate(projectile, spawnLocation_left.position, spawnRotation1);
                     //photonView.RPC("start_mult", RpcTarget.All,collision.gameObject.GetComponent<PhotonView>().ViewID);
+                    Boss.SetTrigger("ataque");
                 }
                 else
                 {
                     Instantiate(projectile, spawnLocation_right.position, spawnRotation2);
                     //photonView.RPC("start_mult", RpcTarget.All,collision.gameObject.GetComponent<PhotonView>().ViewID);
+                    Boss.SetTrigger("ataque");
                 }
                 //Instantiate(projectile, spawnLocation[Zone].position, spawnRotation);
                 timeSinceSpawned = 0f;

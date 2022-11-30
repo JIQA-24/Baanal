@@ -8,10 +8,11 @@ using Photon.Realtime;
 public class BossHealthSystem : MonoBehaviourPunCallbacks
 {
 
-    private float startingBossHealth = 700f;
+    private float startingBossHealth = 100;
     private float currentBossHealth;
     public BossHealthBar healthBar;
     public GameObject ImpactEffect;
+    public Animator Boss;
     [SerializeField] private PauseMenu pauseMenu;
 
     public int id;
@@ -32,10 +33,12 @@ public class BossHealthSystem : MonoBehaviourPunCallbacks
         SoundManager.PlaySound(SoundManager.Sound.VucubImpacto);
         if (currentBossHealth <= 0)
         {
-            Destroy(gameObject);
+            
+            Boss.SetBool("muerte",true);
             healthBar.DeactivateHealthBar();
             pauseMenu.EndScreen();
         }
+        
     }
     
     public float GetBossHealth()
